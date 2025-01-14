@@ -11,8 +11,9 @@ function Header() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <h1 className="navbar-logo">SPB</h1>
-        <button className="menu-toggle" onClick={toggleMenu}>
+      <h1 className="navbar-logo" style={{ fontSize: '25px' }}>SPB</h1>
+
+        <button className="menu-toggle" style={{ fontSize: '35px' }} onClick={toggleMenu}>
           {isMenuOpen ? '✖' : '☰'}
         </button>
         <ul className={`nav-links ${isMenuOpen ? 'show' : ''}`}>

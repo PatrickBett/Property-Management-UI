@@ -27,7 +27,7 @@ function App() {
         <Route path='/contact' element={<Contact /> }/>
         <Route path='/tenant/*' element={<TenantDashboard /> }/>
         <Route path='/landlord/*' element={<LandlordDashboard /> }/>
-        <Route path='landlord-contact' element={<Contact />} />
+        <Route path='/contact' element={<Contact />} />
       </Routes>
       <Footer />
       </BrowserRouter>

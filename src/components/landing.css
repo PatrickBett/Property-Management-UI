@@ -1,7 +1,7 @@
 .landing {
   position: relative;
   height: 100vh;
-  background: url('https://careertraining.tamiu.edu/common/images/1/19337/household-manager-935x572.webp') no-repeat center center/cover;
+  background: url('https://ent-tomps-images-public-prod.oss-ap-southeast-5.aliyuncs.com/prod/front_view_house_investments_elements_composition_47ad8a9f4a.jpg') no-repeat center center/cover;
   color: white;
   text-align: center;
 }
@@ -29,11 +29,10 @@
 }
 
 .landing-info {
-  padding: 40px;
   background: #ffffff;
   margin: 20px auto;
-  max-width: 800px;
-  border-radius: 8px;
+  
+  
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
