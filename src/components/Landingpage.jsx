@@ -7,7 +7,7 @@ function Landingpage() {
     <div className="landing">
       <main className='landing-content'>
         <h1>SPB Property Management</h1>
-        <p>Your trusted partner in property rental and management.</p>
+        <h1>Your trusted partner in property rental and management.</h1>
       </main>
 
       

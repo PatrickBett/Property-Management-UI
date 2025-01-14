@@ -11,7 +11,7 @@ function Header() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <h1 className="navbar-logo">SPB Property Management</h1>
+        <h1 className="navbar-logo">SPB</h1>
         <button className="menu-toggle" onClick={toggleMenu}>
           {isMenuOpen ? '✖' : '☰'}
         </button>
