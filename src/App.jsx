@@ -1,9 +1,9 @@
 import Landingpage from './components/Landingpage'
 import './App.css'
 import { BrowserRouter,Route, Routes } from 'react-router-dom'
-import Dashboard from './components/Landlord/LandlordDashboard'
+
 import SignIn from './components/SignIn'
-import Signup from './components/Signup'
+import Signup from './components/SignUp'
 import TenantDashboard from './components/Tenant/TenantDashboard'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
