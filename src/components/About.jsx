@@ -88,7 +88,7 @@ function About() {
             <i className="fas fa-check-circle"></i> Enhanced communication between landlords and tenants.
           </li>
           <li>
-            <i className="fas fa-check-circle"></i> Comprehensive tools for managing multiple properties.
+            <i className="fas fa-check-circle"></i> Comprehensive tools for managing multiple properties
           </li>
           <li>
             <i className="fas fa-check-circle"></i> 24/7 customer support for any queries or issues.
