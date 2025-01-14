@@ -1,0 +1,142 @@
+/* General Styling */
+.about {
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+  
+  .about-header h1 {
+    font-size: 2.5rem;
+    color: #222;
+  }
+  
+  .about-header p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-top: 10px;
+  }
+  
+  .about-header span {
+    color: #f5a623;
+    font-weight: bold;
+  }
+  
+  /* Content Section */
+  .about-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+  
+  .about-item {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .about-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  .about-item i {
+    font-size: 3rem;
+    color: #f5a623;
+    margin-bottom: 10px;
+  }
+  
+  .about-item h2 {
+    font-size: 1.5rem;
+    color: #222;
+    margin-bottom: 10px;
+  }
+  
+  .about-item p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+  }
+  
+  /* Services Section */
+  .about-services {
+    margin-top: 50px;
+  }
+  
+  .about-services h2 {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 30px;
+  }
+  
+  .services-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+  
+  .service-item i {
+    font-size: 2.5rem;
+    color: #f5a623;
+    margin-bottom: 10px;
+  }
+  
+  .service-item h3 {
+    font-size: 1.4rem;
+    color: #222;
+    margin-bottom: 10px;
+  }
+  
+  .service-item p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  /* Benefits Section */
+  .about-benefits {
+    margin-top: 50px;
+  }
+  
+  .about-benefits h2 {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 20px;
+  }
+  
+  .about-benefits ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .about-benefits ul li {
+    font-size: 1rem;
+    color: #555;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .about-benefits ul li i {
+    font-size: 1.2rem;
+    color: #f5a623;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .about-header h1 {
+      font-size: 2rem;
+    }
+  
+    .about-header p {
+      font-size: 1rem;
+    }
+  
+    .about-content,
+    .services-content {
+      grid-template-columns: 1fr;
+    }
+  }
+  

@@ -1,7 +1,90 @@
-.landing{
-    background: url('https://careertraining.tamiu.edu/common/images/1/19337/household-manager-935x572.webp');
-    height: 100vh;
-    background-size: cover;
-    background-repeat: no-repeat;
+.landing {
+  background: url('https://careertraining.tamiu.edu/common/images/1/19337/household-manager-935x572.webp');
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #333;
+  text-align: center;
+}
 
+.landing-header {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.landing-header h1 {
+  font-size: 2.5rem;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.landing-header p {
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+.landing-info {
+  padding: 40px;
+  background: #ffffff;
+  margin: 20px auto;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.landing-info h2 {
+  font-size: 2rem;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.info-item {
+  margin-bottom: 20px;
+}
+
+.info-item h3 {
+  font-size: 1.5rem;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.info-item p {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+.cta-section {
+  padding: 30px;
+  background: #f8f9fa;
+  text-align: center;
+}
+
+.cta-section h2 {
+  font-size: 2rem;
+  color: #28a745;
+  margin-bottom: 10px;
+}
+
+.cta-section p {
+  font-size: 1.2rem;
+  color: #6c757d;
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  font-size: 1.2rem;
+  color: #fff;
+  background: #007bff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  background: #0056b3;
+}
+.landing-content{
+  color: orangered;
+  padding-top: 160px;
 }
