@@ -24,10 +24,12 @@
 
 .landing-content h1, .landing-content p {
   color: white;
-  padding-top: 160px;
   font-size: 40px;
 }
-
+.landing-content h1{
+  padding-top: 220px;
+  padding-bottom: 20px;
+}
 .landing-info {
   background: #ffffff;
   margin: 20px auto;

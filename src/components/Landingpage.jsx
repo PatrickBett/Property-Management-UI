@@ -5,9 +5,9 @@ function Landingpage() {
   return (
     <>
     <div className="landing">
-      <main className='landing-content'>
+      <main className='landing-content py-5'>
         <h1>SPB Property Management</h1>
-        <h1>Your trusted partner in property rental and management.</h1>
+        <h2>Your trusted partner in property rental and management.</h2>
       </main> 
     </div>
 
