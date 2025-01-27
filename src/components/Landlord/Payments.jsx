@@ -1,7 +1,7 @@
 
 function Payments() {
   return (
-    <div>Payments</div>
+    <div> My Payments</div>
   )
 }
 

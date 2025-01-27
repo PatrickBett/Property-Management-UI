@@ -17,32 +17,32 @@ const LandlordDashboard = () => {
         <h5 className="text-white">Landlord Menu</h5>
         <ul className="nav flex-column">
           <li className="nav-item">
-            <Link className="nav-link text-white" to="">
+            <Link className="nav-link text-white" to="/landlord/">
               Home
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="properties">
+            <Link className="nav-link text-white" to="/landlord/properties">
               My Properties
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="maintenance-requests">
+            <Link className="nav-link text-white" to="/landlord/maintenance-requests">
               Maintenance
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="applications">
+            <Link className="nav-link text-white" to="/landlord/applications">
               Applications
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="payments">
+            <Link className="nav-link text-white" to="/landlord/payments">
               Payments
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="account">
+            <Link className="nav-link text-white" to="/landlord/account">
               Account
             </Link>
           </li>

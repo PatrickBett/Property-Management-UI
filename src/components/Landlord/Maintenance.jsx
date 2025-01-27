@@ -2,7 +2,7 @@
 
 function Maintenance() {
   return (
-    <div>Maintenance</div>
+    <div>Maintenance Requests</div>
   )
 }
 

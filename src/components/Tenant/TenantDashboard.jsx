@@ -20,27 +20,27 @@ const TenantDashboard = () => {
         <h5 className="text-white">Tenant Menu</h5>
         <ul className="nav flex-column">
           <li className="nav-item">
-            <Link className="nav-link text-white" to="">
+            <Link className="nav-link text-white" to="/tenant/">
               Home
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="properties">
+            <Link className="nav-link text-white" to="/tenant/properties">
               Properties
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="maintenance-requests">
+            <Link className="nav-link text-white" to="/tenant/maintenance-requests">
               Maintenance
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="applications">
+            <Link className="nav-link text-white" to="/tenant/applications">
               Applications
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="account">
+            <Link className="nav-link text-white" to="/tenant/account">
               Account
             </Link>
           </li>

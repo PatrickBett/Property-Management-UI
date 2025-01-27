@@ -1,7 +1,7 @@
 
 function Properties() {
   return (
-    <div>Properties</div>
+    <div>My Properties</div>
   )
 }
 
