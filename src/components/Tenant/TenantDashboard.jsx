@@ -4,8 +4,12 @@ import Account from "./Account";
 import Maintenance from "./Maintenance";
 import Properties from "./Properties";
 import Home from "./Home";
-
+import api from "../../api";
+import { useEffect, useState } from "react";
 const TenantDashboard = () => {
+
+
+
   return (
     <div className="d-flex">
       {/* Sidebar */}
@@ -48,8 +52,8 @@ const TenantDashboard = () => {
       </nav>
 
       {/* Main Content */}
-      <div className="flex-grow-1 p-4">
-        <Routes>
+      <div className="flex-grow-1 p-4 border container m-2">
+        <Routes >
           <Route path="/" element={<Home />} />
           <Route path="properties" element={<Properties />} />
           <Route path="maintenance-requests" element={<Maintenance />} />

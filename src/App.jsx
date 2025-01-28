@@ -12,6 +12,7 @@ import LandlordDashboard from './components/Landlord/LandlordDashboard'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import About from './components/About'
+import StripeCheckout from './components/StripeCheckout'
 function App() {
 
 
@@ -28,6 +29,8 @@ function App() {
         <Route path='/tenant/*' element={<TenantDashboard /> }/>
         <Route path='/landlord/*' element={<LandlordDashboard /> }/>
         <Route path='/contact' element={<Contact />} />
+
+        <Route path="/checkout" element={<StripeCheckout />} />
       </Routes>
       <Footer />
       </BrowserRouter>
