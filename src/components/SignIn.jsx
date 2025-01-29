@@ -37,6 +37,7 @@ const Login = () => {
       console.log("Landlord Dashboard")
     } else {
       setError("Invalid role. Please contact support.");
+      navigate("/login")
     }
       // const token = response.data.access
     
@@ -56,6 +57,7 @@ const Login = () => {
     } catch (err) {
       console.error(err);
       setError("Invalid username or password.");
+      navigate("/login")
     }
   };
 
