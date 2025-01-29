@@ -13,6 +13,8 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import About from './components/About'
 import StripeCheckout from './components/StripeCheckout'
+import "bootstrap-icons/font/bootstrap-icons.css";
+
 function App() {
 
 

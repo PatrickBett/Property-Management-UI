@@ -15,7 +15,7 @@ const TenantDashboard = () => {
       {/* Sidebar */}
       <nav
         className="bg-dark text-white p-3 d-md-block"
-        style={{ minHeight: "100vh", width: "250px" }}
+        style={{ minHeight: "100vh" }}
       >
 
         
@@ -52,7 +52,7 @@ const TenantDashboard = () => {
       </nav>
 
       {/* Main Content */}
-      <div className="flex-grow-1 p-4 border container m-2">
+      <div className="flex-grow-1 p-4 border  container m-2">
         <Routes >
           <Route path="/" element={<Home />} />
           <Route path="properties" element={<Properties />} />
