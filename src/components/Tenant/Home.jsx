@@ -29,6 +29,12 @@ const [username, setUsername] = useState("")
       }
   
     }
+
+    // function to handle logout
+    const handleLogout = ()=>{
+      console.log("logged out")
+      
+    }
   return (
     <>
     <div className="container border bg-secondary">
@@ -43,8 +49,8 @@ const [username, setUsername] = useState("")
       <button className="btn-primary my-2 p-5 cols-sm-4 mx-5">
         Notifications
       </button>
-      <button className="btn-danger my-2 p-5 cols-sm-4 mx-5">
-        Notifications
+      <button className="btn-danger my-2 p-5 cols-sm-4 mx-5" onClick={handleLogout()}>
+        Logout
       </button>
     </div>
 

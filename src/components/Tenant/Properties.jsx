@@ -53,6 +53,12 @@ function Properties() {
 
   <div className="property-category-name">
   <p><i className="bi bi-house-door-fill me-2 "></i>{property.category.name}</p>
+  {property.tenant ? 
+      <button className="btn btn-danger">Not available</button>
+    :
+      <button className="btn btn-success">Book Now</button>
+     }
+  
 
     {/* determine whether available or rented? */}
     <div 
