@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "../api";
 
 function Signup() {
-  const [firstname, setFirstname] = useState("");
+  const [first_name, setFirstname] = useState("");
   const [username, setUsername] = useState("");
-  const [lastname, setLastname] = useState("");
+  const [last_name, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("tenant"); // Default role set to 'tenant'
-  const [phone, setPhone] = useState("");
+  const [phone_number, setPhone] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
@@ -16,17 +16,17 @@ function Signup() {
 
   const handleRegister = async (e) => {
     e.preventDefault(); // Prevent form refresh
-    console.log({ username, email, firstname, lastname, password, role, phone });
+    console.log({ username, email, first_name, last_name, password, role, phone_number });
 
     try {
-      const res = await api.post("api/api-auth/users/", {
+      const res = await api.post("http://127.0.0.1:8000/api/api-auth/users/", {
         username,
         email,
-        firstname,
-        lastname,
+        first_name,
+        last_name,
         password,
         role,
-        phone,
+        phone_number,
       });
       console.log(res)
 
@@ -47,29 +47,29 @@ function Signup() {
       {error && <p className="text-danger text-center">{error}</p>}
       <form onSubmit={handleRegister}>
         <div className="form-group mb-3">
-          <label htmlFor="firstname" className="form-label">
+          <label htmlFor="first_name" className="form-label">
             First Name:
           </label>
           <input
             type="text"
             className="form-control"
-            id="firstname"
+            id="first_name"
             placeholder="Enter your first name"
-            value={firstname}
+            value={first_name}
             onChange={(e) => setFirstname(e.target.value)}
           />
         </div>
 
         <div className="form-group mb-3">
-          <label htmlFor="lastname" className="form-label">
+          <label htmlFor="last_name" className="form-label">
             Last Name:
           </label>
           <input
             type="text"
             className="form-control"
-            id="lastname"
+            id="last_name"
             placeholder="Enter your last name"
-            value={lastname}
+            value={last_name}
             onChange={(e) => setLastname(e.target.value)}
           />
         </div>
@@ -109,9 +109,9 @@ function Signup() {
           <input
             type="tel"
             className="form-control"
-            id="phone"
+            id="phone_number"
             placeholder="Enter your phone number"
-            value={phone}
+            value={phone_number}
             onChange={(e) => setPhone(e.target.value)}
           />
         </div>

@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react"
 import api from "../../api"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 function Properties() {
 
   const [properties, setProperties] = useState([])
   const navigate = useNavigate()
 
+
+
+
+
+     
+  // function to fetch properties
   useEffect(()=>{
     fetchProperties()
     
@@ -48,16 +54,16 @@ function Properties() {
 >
   <div className="property-title">
     <h5>{property.title}</h5>
-    <button className="btn btn-secondary m-1">See More</button>
+    <Link to='/property/property-details' state={{ property }}><button className="btn btn-secondary m-1">See More</button></Link>
   </div>
 
   <div className="property-category-name">
   <p><i className="bi bi-house-door-fill me-2 "></i>{property.category.name}</p>
-  {property.tenant ? 
+  {/* {property.tenant ? 
       <button className="btn btn-danger">Not available</button>
     :
       <button className="btn btn-success">Book Now</button>
-     }
+     } */}
   
 
     {/* determine whether available or rented? */}

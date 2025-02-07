@@ -3,6 +3,7 @@ import Applications from "./Applications";
 import Account from "./Account";
 import Maintenance from "./Maintenance";
 import Properties from "./Properties";
+
 import Home from "./Home";
 import api from "../../api";
 import { useEffect, useState } from "react";
@@ -38,11 +39,7 @@ const TenantDashboard = () => {
               Maintenance
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/tenant/applications">
-              Applications
-            </Link>
-          </li>
+         
           <li className="nav-item">
             <Link className="nav-link text-white" to="/tenant/account">
               Account
@@ -59,6 +56,7 @@ const TenantDashboard = () => {
           <Route path="maintenance-requests" element={<Maintenance />} />
           <Route path="applications" element={<Applications />} />
           <Route path="account" element={<Account />} />
+          
         </Routes>
       </div>
     </div>

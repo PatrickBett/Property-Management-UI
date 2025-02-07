@@ -10,6 +10,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Contact from './components/Contact'
 import LandlordDashboard from './components/Landlord/LandlordDashboard'
 import Header from './components/Header'
+import PropertyDetails from './components/Tenant/PropertyDetails'
 import Footer from './components/Footer'
 import About from './components/About'
 import StripeCheckout from './components/StripeCheckout'
@@ -31,6 +32,7 @@ function App() {
         <Route path='/tenant/*' element={<TenantDashboard /> }/>
         <Route path='/landlord/*' element={<LandlordDashboard /> }/>
         <Route path='/contact' element={<Contact />} />
+        <Route path="property/property-details" element={<PropertyDetails />} />
 
         <Route path="/checkout" element={<StripeCheckout />} />
       </Routes>
