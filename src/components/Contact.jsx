@@ -14,7 +14,7 @@ function Contact() {
         <div className="contact-item">
           <FaPhone className="contact-icon" />
           <h4>Phone</h4>
-          <p>+1 (123) 456-7890</p>
+          <p>+254791474737</p>
         </div>
 
         <div className="contact-item">
