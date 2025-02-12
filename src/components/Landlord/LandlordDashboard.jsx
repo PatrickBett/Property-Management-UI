@@ -12,7 +12,7 @@ const LandlordDashboard = () => {
       {/* Sidebar */}
       <nav
         className="bg-dark text-white p-3 d-md-block"
-        style={{ minHeight: "100vh", width: "250px" }}
+        style={{ minHeight: "100vh", width: "150px" }}
       >
         <h5 className="text-white">Landlord Menu</h5>
         <ul className="nav flex-column">
@@ -52,6 +52,7 @@ const LandlordDashboard = () => {
       {/* Main Content */}
       <div className="flex-grow-1 p-4">
         <Routes>
+          
           <Route path="/" element={<Home />} />
           <Route path="properties" element={<Properties />} />
           <Route path="maintenance-requests" element={<Maintenance />} />

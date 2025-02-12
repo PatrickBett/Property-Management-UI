@@ -23,6 +23,7 @@ const [username, setUsername] = useState("")
   
       }
       catch(error){
+        
         console.log(error)
         // navigate("/login")
       }
@@ -32,20 +33,20 @@ const [username, setUsername] = useState("")
 
   return (
     <>
-    <div className="container border bg-secondary">
+    {/* <div className="container border bg-secondary"> */}
       
       {/* <button className="btn-success my-2 p-5 cols-sm-4 mx-5">
       
       {username}
       </button> */}
-      <button className="btn-warning my-2 p-5 cols-sm-4 mx-5">
+      {/* <button className="btn-warning my-2 p-5 cols-sm-4 mx-5">
         Notifications
       </button>
       <button className="btn-primary my-2 p-5 cols-sm-4 mx-5">
         Notifications
       </button>
      
-    </div>
+    </div> */}
 
 
     <div className="container border mt-3 rounded shadow-lg">

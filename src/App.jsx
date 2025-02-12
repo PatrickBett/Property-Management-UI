@@ -2,6 +2,7 @@ import Landingpage from './components/Landingpage'
 import './App.css'
 import { BrowserRouter,Route, Routes } from 'react-router-dom'
 
+
 import SignIn from './components/SignIn'
 import Signup from './components/SignUp'
 import TenantDashboard from './components/Tenant/TenantDashboard'
@@ -21,7 +22,7 @@ function App() {
 
   return (
     
-      <BrowserRouter>
+    <>
       <Header />
       <Routes>
         <Route path='/' element={<Landingpage /> }/>
@@ -37,7 +38,7 @@ function App() {
         <Route path="/checkout" element={<StripeCheckout />} />
       </Routes>
       <Footer />
-      </BrowserRouter>
+      </>
     
   )
 }

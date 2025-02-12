@@ -11,13 +11,16 @@ function Header() {
   //check if the user is logged in
 
   useEffect(
-    ()=>{
-      const token = localStorage.getItem('access')
-      token? setIsLoggedIn(true) : setIsLoggedIn(false)
-      
-    },[]
+    ()=>{loginstatus()}
+    ,[]
 
   )
+
+  const loginstatus =()=>{
+    const token = localStorage.getItem('access')
+    token? setIsLoggedIn(true) : setIsLoggedIn(false)
+    
+  }
 
   //FUNCTION TO LOGOUT USER
   const handleLogout =() =>{
@@ -59,8 +62,8 @@ function Header() {
 
           {
             isLoggedIn ? (
-              <>
               
+              <>
               <button onClick={handleLogout}>
   
     <FaSignOutAlt style={{ marginRight: "5px" }} /> Logout
