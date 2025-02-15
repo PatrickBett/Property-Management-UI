@@ -11,9 +11,9 @@ export const PropertyProvider = ({ children }) => {
 
   useEffect(() => {
     if (!token) {
-      if (window.location.pathname !== "/login") {
-        navigate("/login");
-      }
+      // if (window.location.pathname !== "/login") {
+      //   navigate("/login");
+      // }
       return;
     }
 

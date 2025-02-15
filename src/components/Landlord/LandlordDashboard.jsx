@@ -5,6 +5,9 @@ import Maintenance from "./Maintenance";
 import Payments from "./Payments";
 import Properties from "./Properties";
 import Home from "./Home";
+import { CategoryProvider } from "../Contexts/CategoryContext";
+import { GrHostMaintenance } from "react-icons/gr";
+import { IoIosSettings } from "react-icons/io";
 
 const LandlordDashboard = () => {
   return (
@@ -27,8 +30,9 @@ const LandlordDashboard = () => {
             </Link>
           </li>
           <li className="nav-item">
+            
             <Link className="nav-link text-white" to="/landlord/maintenance-requests">
-              Maintenance
+            <GrHostMaintenance className="me-2"/>Maintenance
             </Link>
           </li>
           <li className="nav-item">
@@ -43,7 +47,7 @@ const LandlordDashboard = () => {
           </li>
           <li className="nav-item">
             <Link className="nav-link text-white" to="/landlord/account">
-              Account
+              <IoIosSettings className="me-2" />Account
             </Link>
           </li>
         </ul>
@@ -53,7 +57,14 @@ const LandlordDashboard = () => {
       <div className="flex-grow-1 p-4">
         <Routes>
           
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={
+            <CategoryProvider>
+               <Home />
+            </CategoryProvider>
+           
+            } />
+         
+          
           <Route path="properties" element={<Properties />} />
           <Route path="maintenance-requests" element={<Maintenance />} />
           <Route path="applications" element={<Applications />} />

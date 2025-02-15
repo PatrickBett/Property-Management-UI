@@ -33,6 +33,7 @@ function Account() {
     <div className="container border" >
       {account &&(
         <>
+        <h1 className="text-center border-bottom mb-3">Account Settings</h1>
          <div className="col-md-3" >
          <img 
   src={account.profile?.profile} 

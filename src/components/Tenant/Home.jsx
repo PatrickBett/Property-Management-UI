@@ -49,7 +49,7 @@ const [username, setUsername] = useState("")
     </div> */}
 
 
-    <div className="container border mt-3 rounded shadow-lg">
+    <div className="container border mt-3 rounded shadow-lg" style={{ fontFamily: "Calibri, sans-serif", fontSize: "14px" }}>
       <h2 className="text-center py-3"><i className="bi bi-house-door-fill me-2 "></i>My Home</h2>
 
 
@@ -77,26 +77,24 @@ const [username, setUsername] = useState("")
                 </div>
         
         
-              <div className="tenant-info border col-sm-8 mt-2 shadow-lg ">
-                <h5 className="text-primary mt-3 p-2" style={{borderBottom: "1px solid #e3e0e0"}}>{home.property.title}</h5>
-                <p style={{borderBottom: "1px solid #e3e0e0"}} className="p-2">
-                  <strong><i className="bi bi-person-circle me-2"></i>Tenant:</strong> {home.tenant.username} ({home.tenant.role})
-                </p>
-                <p style={{borderBottom: "1px solid #e3e0e0"}} className="p-2">
-                  <strong><i className="bi bi-houses me-2"></i>No of bedrooms:</strong> {home.property.category.name}
-                </p>
-                <p style={{borderBottom: "1px solid #e3e0e0"}} className="p-2">
-                  <strong><i className="bi bi-wallet me-2"></i>Rent:</strong> {home.property.rent_amount} KES
-                </p>
-        
-                <button className="btn btn-primary mb-2"><i className="bi bi-pencil-fill me-2"></i>Update Profile</button>
-                </div>
-                
-        
-        
-        
-        
-                
+                <div className="tenant-info border col-sm-8 mt-2 shadow-lg" >
+  <h5 className="text-primary mt-3 p-2" style={{ borderBottom: "1px solid #e3e0e0" }}>
+    {home.property.title}
+  </h5>
+  <p style={{ borderBottom: "1px solid #e3e0e0" }} className="p-2">
+    <strong><i className="bi bi-person-circle me-2"></i>Tenant:</strong> {home.tenant.username} ({home.tenant.role})
+  </p>
+  <p style={{ borderBottom: "1px solid #e3e0e0" }} className="p-2">
+    <strong><i className="bi bi-houses me-2"></i>No of bedrooms:</strong> {home.property.category.name}
+  </p>
+  <p style={{ borderBottom: "1px solid #e3e0e0" }} className="p-2">
+    <strong><i className="bi bi-wallet me-2"></i>Rent:</strong> {home.property.rent_amount} KES
+  </p>
+  <button className="btn btn-primary mb-2">
+    <i className="bi bi-pencil-fill me-2"></i>Update Profile
+  </button>
+</div>
+
         
                 </div>
         
