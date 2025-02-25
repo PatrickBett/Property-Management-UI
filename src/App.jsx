@@ -14,9 +14,10 @@ import Header from './components/Header'
 import PropertyDetails from './components/Tenant/PropertyDetails'
 import Footer from './components/Footer'
 import About from './components/About'
-import StripeCheckout from './components/StripeCheckout'
+import PaymentCancel from './components/PaymentCancel'
+import PaymentSuccess from './components/PaymentSuccess'
 import "bootstrap-icons/font/bootstrap-icons.css";
-
+import Payment from './components/Payment'
 function App() {
 
 
@@ -34,8 +35,10 @@ function App() {
         <Route path='/landlord/*' element={<LandlordDashboard /> }/>
         <Route path='/contact' element={<Contact />} />
         <Route path="property/property-details" element={<PropertyDetails />} />
+        <Route path="payment" element={<Payment />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/payment-cancel" element={<PaymentCancel />} />
 
-        <Route path="/checkout" element={<StripeCheckout />} />
       </Routes>
       <Footer />
       </>

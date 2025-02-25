@@ -3,6 +3,7 @@ import Applications from "./Applications";
 import Account from "./Account";
 import Maintenance from "./Maintenance";
 import Properties from "./Properties";
+import Payment from "../Payment";
 
 import Home from "./Home";
 import api from "../../api";
@@ -56,6 +57,7 @@ const TenantDashboard = () => {
           <Route path="maintenance-requests" element={<Maintenance />} />
           <Route path="applications" element={<Applications />} />
           <Route path="account" element={<Account />} />
+          
           
         </Routes>
       </div>

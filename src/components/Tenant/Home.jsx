@@ -3,20 +3,29 @@ import api from "../../api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+
 function Home() {
 
   
 const [homes ,setHome] = useState([])
 const navigate = useNavigate()
 const [username, setUsername] = useState("")
+const token = localStorage.getItem("access")
   
     useEffect(()=>{
       getHome()
     },[])
+
+  
   
     const getHome =async() =>{
+      
       try{
-        const response = await api.get('http://127.0.0.1:8000/api/myhome')
+        const response = await api.get('http://127.0.0.1:8000/api/myhome',{
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         setHome(response.data)
         setUsername(response.data[0].tenant.username)
         console.log(response.data)
@@ -144,7 +153,7 @@ const [username, setUsername] = useState("")
       :
 
       <div className="container border my-3 p-2">
-        <h3 className="p-3">No Home Currently. Searching for a home? <Link to='/tenant/properties/'>Homes</Link></h3>
+        <h3 className="font-bold antialiased text-4xl text-green8 mb-4 p-3">No Home Currently. Searching for a home? <Link to='/tenant/properties/'>Homes</Link></h3>
       </div>
 
 

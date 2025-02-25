@@ -1,9 +1,19 @@
 import { useLocation } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 function PropertyDetails() {
 
     const location = useLocation()
+    const navigate = useNavigate()
     const property = location.state?.property; // Retrieve the passed property data
     console.log(property)
+
+
+    const handlePayment =()=>{
+      navigate("/payment", { state: { rentAmount: property.rent_amount } })
+    }
+
+
+
   return (
     <div className="m-3 p-3">
 
@@ -20,14 +30,10 @@ function PropertyDetails() {
             {property.tenant ? 
       <button className="btn btn-danger">Not available</button>
     :
-      <button className="btn btn-success">Book Now</button>
+      <button className="btn btn-success" onClick={handlePayment}>Book Now</button>
      }
         </div>
-
-     
-        
-        
-       
+   
     </div>
   )
 }

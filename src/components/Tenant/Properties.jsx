@@ -7,18 +7,8 @@ function Properties() {
   const [properties, setProperties] = useState([])
   const navigate = useNavigate()
 
-
-
-
-
      
   // function to fetch properties
-  useEffect(()=>{
-    fetchProperties()
-    
-  },[])
-
-
   const fetchProperties = async() =>{
     try{
       const res = await api.get("http://127.0.0.1:8000/api/properties/")
@@ -32,6 +22,14 @@ function Properties() {
     }
     
   }
+  
+  useEffect(()=>{
+    fetchProperties()
+    
+  },[])
+
+
+  
 
   return (
     <>
