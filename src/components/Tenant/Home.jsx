@@ -26,6 +26,7 @@ const token = localStorage.getItem("access")
             Authorization: `Bearer ${token}`,
           },
         })
+
         setHome(response.data)
         setUsername(response.data[0].tenant.username)
         console.log(response.data)
@@ -130,7 +131,7 @@ const token = localStorage.getItem("access")
         
         <div className="landlord-info col-sm-8 border mt-2 shadow-lg">
                <h3 style={{borderBottom: "1px solid #e3e0e0", textAlign: "center"}} className="py-2">
-                   {home.property.landlord.first_name} {home.property.landlord.last_name}
+                   Landlords Information
                 </h3>
         
                 <p className="mt-3" style={{borderBottom: "1px solid #e3e0e0"}}>

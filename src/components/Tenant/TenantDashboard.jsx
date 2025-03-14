@@ -3,12 +3,15 @@ import Applications from "./Applications";
 import Account from "./Account";
 import Maintenance from "./Maintenance";
 import Properties from "./Properties";
+import ProtectedRoute from "../ProtectedRoute";
 import Payment from "../Payment";
 
 import Home from "./Home";
 import api from "../../api";
 import { useEffect, useState } from "react";
+import PaymentsHistory from "./PaymentsHistory";
 const TenantDashboard = () => {
+  const isAuthenticated = !!localStorage.getItem("access"); // Check authentication
 
 
 
@@ -26,23 +29,29 @@ const TenantDashboard = () => {
         <h5 className="text-white">Tenant Menu</h5>
         <ul className="nav flex-column">
           <li className="nav-item">
-            <Link className="nav-link text-white" to="/tenant/">
+            <Link className="nav-link text-blue fw-bolder" to="/tenant/">
               Home
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="/tenant/properties">
+            <Link className="nav-link text-blue fw-bolder" to="/tenant/properties">
               Properties
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="/tenant/maintenance-requests">
+            <Link className="nav-link text-blue fw-bolder" to="/tenant/maintenance-requests">
               Maintenance
+            </Link>
+          </li>
+
+          <li className="nav-item">
+            <Link className="nav-link text-blue fw-bolder" to="/tenant/mypayments-history">
+              Payments History
             </Link>
           </li>
          
           <li className="nav-item">
-            <Link className="nav-link text-white" to="/tenant/account">
+            <Link className="nav-link text-blue fw-bolder" to="/tenant/account">
               Account
             </Link>
           </li>
@@ -52,13 +61,15 @@ const TenantDashboard = () => {
       {/* Main Content */}
       <div className="flex-grow-1 p-4 border  container m-2">
         <Routes >
+        <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
           <Route path="/" element={<Home />} />
           <Route path="properties" element={<Properties />} />
           <Route path="maintenance-requests" element={<Maintenance />} />
           <Route path="applications" element={<Applications />} />
+          <Route path="mypayments-history" element={<PaymentsHistory />} />
           <Route path="account" element={<Account />} />
           
-          
+          </Route>
         </Routes>
       </div>
     </div>

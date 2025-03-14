@@ -31,6 +31,8 @@ const CheckoutForm = () => {
             card: elements.getElement(CardElement),
         });
 
+        setLoading(true);
+
         if (error) {
             setError(error.message);
             setLoading(false); // Stop loading on error

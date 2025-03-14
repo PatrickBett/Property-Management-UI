@@ -18,7 +18,12 @@ import PaymentCancel from './components/PaymentCancel'
 import PaymentSuccess from './components/PaymentSuccess'
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Payment from './components/Payment'
+
+
 function App() {
+
+
+  
 
 
   return (
@@ -34,7 +39,10 @@ function App() {
         <Route path='/tenant/*' element={<TenantDashboard /> }/>
         <Route path='/landlord/*' element={<LandlordDashboard /> }/>
         <Route path='/contact' element={<Contact />} />
-        <Route path="property/property-details" element={<PropertyDetails />} />
+        <Route path="property/property-details" element={
+           
+              <PropertyDetails />}
+            />
         <Route path="payment" element={<Payment />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payment-cancel" element={<PaymentCancel />} />

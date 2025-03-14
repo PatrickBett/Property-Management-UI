@@ -8,8 +8,10 @@ import Home from "./Home";
 import { CategoryProvider } from "../Contexts/CategoryContext";
 import { GrHostMaintenance } from "react-icons/gr";
 import { IoIosSettings } from "react-icons/io";
+import ProtectedRoute from "../ProtectedRoute";
 
 const LandlordDashboard = () => {
+  const isAuthenticated = !!localStorage.getItem("access");
   return (
     <div className="d-flex">
       {/* Sidebar */}
@@ -56,7 +58,7 @@ const LandlordDashboard = () => {
       {/* Main Content */}
       <div className="flex-grow-1 p-4">
         <Routes>
-          
+        <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
           <Route path="/" element={
             <CategoryProvider>
                <Home />
@@ -70,6 +72,7 @@ const LandlordDashboard = () => {
           <Route path="applications" element={<Applications />} />
           <Route path="payments" element={<Payments />} />
           <Route path="account" element={<Account />} />
+        </Route>
         </Routes>
       </div>
     </div>
