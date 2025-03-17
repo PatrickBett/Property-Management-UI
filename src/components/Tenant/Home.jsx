@@ -29,7 +29,7 @@ const token = localStorage.getItem("access")
 
         setHome(response.data)
         setUsername(response.data[0].tenant.username)
-        console.log(response.data)
+        
   
       }
       catch(error){
@@ -43,20 +43,7 @@ const token = localStorage.getItem("access")
 
   return (
     <>
-    {/* <div className="container border bg-secondary"> */}
-      
-      {/* <button className="btn-success my-2 p-5 cols-sm-4 mx-5">
-      
-      {username}
-      </button> */}
-      {/* <button className="btn-warning my-2 p-5 cols-sm-4 mx-5">
-        Notifications
-      </button>
-      <button className="btn-primary my-2 p-5 cols-sm-4 mx-5">
-        Notifications
-      </button>
-     
-    </div> */}
+
 
 
     <div className="container border mt-3 rounded shadow-lg" style={{ fontFamily: "Calibri, sans-serif", fontSize: "14px" }}>

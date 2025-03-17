@@ -28,8 +28,7 @@ function Account() {
 
         
         setAccount(response.data);
-        console.log(response.data);
-        console.log(token)
+        
       } catch (error) {
         console.log(error);
       

@@ -12,7 +12,7 @@ function Account() {
       try{
         const response = await api.get("http://127.0.0.1:8000/api/account/")
         setAccount(response.data)
-        console.log(response.data)
+        
   
       }
       catch(error){

@@ -13,8 +13,6 @@ function Properties() {
     try{
       const res = await api.get("http://127.0.0.1:8000/api/properties/")
       setProperties(res.data)
-      console.log(res.data)
-
     }
     catch(error){
       console.log(error)

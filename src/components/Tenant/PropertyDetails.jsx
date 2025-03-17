@@ -7,12 +7,17 @@ import api from "../../api";
 // Initialize Stripe outside the component
 const stripePromise = loadStripe("pk_test_51OeBjFF11zjK1PObRcOLVS4OiagIrRa6TnECSaI7lrMkV59jyBDEkyLpNaz63nHJKcL7JLNmhUXTYN5oNm0cAqxX00i3WBd2FG");
 
-function CheckoutForm({ clientSecret }) {
+function CheckoutForm({ clientSecret, property }) {
+
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  
   console.log("first",clientSecret)
+  
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -38,7 +43,27 @@ function CheckoutForm({ clientSecret }) {
       console.error("Payment failed:", error.message);
       navigate("/payment-cancel");
     } else if (paymentIntent.status === "succeeded") {
-      console.log("Payment successful!", paymentIntent);
+    
+      console.log("Payment successful property ID!", property);
+
+
+      try{
+        const response = await api.post("http://127.0.0.1:8000/api/finalyze-payment/",
+          {paymentIntentId: paymentIntent.id,
+            status: 'succeeded',
+            property_id: property.id,
+          }
+        )
+        console.log("Payment Confirmed Successful Response")
+
+      }
+      catch(error){
+        console.log(error)
+
+      }
+
+      
+
       navigate("/payment-success");
     } else {
       console.error("Unexpected payment status:", paymentIntent.status);
@@ -63,6 +88,7 @@ function PropertyDetails() {
   const [paymentdata, setPaymentData] = useState('')
   const property = location.state?.property;
   const [clientSecret, setClientSecret] = useState("");
+  console.log("THIS IS MY Property:", property);
 
   const handlePaymentIntent = async () => {
     try {
@@ -71,9 +97,13 @@ function PropertyDetails() {
         currency: "usd",
         property_id: property.id,
       });
+      
 
       setClientSecret(response.data.clientSecret);
       setPaymentData(response.data)
+      console.log(response.data)
+
+      
       
     } catch (error) {
       console.error("Error creating payment intent:", error);
@@ -103,7 +133,7 @@ function PropertyDetails() {
 
             {clientSecret && (
               <Elements stripe={stripePromise} options={{ clientSecret }}>
-                <CheckoutForm clientSecret={clientSecret} />
+                <CheckoutForm clientSecret={clientSecret} property={property} />
               </Elements>
             )}
           </>
