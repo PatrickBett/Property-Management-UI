@@ -11,7 +11,7 @@ function Maintenance() {
 
   const fetchMaintenances = async () => {
     try {
-      const res = await api.get("http://127.0.0.1:8000/api/maintenances/", {
+      const res = await api.get("/api/maintenances/", {
         headers: {
           Authorization: `Token ${localStorage.getItem("access")}`, // Include auth token if required
         },

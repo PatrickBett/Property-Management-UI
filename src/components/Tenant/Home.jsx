@@ -22,7 +22,7 @@ const role = localStorage.getItem("userRole")
     const getHome =async() =>{
       
       try{
-        const response = await api.get('http://127.0.0.1:8000/api/myhome',{
+        const response = await api.get('/api/myhome',{
           headers: {
             Authorization: `Bearer ${token}`,
           },

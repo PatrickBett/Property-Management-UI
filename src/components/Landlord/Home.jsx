@@ -36,7 +36,7 @@ function Home() {
     
 
     try{
-      const res = await api.post("http://127.0.0.1:8000/api/properties/",{
+      const res = await api.post("/api/properties/",{
         title,
         category: categoryId,
         description,

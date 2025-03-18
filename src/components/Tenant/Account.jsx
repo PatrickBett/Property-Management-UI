@@ -20,7 +20,7 @@ function Account() {
     const fetchAccount = async () => {
       
       try {
-        const response = await api.get("http://127.0.0.1:8000/api/account/", {
+        const response = await api.get("/api/account/", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

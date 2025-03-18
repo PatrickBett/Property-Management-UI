@@ -169,7 +169,7 @@ function PropertyDetails() {
 
   const fetchReviews = async () => {
     try {
-      const res = await api.get(`http://127.0.0.1:8000/api/post-review/`, {
+      const res = await api.get(`/api/post-review/`, {
         params: { property_id: property.id },
       });
       
@@ -188,7 +188,7 @@ function PropertyDetails() {
 
   const handlePaymentIntent = async () => {
     try {
-      const response = await api.post("http://127.0.0.1:8000/api/create-payment-intent/", {
+      const response = await api.post("/api/create-payment-intent/", {
         amount: property.rent_amount,
         currency: "usd",
         property_id: property.id,

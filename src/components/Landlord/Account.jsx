@@ -1,4 +1,4 @@
-// http://127.0.0.1:8000/api/account/
+// /api/account/
 import { useState, useEffect } from "react"
 import api from "../../api"
 import { useNavigate } from "react-router-dom"
@@ -10,7 +10,7 @@ function Account() {
    ()=>{
     const fetchAccount= async()=>{
       try{
-        const response = await api.get("http://127.0.0.1:8000/api/account/")
+        const response = await api.get("/api/account/")
         setAccount(response.data)
         
   

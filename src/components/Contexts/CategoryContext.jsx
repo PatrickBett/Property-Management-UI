@@ -13,7 +13,7 @@ export const CategoryProvider =({children})=>{
 
         const fetchCategories = async()=>{
             try{
-                const res =  await api.get("http://127.0.0.1:8000/api/categories/", {
+                const res =  await api.get("/api/categories/", {
                     headers: { Authorization: `Bearer ${token}` },
                   })
             console.log(res.data)

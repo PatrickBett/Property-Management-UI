@@ -18,7 +18,7 @@ const Login = ({ setIsLoggedIn }) => {
 
     try {
       // Send login request to the backend
-      const response = await api.post("api/login/", { username, password });
+      const response = await api.post("http://127.0.0.1:8000/api/login/", { username, password });
       
        // Extract tokens and role from response
       const { access, refresh, role } = response.data;
