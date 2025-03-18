@@ -4,10 +4,12 @@ import api from "../api"; // Axios instance configured with baseURL
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  
+  
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -21,37 +23,26 @@ const Login = () => {
        // Extract tokens and role from response
       const { access, refresh, role } = response.data;
 
+
     // Save tokens and role to localStorage
       localStorage.setItem("access", access);
       localStorage.setItem("refresh", refresh);
       localStorage.setItem("userRole", role);
+      setIsLoggedIn(true);
 
       console.log(response)
 
 
     if (role === "tenant") {
-      console.log("Tenant Dashboard")
+      
       navigate("/tenant");
     } else if (role === "landlord") {
       navigate("/landlord");
-      console.log("Landlord Dashboard")
+      
     } else {
       setError("Invalid role. Please contact support.");
       navigate("/login")
     }
-      // const token = response.data.access
-    
-      // localStorage.setItem(ACCESS_TOKEN, token);
-      // localStorage.setItem(REFRESH_TOKEN, response.data.refresh);
-
-      // // Assuming the response contains a token and user data
-      // const { token, user } = response.data;
-
-      // // Save token and user data to localStorage/sessionStorage
-      // localStorage.setItem("token", token);
-      // localStorage.setItem("user", JSON.stringify(user));
-
-      // Navigate to the appropriate dashboard based on the role
 
       
     } catch (err) {

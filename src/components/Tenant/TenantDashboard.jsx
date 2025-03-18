@@ -26,32 +26,32 @@ const TenantDashboard = () => {
         
 
 
-        <h5 className="text-white">Tenant Menu</h5>
-        <ul className="nav flex-column">
+        <h5  className="py-3" style={{backgroundColor:"rgb(2, 2, 52)",color:"orange",textAlign:"center"}}>Tenant Menu</h5>
+        <ul className="nav flex-column" >
           <li className="nav-item">
-            <Link className="nav-link text-blue fw-bolder" to="/tenant/">
+            <Link className="nav-link fw-bolder text-white" to="/tenant/" style={{textAlign:"center"}}>
               Home
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-blue fw-bolder" to="/tenant/properties">
+            <Link className="nav-link text-white fw-bolder" to="/tenant/properties" style={{textAlign:"center"}}>
               Properties
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-blue fw-bolder" to="/tenant/maintenance-requests">
+            <Link className="nav-link text-white fw-bolder" to="/tenant/maintenance-requests" style={{textAlign:"center"}}>
               Maintenance
             </Link>
           </li>
 
           <li className="nav-item">
-            <Link className="nav-link text-blue fw-bolder" to="/tenant/mypayments-history">
+            <Link className="nav-link text-white fw-bolder" to="/tenant/mypayments-history" style={{textAlign:"center"}}>
               Payments History
             </Link>
           </li>
          
           <li className="nav-item">
-            <Link className="nav-link text-blue fw-bolder" to="/tenant/account">
+            <Link className="nav-link text-white fw-bolder" to="/tenant/account" style={{textAlign:"center"}}>
               Account
             </Link>
           </li>
@@ -59,7 +59,7 @@ const TenantDashboard = () => {
       </nav>
 
       {/* Main Content */}
-      <div className="flex-grow-1 p-4 border  container m-2">
+      <div className="flex-grow-1 p-4 border  container m-2" style={{backgroundColor:"#deeaee"}}>
         <Routes >
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
           <Route path="/" element={<Home />} />

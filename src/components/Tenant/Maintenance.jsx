@@ -23,8 +23,7 @@ function Maintenance() {
     }
   };
 
-// function to create a maintence
-  const postMaintainance = () =>{}
+
 
 
   return (

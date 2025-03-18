@@ -11,6 +11,7 @@ const [homes ,setHome] = useState([])
 const navigate = useNavigate()
 const [username, setUsername] = useState("")
 const token = localStorage.getItem("access")
+const role = localStorage.getItem("userRole")
   
     useEffect(()=>{
       getHome()
@@ -40,13 +41,17 @@ const token = localStorage.getItem("access")
   
     }
 
-
+ 
   return (
     <>
 
 
 
-    <div className="container border mt-3 rounded shadow-lg" style={{ fontFamily: "Calibri, sans-serif", fontSize: "14px" }}>
+    <div className="container mt-3" style={{ fontFamily: "Calibri, sans-serif", fontSize: "14px" }}>
+
+    {role ? `Logged In As ${role}` : "Welcome User"}
+
+
       <h2 className="text-center py-3"><i className="bi bi-house-door-fill me-2 "></i>My Home</h2>
 
 
@@ -57,10 +62,10 @@ const token = localStorage.getItem("access")
                
                
                 {/* Tenant's detail */}
-                <div className="container tenant border p-4 mx-1 my-1 shadow-lg ">
+                <div className="container tenant border p-4 mx-1 my-1 shadow-lg " style={{backgroundColor:"#b1cbbb"}}>
                 
         
-                <div className="tenant-profile col-sm-4 ">
+                <div className="tenant-profile col-sm-4 " >
                 <img src={home.tenant.profile.profile} style={{
             width: "200px", 
             height: "200px", 
@@ -69,13 +74,17 @@ const token = localStorage.getItem("access")
             
             
             
+            
           }}></img>
         
                 </div>
         
         
-                <div className="tenant-info border col-sm-8 mt-2 shadow-lg" >
-  <h5 className="text-primary mt-3 p-2" style={{ borderBottom: "1px solid #e3e0e0" }}>
+                <div className="tenant-info col-sm-8 mt-2" >
+                <h3 style={{borderBottom: "1px solid #e3e0e0", textAlign: "center",backgroundColor:"orangered"}} className="py-2 text-light">
+                   Personal Information
+                </h3>
+  <h5 className="text-primary mt-3 p-2 " style={{ borderBottom: "1px solid #e3e0e0" }}>
     {home.property.title}
   </h5>
   <p style={{ borderBottom: "1px solid #e3e0e0" }} className="p-2">
@@ -87,16 +96,14 @@ const token = localStorage.getItem("access")
   <p style={{ borderBottom: "1px solid #e3e0e0" }} className="p-2">
     <strong><i className="bi bi-wallet me-2"></i>Rent:</strong> {home.property.rent_amount} KES
   </p>
-  <button className="btn btn-primary mb-2">
-    <i className="bi bi-pencil-fill me-2"></i>Update Profile
-  </button>
+  
 </div>
 
         
                 </div>
         
         {/* Landlord's detail */}
-                <div className="container border p-4 mx-1 mt-4 mb-1 shadow-lg">
+                <div className="container border p-4 mx-1 mt-4 mb-1 shadow-lg" >
         
                 <div className="landlord-profile col-sm-4">
         
@@ -116,8 +123,8 @@ const token = localStorage.getItem("access")
         
         </div>
         
-        <div className="landlord-info col-sm-8 border mt-2 shadow-lg">
-               <h3 style={{borderBottom: "1px solid #e3e0e0", textAlign: "center"}} className="py-2">
+        <div className="landlord-info col-sm-8 border mt-2 shadow-lg" >
+               <h3 style={{borderBottom: "1px solid #e3e0e0", textAlign: "center",backgroundColor:"orangered"}} className="py-2 text-light">
                    Landlords Information
                 </h3>
         

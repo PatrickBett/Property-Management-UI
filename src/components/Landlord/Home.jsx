@@ -25,6 +25,7 @@ function Home() {
  
 
   const token = localStorage.getItem("access")
+  const role = localStorage.getItem("userRole")
   
 
   //  function to triger add property
@@ -79,10 +80,16 @@ function Home() {
 
   return (
     <>
+
+            <div className="mt-5" style={{fontFamily: "Calibri, sans-serif", fontSize: "14px" }}>
+            {role ? `Logged In As ${role}` : "Welcome User"}
+            </div>
     
       {/* User Info Card */}
-      <div className="row border m-1 p-1 bg-secondary">
-      <div className=" text-center p-3 col-sm-4 border bg-primary">
+      <div className="row mt-5 p-1">
+
+      
+      <div className=" text-center p-3 col-sm-4 border bg-primary rounded">
         <h3 className="font-bold text-lg">
           <FaUser className="text-blue-500 mr-3 text-xl" /> {/* User Icon */}
           {properties.length > 0 ? properties[0].landlord.email : "User"}
@@ -90,7 +97,7 @@ function Home() {
         
       </div>
 
-      <div className="  p-3 text-center shadow-md col-sm-4 border bg-success" data-bs-toggle ="modal" data-bs-target="#myadd-property" >
+      <div className="  p-3 text-center col-sm-4 border rounded bg-success" data-bs-toggle ="modal" data-bs-target="#myadd-property" >
         <h3 className="font-bold text-lg flex items-center">
           <CiCirclePlus className="text-green-500 mr-3 text-xl me-3" /> 
           Add property
@@ -182,7 +189,7 @@ function Home() {
 {/* End Modal property */}
 
       {/* Properties Count Card */}
-      <div className="p-3 text-center shadow-md col-sm-4 border bg-warning">
+      <div className="p-3 text-center col-sm-4 border rounded bg-warning">
         <h3 className="font-bold text-lg flex items-center">
           <FaHome className="text-green-500 mr-3 text-xl " /> {/* Home Icon */}
           Number of properties: <span className="ml-1">{properties.length}</span>

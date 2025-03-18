@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
@@ -13,6 +13,7 @@ function CheckoutForm({ clientSecret, property }) {
   const elements = useElements();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  
   
   console.log("first",clientSecret)
   
@@ -48,7 +49,7 @@ function CheckoutForm({ clientSecret, property }) {
 
 
       try{
-        const response = await api.post("http://127.0.0.1:8000/api/finalyze-payment/",
+        await api.post("http://127.0.0.1:8000/api/finalyze-payment/",
           {paymentIntentId: paymentIntent.id,
             status: 'succeeded',
             property_id: property.id,
@@ -83,12 +84,107 @@ function CheckoutForm({ clientSecret, property }) {
   );
 }
 
+
+
+
+
+
+
 function PropertyDetails() {
+
   const location = useLocation();
   const [paymentdata, setPaymentData] = useState('')
   const property = location.state?.property;
   const [clientSecret, setClientSecret] = useState("");
-  console.log("THIS IS MY Property:", property);
+  const navigate = useNavigate();
+  
+
+  const [content, setContent] = useState("");
+  const [success, setSuccess] = useState("")
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [reviews, setReviews] = useState([])
+  
+  
+
+  // Function to post the review
+  const handleSubmit =async (e)=>{
+    e.preventDefault()
+    setLoading(true)
+
+    try{
+      const token = localStorage.getItem("token");
+      
+  
+      const res = await api.post("http://127.0.0.1:8000/api/post-review/",{
+        "content":content,
+        "property_id" : property.id
+
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Pass auth token if required
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    
+
+    if (res.data.error){
+      setError(res.data.error)
+      setContent("")
+    }
+    else{
+      setSuccess("Review added successfully")
+      setContent("")
+    }
+ 
+    }
+    catch(e){
+      if (e.response && e.response.data) {
+        setError(e.response.data.error || "Something went wrong.");
+      } else {
+        setError("Network error. Please try again.");
+      }
+      console.error(e);
+      
+    }
+    finally{
+      setLoading(false)
+      
+    }
+    
+  }
+
+
+
+  // function to fetch reviews
+
+
+  useEffect(
+    ()=>{
+      fetchReviews()
+    },[]
+  )
+
+  const fetchReviews = async () => {
+    try {
+      const res = await api.get(`http://127.0.0.1:8000/api/post-review/`, {
+        params: { property_id: property.id },
+      });
+      
+      setReviews(res.data);
+      console.log(res.data)
+    } catch (err) {
+      setError("Failed to load reviews.");
+      console.error(err);
+    }
+  };
+  
+
+
+
+
 
   const handlePaymentIntent = async () => {
     try {
@@ -138,7 +234,55 @@ function PropertyDetails() {
             )}
           </>
         )}
+
+<div className="card p-3 mt-4">
+            <h5 className="card-title">Write a Review</h5>
+            {error && <div className="alert alert-danger">{error}</div>}
+            {success && <div className="alert alert-success">{success}</div>}
+            <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    
+                    <textarea
+                        className="form-control"
+                        rows="4"
+                        placeholder="Share your experience..."
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                        required
+                    ></textarea>
+                </div>
+                <button type="submit" className="btn btn-primary" disabled={loading}>
+                    {loading ? "Submitting..." : "Submit Review"}
+                </button>
+            </form>
+        </div>
+
+        {/* Listng Reviews section */}
+
+        <div className="card p-3 mt-3 border">
+  <h5 className="card-title bg-success p-4">Reviews</h5>
+
+  {reviews.length > 0 ? (
+    <ol className="list-group list-group-flush">
+      {reviews.map((review) => (
+        <li key={review.id} className="list-group-item bg-light border mt-2">
+          <p className="review-content " style={{fontSize: "14px",
+  color: "black",
+  marginTop: "5px"}}>{review.content}</p>
+        </li>
+      ))}
+    </ol>
+  ) : (
+    <p className="text-muted">No reviews yet. Be the first to leave a review!</p>
+  )}
+</div>
+
+
       </div>
+
+      
+
+
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { Link, Routes, Route } from "react-router-dom";
-import Applications from "./Applications";
+
 import Account from "./Account";
 import Maintenance from "./Maintenance";
 import Payments from "./Payments";
@@ -17,9 +17,11 @@ const LandlordDashboard = () => {
       {/* Sidebar */}
       <nav
         className="bg-dark text-white p-3 d-md-block"
-        style={{ minHeight: "100vh", width: "150px" }}
+        style={{ minHeight: "100vh", width: "150px" ,fontFamily: "Calibri, sans-serif", fontSize: "14px"}}
       >
-        <h5 className="text-white">Landlord Menu</h5>
+
+        
+        <h5 className="text-white py-3" style={{backgroundColor:"rgb(2, 2, 52)",textAlign:"center"}}>Landlord Menu</h5>
         <ul className="nav flex-column">
           <li className="nav-item">
             <Link className="nav-link text-white" to="/landlord/">
@@ -37,11 +39,7 @@ const LandlordDashboard = () => {
             <GrHostMaintenance className="me-2"/>Maintenance
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/landlord/applications">
-              Applications
-            </Link>
-          </li>
+          
           <li className="nav-item">
             <Link className="nav-link text-white" to="/landlord/payments">
               Payments
@@ -69,7 +67,7 @@ const LandlordDashboard = () => {
           
           <Route path="properties" element={<Properties />} />
           <Route path="maintenance-requests" element={<Maintenance />} />
-          <Route path="applications" element={<Applications />} />
+          
           <Route path="payments" element={<Payments />} />
           <Route path="account" element={<Account />} />
         </Route>

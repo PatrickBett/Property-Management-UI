@@ -2,46 +2,10 @@ import { useState, useEffect } from 'react';
 import './header.css';
 import { FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-function Header() {
+
+function Header({ isLoggedIn, onLogout }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate()
-
-
-  //check if the user is logged in
-
-  useEffect(
-    ()=>{loginstatus()}
-    ,[]
-
-  )
-
-  const loginstatus =()=>{
-    const token = localStorage.getItem('access')
-    token? setIsLoggedIn(true) : setIsLoggedIn(false)
-    
-  }
-
-  //FUNCTION TO LOGOUT USER
-  const handleLogout =() =>{
-    
-    try{
-      
-        localStorage.clear()
-        setIsLoggedIn(false)
-        navigate('/login')
-      
-    }
-    catch(error){
-      alert(error)
-      setIsLoggedIn(false)
-    }
-    finally{
-      navigate('/login')
-      setIsLoggedIn(false)
-    }
-  }
-
+  
   
 
 
@@ -64,11 +28,15 @@ function Header() {
             isLoggedIn ? (
               
               <>
-              <button onClick={handleLogout}>
-  
-    <FaSignOutAlt style={{ marginRight: "5px" }} /> Logout
-
+              <button 
+  onClick={onLogout} 
+  className='bg-danger' 
+  style={{ borderRadius: "50%", height: "25px", width: "25px" }} 
+  title="Logout"
+>
+  <FaSignOutAlt style={{ marginRight: "5px" }} />
 </button>
+
             </>
 
             ):(
