@@ -36,7 +36,7 @@ function Home() {
     
 
     try{
-      const res = await api.post("/api/properties/",{
+      const res = await api.post("https://spbproperty.pythonanywhere.com/api/properties/",{
         title,
         category: categoryId,
         description,

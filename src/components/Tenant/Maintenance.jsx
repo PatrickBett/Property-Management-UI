@@ -11,7 +11,7 @@ function Maintenance() {
 
   const fetchMaintenances = async () => {
     try {
-      const res = await api.get("/api/maintenances/", {
+      const res = await api.get("https://spbproperty.pythonanywhere.com/api/maintenances/", {
         headers: {
           Authorization: `Token ${localStorage.getItem("access")}`, // Include auth token if required
         },

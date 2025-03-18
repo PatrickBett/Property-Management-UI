@@ -19,7 +19,7 @@ function Signup() {
     console.log({ username, email, first_name, last_name, password, role, phone_number });
 
     try {
-      const res = await api.post("/api/api-auth/users/", {
+      const res = await api.post("https://spbproperty.pythonanywhere.com/api/api-auth/users/", {
         username,
         email,
         first_name,

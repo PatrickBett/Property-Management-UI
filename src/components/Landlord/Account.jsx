@@ -1,4 +1,4 @@
-// /api/account/
+// https://spbproperty.pythonanywhere.com/api/account/
 import { useState, useEffect } from "react"
 import api from "../../api"
 import { useNavigate } from "react-router-dom"
@@ -10,7 +10,7 @@ function Account() {
    ()=>{
     const fetchAccount= async()=>{
       try{
-        const response = await api.get("/api/account/")
+        const response = await api.get("https://spbproperty.pythonanywhere.com/api/account/")
         setAccount(response.data)
         
   

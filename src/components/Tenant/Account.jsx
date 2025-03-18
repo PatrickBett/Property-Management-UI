@@ -20,7 +20,7 @@ function Account() {
     const fetchAccount = async () => {
       
       try {
-        const response = await api.get("/api/account/", {
+        const response = await api.get("https://spbproperty.pythonanywhere.com/api/account/", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

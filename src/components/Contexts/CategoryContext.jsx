@@ -13,7 +13,7 @@ export const CategoryProvider =({children})=>{
 
         const fetchCategories = async()=>{
             try{
-                const res =  await api.get("/api/categories/", {
+                const res =  await api.get("https://spbproperty.pythonanywhere.com/api/categories/", {
                     headers: { Authorization: `Bearer ${token}` },
                   })
             console.log(res.data)

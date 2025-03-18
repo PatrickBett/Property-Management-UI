@@ -49,7 +49,7 @@ function CheckoutForm({ clientSecret, property }) {
 
 
       try{
-        await api.post("http://127.0.0.1:8000/api/finalyze-payment/",
+        await api.post("https://spbproperty.pythonanywhere.com/api/finalyze-payment/",
           {paymentIntentId: paymentIntent.id,
             status: 'succeeded',
             property_id: property.id,
@@ -116,7 +116,7 @@ function PropertyDetails() {
       const token = localStorage.getItem("token");
       
   
-      const res = await api.post("http://127.0.0.1:8000/api/post-review/",{
+      const res = await api.post("https://spbproperty.pythonanywhere.com/api/post-review/",{
         "content":content,
         "property_id" : property.id
 

@@ -22,7 +22,7 @@ const role = localStorage.getItem("userRole")
     const getHome =async() =>{
       
       try{
-        const response = await api.get('/api/myhome',{
+        const response = await api.get('https://spbproperty.pythonanywhere.com/api/myhome',{
           headers: {
             Authorization: `Bearer ${token}`,
           },

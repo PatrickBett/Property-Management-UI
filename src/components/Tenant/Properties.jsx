@@ -11,7 +11,7 @@ function Properties() {
   // function to fetch properties
   const fetchProperties = async() =>{
     try{
-      const res = await api.get("http://127.0.0.1:8000/api/properties/")
+      const res = await api.get("https://spbproperty.pythonanywhere.com/api/properties/")
       setProperties(res.data)
     }
     catch(error){
