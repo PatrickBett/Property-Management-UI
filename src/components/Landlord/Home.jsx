@@ -203,7 +203,7 @@ function Home() {
 
       <div className="card border-0 rounded-lg shadow-lg bg-white mt-5">
   <div className="card-header bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 rounded-top">
-    <h2 className="text-center mb-0 fw-bold">
+    <h2 className="text-center mb-0 fw-bold text-dark">
       <i className="bi bi-people-fill me-2"></i>
       Tenants Information
     </h2>
