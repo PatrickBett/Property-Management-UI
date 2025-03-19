@@ -6,54 +6,13 @@ import Payments from "./Payments";
 import Properties from "./Properties";
 import Home from "./Home";
 import { CategoryProvider } from "../Contexts/CategoryContext";
-import { GrHostMaintenance } from "react-icons/gr";
-import { IoIosSettings } from "react-icons/io";
+
 import ProtectedRoute from "../ProtectedRoute";
 
 const LandlordDashboard = () => {
   const isAuthenticated = !!localStorage.getItem("access");
   return (
-    <div className="d-flex">
-      {/* Sidebar */}
-      <nav
-        className="bg-dark text-white p-3 d-md-block"
-        style={{ minHeight: "100vh", width: "150px" ,fontFamily: "Calibri, sans-serif", fontSize: "14px"}}
-      >
 
-        
-        <h5 className="text-white py-3" style={{backgroundColor:"rgb(2, 2, 52)",textAlign:"center"}}>Landlord Menu</h5>
-        <ul className="nav flex-column">
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/landlord/">
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/landlord/properties">
-              My Properties
-            </Link>
-          </li>
-          <li className="nav-item">
-            
-            <Link className="nav-link text-white" to="/landlord/maintenance-requests">
-            <GrHostMaintenance className="me-2"/>Maintenance
-            </Link>
-          </li>
-          
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/landlord/payments">
-              Payments
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/landlord/account">
-              <IoIosSettings className="me-2" />Account
-            </Link>
-          </li>
-        </ul>
-      </nav>
-
-      {/* Main Content */}
       <div className="flex-grow-1 p-4">
         <Routes>
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
@@ -73,7 +32,7 @@ const LandlordDashboard = () => {
         </Route>
         </Routes>
       </div>
-    </div>
+
   );
 };
 

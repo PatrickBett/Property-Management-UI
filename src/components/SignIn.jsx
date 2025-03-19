@@ -4,7 +4,7 @@ import api from "../api"; // Axios instance configured with baseURL
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = ({ setIsLoggedIn, setIsTenant }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -23,18 +23,21 @@ const Login = ({ setIsLoggedIn }) => {
        // Extract tokens and role from response
       const { access, refresh, role } = response.data;
 
-
+      const isTenant =  response.data.role == "tenant"
+      setIsTenant(isTenant)
     // Save tokens and role to localStorage
       localStorage.setItem("access", access);
       localStorage.setItem("refresh", refresh);
       localStorage.setItem("userRole", role);
+
       setIsLoggedIn(true);
 
       console.log(response)
 
 
     if (role === "tenant") {
-      
+
+      setIsTenant(true)
       navigate("/tenant");
     } else if (role === "landlord") {
       navigate("/landlord");
@@ -55,9 +58,12 @@ const Login = ({ setIsLoggedIn }) => {
   return (
     <div
       className="container border p-4 mt-5"
-      style={{ maxWidth: "500px", background: "#f8f9fa" }}
+      style={{ maxWidth: "600px",
+        
+        
+       }}
     >
-      <h3 className="text-center mb-4 text-primary">Login</h3>
+      <h3 className="text-center mb-4 text-primary mt-5">Login</h3>
       {error && <p className="text-danger text-center">{error}</p>}
       <form onSubmit={handleLogin}>
         <div className="form-group mb-3">
@@ -90,11 +96,11 @@ const Login = ({ setIsLoggedIn }) => {
           />
         </div>
 
-        <div className="text-center">
+        <div className="text-center mt-5">
           <button
             className="btn btn-primary w-100"
             type="submit"
-            style={{ fontWeight: "bold" }}
+            style={{ fontWeight: "bold",height:"40px" }}
           >
             Login
           </button>

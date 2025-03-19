@@ -65,7 +65,7 @@ function Account() {
           </div>
 
           {/* User Information Section */}
-          <div className="col-md-9 mt-2 mb-2 p-3">
+          <div className="col-md-9 mt-2 mb-2 p-5 border" style={{fontSize:"15px"}}>
             <div className="mb-4">
               <i className="bi bi-envelope-fill me-2 text-primary"></i>
               <strong>Email:</strong> {account.email}

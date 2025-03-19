@@ -34,7 +34,7 @@ function Landingpage() {
         </div>
       </section>
 
-      <section className="cta-section">
+      <section className="cta-section" >
         <h2 style={{ fontSize: '30px' }}>Ready to Get Started?</h2>
         <p style={{ fontSize: '15px' }}>
           Experience hassle-free property management today. Sign up to explore our features and join a community of satisfied users.

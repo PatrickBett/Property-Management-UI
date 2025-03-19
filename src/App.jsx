@@ -22,6 +22,7 @@ import Payment from './components/Payment'
 import { useNavigate } from 'react-router-dom'
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isTenant, setIsTenant] = useState(false)
   const navigate = useNavigate()
 
 
@@ -47,11 +48,11 @@ function App() {
   return (
     
     <>
-      <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+      <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} isTenant={isTenant}  />
       <Routes>
         <Route path='/' element={<Landingpage setIsLoggedIn={setIsLoggedIn} /> }/>
         <Route path='/register' element={<Signup setIsLoggedIn={setIsLoggedIn} /> }/>
-        <Route path='/login' element={<SignIn setIsLoggedIn={setIsLoggedIn} /> }/>
+        <Route path='/login' element={<SignIn setIsLoggedIn={setIsLoggedIn} setIsTenant={setIsTenant} /> }/>
         <Route path='/about' element={<About setIsLoggedIn={setIsLoggedIn} /> }/>
         <Route path='/contact' element={<Contact setIsLoggedIn={setIsLoggedIn} /> }/>
         <Route path='/tenant/*' element={<TenantDashboard setIsLoggedIn={setIsLoggedIn} /> }/>
