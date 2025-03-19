@@ -123,7 +123,7 @@ const role = localStorage.getItem("userRole")
         
         </div>
         
-        <div className="landlord-info col-sm-8 border mt-2 shadow-lg" >
+        <div className="landlord-info col-sm-8 mt-2 shadow-lg" >
                <h3 style={{borderBottom: "1px solid #e3e0e0", textAlign: "center",backgroundColor:"orangered"}} className="py-2 text-light">
                    Landlords Information
                 </h3>
