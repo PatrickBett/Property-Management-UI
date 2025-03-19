@@ -49,13 +49,13 @@ function CheckoutForm({ clientSecret, property }) {
 
 
       try{
-        await api.post("https://spbproperty.pythonanywhere.com/api/finalyze-payment/",
+        const paymentshistory = await api.post("https://spbproperty.pythonanywhere.com/api/finalyze-payment/",
           {paymentIntentId: paymentIntent.id,
             status: 'succeeded',
             property_id: property.id,
           }
         )
-        console.log("Payment Confirmed Successful Response")
+        console.log("Payment Confirmed Successful Response", paymentshistory)
 
       }
       catch(error){
@@ -197,7 +197,7 @@ function PropertyDetails() {
 
       setClientSecret(response.data.clientSecret);
       setPaymentData(response.data)
-      console.log(response.data)
+      console.log("Response data intent",response.data)
 
       
       

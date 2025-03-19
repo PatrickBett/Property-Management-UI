@@ -13,7 +13,7 @@ function Maintenance() {
     try {
       const res = await api.get("https://spbproperty.pythonanywhere.com/api/maintenances/", {
         headers: {
-          Authorization: `Token ${localStorage.getItem("access")}`, // Include auth token if required
+          Authorization: `Bearer ${localStorage.getItem("access")}`, // Include auth token if required
         },
       });
       setMaintenances(res.data);

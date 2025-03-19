@@ -36,7 +36,7 @@ function Home() {
     
 
     try{
-      const res = await api.post("https://spbproperty.pythonanywhere.com/api/properties/",{
+      const res = await api.post("http://127.0.0.1:8000/api/properties/",{
         title,
         category: categoryId,
         description,
@@ -81,9 +81,11 @@ function Home() {
   return (
     <>
 
-            <div className="mt-5" style={{fontFamily: "Calibri, sans-serif", fontSize: "14px" }}>
-            {role ? `Logged In As ${role}` : "Welcome User"}
-            </div>
+<div className="bg-light rounded-lg shadow-sm p-4 mb-4">
+        <h2 className="text-primary fw-bold mb-0">
+          {role ? `Logged In As ${role}` : "Welcome User"}
+        </h2>
+      </div>
     
       {/* User Info Card */}
       <div className="row mt-5 p-1">
@@ -199,34 +201,74 @@ function Home() {
     
 
 
-      <div className="border p-3 mt-5 rounded-lg shadow-lg">
-  <h2 className="text-center text-success">Tenants Information</h2>
+      <div className="card border-0 rounded-lg shadow-lg bg-white mt-5">
+  <div className="card-header bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 rounded-top">
+    <h2 className="text-center mb-0 fw-bold">
+      <i className="bi bi-people-fill me-2"></i>
+      Tenants Information
+    </h2>
+  </div>
 
-  {properties.length > 0 ? (
-    properties.map((property, index) => (
-      <div key={index} className="p-3 border my-2">
-        {property.tenant && property.tenant.email ? (
-          <h3 className="p-2"><FaHome className="text-green-500 mr-3 text-xl me-2 " />
-            <strong className="text-info">{property.title}</strong> 
-            <span className="font-semibold">
-              {/* tenant information */}
-              <div className="mt-2">
-              <FaUser className="text-blue-500 mr-3 text-xl" /> Tenant:
-              
-              <p> <MdEmail className="me-2"/>{property.tenant.email}</p>
-              <p> <FaPhone className="me-2"/>{property.tenant.phone_number}</p>
-              <p>{property.tenant.first_name}</p>
+  <div className="card-body p-4">
+    {properties.length > 0 ? (
+      properties.map((property, index) => (
+        <div key={index} className="card mb-3 border-0 shadow-sm hover:shadow-md transition-all duration-300">
+          <div className="card-body">
+            <div className="d-flex align-items-start">
+              <div className="property-icon rounded-circle bg-indigo-100 p-3 me-3">
+                <FaHome className="text-indigo-600 fs-4" />
               </div>
-            </span>
-          </h3>
-        ) : (
-          <h3 className="p-2"><FaHome className="text-green-500 mr-3 text-xl me-2  " /><strong className="text-info">{property.title}</strong>: No tenants currently. </h3>
-        )}
+              
+              <div className="flex-grow-1">
+                <h4 className="fw-bold text-indigo-800 mb-3">{property.title}</h4>
+                
+                {property.tenant && property.tenant.email ? (
+                  <div className="bg-light rounded-lg p-3 border-start border-4 border-success">
+                    <div className="d-flex align-items-center mb-2">
+                      <div className="tenant-icon rounded-circle bg-success-soft p-2 me-2">
+                        <FaUser className="text-success fs-5" />
+                      </div>
+                      <h5 className="mb-0 text-success fw-bold">Tenant Details</h5>
+                    </div>
+                    
+                    <div className="ms-4 mt-3">
+                      <div className="d-flex align-items-center mb-2">
+                        <MdEmail className="text-gray-600 me-3 fs-5" />
+                        <span className="text-dark">{property.tenant.email}</span>
+                      </div>
+                      
+                      <div className="d-flex align-items-center mb-2">
+                        <FaPhone className="text-gray-600 me-3 fs-5" />
+                        <span className="text-dark">{property.tenant.phone_number}</span>
+                      </div>
+                      
+                      <div className="d-flex align-items-center">
+                        <i className="bi bi-person-badge me-3 text-gray-600 fs-5"></i>
+                        <span className="text-dark fw-medium">{property.tenant.first_name}</span>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="alert alert-warning d-flex align-items-center">
+                    <i className="bi bi-exclamation-triangle-fill me-2 fs-5"></i>
+                    <span>No tenants currently occupying this property</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    ) : (
+      <div className="text-center py-5">
+        <div className="empty-state-icon mb-3">
+          <i className="bi bi-house-slash text-gray-400 fs-1"></i>
+        </div>
+        <h3 className="text-gray-500 fw-normal">Your properties have not been rented yet</h3>
+        <p className="text-muted mt-2">When your properties are rented, tenant information will appear here.</p>
       </div>
-    ))
-  ) : (
-    <h3 className="p-3 text-gray-500">Your properties have not been rented</h3>
-  )}
+    )}
+  </div>
 </div>
 
 

@@ -1,177 +1,158 @@
-
 import api from "../../api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 function Home() {
+  const [homes, setHome] = useState([]);
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
 
+  const token = localStorage.getItem("access");
+  const role = localStorage.getItem("userRole");
   
-const [homes ,setHome] = useState([])
-const navigate = useNavigate()
-const [username, setUsername] = useState("")
-const token = localStorage.getItem("access")
-const role = localStorage.getItem("userRole")
+  useEffect(() => {
+    getHome();
+  }, []);
   
-    useEffect(()=>{
-      getHome()
-    },[])
+  const getHome = async() => {
+    try {
+      const response = await api.get('https://spbproperty.pythonanywhere.com/api/myhome', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-  
-  
-    const getHome =async() =>{
-      
-      try{
-        const response = await api.get('https://spbproperty.pythonanywhere.com/api/myhome',{
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-
-        setHome(response.data)
-        setUsername(response.data[0].tenant.username)
-        
-  
+      setHome(response.data);
+      if (response.data.length > 0) {
+        setUsername(response.data[0].tenant.username);
       }
-      catch(error){
-        
-        console.log(error)
-        // navigate("/login")
-      }
-  
+    } catch(error) {
+      console.log(error);
+      // navigate("/login")
     }
+  };
 
- 
   return (
-    <>
-
-
-
-    <div className="container mt-5" style={{ fontFamily: "Calibri, sans-serif", fontSize: "14px" }}>
-
-    {role ? `Logged In As ${role}` : "Welcome User"}
-
-
-      <h2 className="text-center py-3"><i className="bi bi-house-door-fill me-2 "></i>My Home</h2>
-
-
-      {homes && homes.length>0 ? 
-
-              (homes.map((home,index)=>(
-                <div className="container p-4 mb-4 rounded " key={index}>
-               
-               
-                {/* Tenant's detail */}
-                <div className="container tenant border p-4 mx-1 my-1 shadow-lg " style={{backgroundColor:"#b1cbbb"}}>
-                
-        
-                <div className="tenant-profile col-sm-4 " >
-                <img src={home.tenant.profile.profile} style={{
-            width: "200px", 
-            height: "200px", 
-            borderRadius: "50%", 
-            objectFit: "cover", 
-            
-            
-            
-            
-          }}></img>
-        
-                </div>
-        
-        
-                <div className="tenant-info col-sm-8 mt-2" >
-                <h3 style={{borderBottom: "1px solid #e3e0e0", textAlign: "center",backgroundColor:"orangered"}} className="py-2 text-light">
-                   Personal Information
-                </h3>
-  <h5 className="text-primary mt-3 p-2 " style={{ borderBottom: "1px solid #e3e0e0" }}>
-    {home.property.title}
-  </h5>
-  <p style={{ borderBottom: "1px solid #e3e0e0" }} className="p-2">
-    <strong><i className="bi bi-person-circle me-2"></i>Tenant:</strong> {home.tenant.username} ({home.tenant.role})
-  </p>
-  <p style={{ borderBottom: "1px solid #e3e0e0" }} className="p-2">
-    <strong><i className="bi bi-houses me-2"></i>No of bedrooms:</strong> {home.property.category.name}
-  </p>
-  <p style={{ borderBottom: "1px solid #e3e0e0" }} className="p-2">
-    <strong><i className="bi bi-wallet me-2"></i>Rent:</strong> {home.property.rent_amount} KES
-  </p>
-  
-</div>
-
-        
-                </div>
-        
-        {/* Landlord's detail */}
-                <div className="container border p-4 mx-1 mt-4 mb-1 shadow-lg" >
-        
-                <div className="landlord-profile col-sm-4">
-        
-        
-                <img 
-          src={home.property.landlord.profile.profile} 
-          alt="Landlord Profile" 
-          style={{
-            width: "200px", 
-            height: "200px", 
-            borderRadius: "50%", 
-            objectFit: "cover", 
-            border: "2px solid #ddd", 
-            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
-          }} 
-        />
-        
+    <div className="container mt-5 mb-5" style={{ fontFamily: "Poppins, sans-serif" }}>
+      {role ? (
+        <div className="alert alert-info mb-4 text-center">
+          <i className="bi bi-person-check me-2"></i>Logged In As <strong>{role}</strong>
         </div>
-        
-        <div className="landlord-info col-sm-8 mt-2 shadow-lg" >
-               <h3 style={{borderBottom: "1px solid #e3e0e0", textAlign: "center",backgroundColor:"orangered"}} className="py-2 text-light">
-                   Landlords Information
-                </h3>
-        
-                <p className="mt-3" style={{borderBottom: "1px solid #e3e0e0"}}>
-                  <strong><i className="bi bi-envelope-fill me-2"></i>Landlord`s Email:</strong> {home.property.landlord.email}
-                </p>
-                <p style={{borderBottom: "1px solid #e3e0e0"}}>
-                  <strong><i className="bi bi-telephone-fill me-2"></i>Landlord`s Phone:</strong> {home.property.landlord.phone_number}
-                </p>
-        
-                
-        
-         </div>       
+      ) : (
+        <div className="alert alert-secondary mb-4 text-center">Welcome User</div>
+      )}
+
+      <h2 className="text-center py-3 mb-4">
+        <i className="bi bi-house-door-fill me-2"></i>
+        <span className="border-bottom border-primary pb-2">My Home</span>
+      </h2>
+
+      {homes && homes.length > 0 ? (
+        homes.map((home, index) => (
+          <div className="card shadow-lg mb-5" key={index}>
+            <div className="card-header bg-primary text-white">
+              <h4 className="m-0">{home.property.title}</h4>
+            </div>
+            
+            {/* Tenant's details */}
+            <div className="card-body p-0">
+              <div className="row g-0">
+                <div className="col-md-4 p-4 text-center bg-light">
+                  <img 
+                    src={home.tenant.profile.profile} 
+                    alt="Tenant Profile"
+                    className="img-fluid rounded-circle shadow" 
+                    style={{
+                      width: "200px", 
+                      height: "200px", 
+                      objectFit: "cover",
+                      border: "3px solid #fff"
+                    }}
+                  />
+                  <h5 className="mt-3">{home.tenant.username}</h5>
+                  <span className="badge bg-info">{home.tenant.role}</span>
                 </div>
-        
-        
-        
+                
+                <div className="col-md-8 p-4">
+                  <div className="card mb-4">
+                    <div className="card-header bg-success text-white">
+                      <h5 className="m-0">
+                        <i className="bi bi-person-badge me-2"></i>
+                        Personal Information
+                      </h5>
+                    </div>
+                    <div className="card-body">
+                      <ul className="list-group list-group-flush">
+                        <li className="list-group-item d-flex justify-content-between align-items-center">
+                          <span><i className="bi bi-houses me-2"></i>Bedrooms</span>
+                          <span className="badge bg-primary rounded-pill">{home.property.category.name}</span>
+                        </li>
+                        <li className="list-group-item d-flex justify-content-between align-items-center">
+                          <span><i className="bi bi-wallet me-2"></i>Rent</span>
+                          <span className="badge bg-success rounded-pill">{home.property.rent_amount} KES</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  {/* Landlord's details */}
+                  <div className="card">
+                    <div className="card-header bg-warning text-dark">
+                      <h5 className="m-0">
+                        <i className="bi bi-person-square me-2"></i>
+                        Landlord Information
+                      </h5>
+                    </div>
+                    <div className="card-body">
+                      <div className="row">
+                        <div className="col-md-4 text-center mb-3">
+                          <img 
+                            src={home.property.landlord.profile.profile} 
+                            alt="Landlord Profile" 
+                            className="img-fluid rounded-circle shadow" 
+                            style={{
+                              width: "100px", 
+                              height: "100px", 
+                              objectFit: "cover",
+                              border: "2px solid #eee" 
+                            }} 
+                          />
+                        </div>
+                        <div className="col-md-8">
+                          <ul className="list-group list-group-flush">
+                            <li className="list-group-item">
+                              <i className="bi bi-envelope-fill me-2 text-primary"></i>
+                              {home.property.landlord.email}
+                            </li>
+                            <li className="list-group-item">
+                              <i className="bi bi-telephone-fill me-2 text-success"></i>
+                              {home.property.landlord.phone_number}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              
-              )) )
-      :
-
-      <div className="container border my-3 p-2">
-        <h3 className="font-bold antialiased text-4xl text-green8 mb-4 p-3">No Home Currently. Searching for a home? <Link to='/tenant/properties/'>Homes</Link></h3>
-      </div>
-
-
-        
-      
-
-            }
-
+            </div>
+          </div>
+        ))
+      ) : (
+        <div className="card shadow-lg">
+          <div className="card-body p-5 text-center">
+            <i className="bi bi-house-x text-muted" style={{ fontSize: "4rem" }}></i>
+            <h3 className="mt-4 mb-3">No Home Currently</h3>
+            <p className="lead mb-4">Looking for a new place?</p>
+            <Link to='/tenant/properties/' className="btn btn-primary btn-lg">
+              <i className="bi bi-search me-2"></i>Browse Homes
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
-    </>
-  )
+  );
 }
 
-export default Home
-
-
-
-
-
-
-
-
-
-
-
-
+export default Home;

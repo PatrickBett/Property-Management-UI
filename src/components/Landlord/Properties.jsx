@@ -5,31 +5,63 @@ function Properties() {
   const { properties } = useContext(PropertyContext);
 
   return (
-    <>
-      <div className="container border shadow-lg p-4"><h1 className="text-primary">My Properties</h1></div>
-      <div className="container border shadow-lg mt-3">
-  {properties.length > 0 ? (
-    properties.map((property, index) => (
-      <div className="container border mt-2 col-sm-4" key={index}>
-        <img src={property.url} className="mt-3" style={{ width: "100%" }} alt={property.title} />
-        <h3 className="mt-3 text-primary">{property.title}</h3>
-        <p>City: {property.city}</p>
-        <p>State: {property.state}</p>
-        <p>Rent: {property.rent_amount}</p>
+    <div className="py-4">
+      {/* Page Header */}
+      <div className="container mb-4">
+        <div className="card border-0 shadow-sm">
+          <div className="card-body">
+            <h1 className="text-primary mb-0 fw-bold">My Properties</h1>
+          </div>
+        </div>
+      </div>
 
-        {property.tenant ? (
-          <p>Tenant: {property.tenant.username}</p>
+      {/* Properties Grid */}
+      <div className="container">
+        {properties.length > 0 ? (
+          <div className="row g-4">
+            {properties.map((property, index) => (
+              <div className="col-md-6 col-lg-4" key={index}>
+                <div className="card h-100 shadow-sm hover-shadow transition-all">
+                  <img 
+                    src={property.url} 
+                    className="card-img-top" 
+                    style={{ height: "200px", objectFit: "cover" }} 
+                    alt={property.title} 
+                  />
+                  <div className="card-body">
+                    <h3 className="card-title text-primary fw-bold">{property.title}</h3>
+                    <div className="mb-3">
+                      <p className="card-text mb-1">
+                        <span className="fw-medium">Location:</span> {property.city}, {property.state}
+                      </p>
+                      <p className="card-text mb-0">
+                        <span className="fw-medium">Monthly Rent:</span> ${property.rent_amount}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="card-footer bg-white border-top-0">
+                    {property.tenant ? (
+                      <div className="d-flex align-items-center">
+                        <div className="badge bg-success me-2">Rented</div>
+                        <span>Tenant: {property.tenant.username}</span>
+                      </div>
+                    ) : (
+                      <button className="btn btn-primary w-100">
+                        Not Yet Rented
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         ) : (
-          <button className="btn btn-primary mb-2">Not Yet Rented</button>
+          <div className="card shadow-sm p-5 text-center">
+            <h3 className="text-muted mb-0">You don't have any properties yet</h3>
+          </div>
         )}
       </div>
-    ))
-  ) : (
-    <h3 className="p-5">You don`t have any properties yet</h3>
-  )}
-</div>
-
-    </>
+    </div>
   );
 }
 
