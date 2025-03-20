@@ -31,10 +31,10 @@ function Landingpage() {
   return (
     <>
       <div className="landing">
-        <main className='landing-content py-5'>
+        <main className='landing-content'>
           <div className="container">
-            <h1 className="display-3 fw-bold text-shadow">SPB Property Management</h1>
-            <h2 className="mt-4 fs-2 fw-light">Your trusted partner in property rental and management.</h2>
+            <h1 className="display-3 fw-bold text-shadow ">SPB Property Management</h1>
+            <h2 className="mt-4 fs-1 fw-light">Your trusted partner in property rental and management.</h2>
             <Link to="/register" className="btn btn-primary btn-lg mt-5 hero-btn px-5 py-3">
               Explore Properties
             </Link>
@@ -44,25 +44,25 @@ function Landingpage() {
         <div className="landing-features">
           <div className="container py-4">
             <div className="row g-4 justify-content-center text-center">
-              <div className="col-md-4">
+              <div className="col-md-4 ">
                 <div className="feature-card">
                   <div className="feature-icon">🏠</div>
-                  <h3>Premium Properties</h3>
-                  <p>Curated selection of high-quality rentals</p>
+                  <h3 className='fs-1'>Premium Properties</h3>
+                  <p className='fs-4'>Curated selection of high-quality rentals</p>
                 </div>
               </div>
               <div className="col-md-4">
-                <div className="feature-card">
+                <div className="feature-card bg-secondary ">
                   <div className="feature-icon">⚡</div>
-                  <h3>Fast Bookings</h3>
-                  <p>Secure your dream property in minutes</p>
+                  <h3 className='fs-1'>Fast Bookings</h3>
+                  <p className='text-white fs-4'>Secure your dream property in minutes</p>
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="feature-card">
                   <div className="feature-icon">🛡️</div>
-                  <h3>Secure Payments</h3>
-                  <p>Safe and transparent payment system</p>
+                  <h3 className='fs-1'>Secure Payments</h3>
+                  <p className='fs-4'>Safe and transparent payment system</p>
                 </div>
               </div>
             </div>
@@ -84,7 +84,7 @@ function Landingpage() {
               <div className="info-card">
                 <div className="info-icon">📋</div>
                 <h3>Comprehensive Management</h3>
-                <p>
+                <p className='fs-4'>
                   We handle everything from property listings, tenant screening, rent collection, and maintenance requests.
                 </p>
               </div>
@@ -94,7 +94,7 @@ function Landingpage() {
               <div className="info-card">
                 <div className="info-icon">🌟</div>
                 <h3>Trusted by Thousands</h3>
-                <p>
+                <p className='fs-4'>
                   Thousands of landlords and tenants trust us to provide reliable, hassle-free property management solutions.
                 </p>
               </div>
@@ -104,7 +104,7 @@ function Landingpage() {
               <div className="info-card">
                 <div className="info-icon">🚀</div>
                 <h3>Simplified Communication</h3>
-                <p>
+                <p className='fs-4'>
                   Seamless communication between landlords and tenants through our state-of-the-art platform.
                 </p>
               </div>
@@ -119,25 +119,25 @@ function Landingpage() {
             <div className="col-6 col-md-3">
               <div className="stat-item">
                 <div className="stat-number">1000+</div>
-                <div className="stat-label">Properties Managed</div>
+                <div className="stat-label fs-4">Properties Managed</div>
               </div>
             </div>
             <div className="col-6 col-md-3">
               <div className="stat-item">
                 <div className="stat-number">98%</div>
-                <div className="stat-label">Customer Satisfaction</div>
+                <div className="stat-label fs-4">Customer Satisfaction</div>
               </div>
             </div>
             <div className="col-6 col-md-3">
               <div className="stat-item">
                 <div className="stat-number">24/7</div>
-                <div className="stat-label">Support Available</div>
+                <div className="stat-label fs-4">Support Available</div>
               </div>
             </div>
             <div className="col-6 col-md-3">
               <div className="stat-item">
                 <div className="stat-number">50+</div>
-                <div className="stat-label">Cities Covered</div>
+                <div className="stat-label fs-4">Cities Covered</div>
               </div>
             </div>
           </div>
@@ -157,7 +157,7 @@ function Landingpage() {
             <div className="col-md-6">
               <div className="testimonial-card">
                 <div className="testimonial-content">
-                  <p>"SPB Property Management has made renting out my properties completely hassle-free. Their team is professional and responsive."</p>
+                  <p className='fs-4'>"SPB Property Management has made renting out my properties completely hassle-free. Their team is professional and responsive."</p>
                 </div>
                 <div className="testimonial-author">
                   <div className="testimonial-name">Sarah Johnson</div>
@@ -169,7 +169,7 @@ function Landingpage() {
             <div className="col-md-6">
               <div className="testimonial-card">
                 <div className="testimonial-content">
-                  <p>"Finding my dream apartment was so easy with SPB. The application process was smooth, and their support team is always helpful."</p>
+                  <p className='fs-4'>"Finding my dream apartment was so easy with SPB. The application process was smooth, and their support team is always helpful."</p>
                 </div>
                 <div className="testimonial-author">
                   <div className="testimonial-name">Michael Chen</div>
@@ -184,7 +184,7 @@ function Landingpage() {
       <section className="cta-section animate-on-scroll">
         <div className="container py-5 text-center">
           <h2 className="section-title">Ready to Get Started?</h2>
-          <p className="cta-text mb-4">
+          <p className="cta-text mb-4 fs-4">
             Experience hassle-free property management today. Sign up to explore our features and join a community of satisfied users.
           </p>
           <div className="cta-buttons">

@@ -7,6 +7,7 @@
   background: url('https://ent-tomps-images-public-prod.oss-ap-southeast-5.aliyuncs.com/prod/front_view_house_investments_elements_composition_47ad8a9f4a.jpg') no-repeat center center/cover;
   color: white;
   text-align: center;
+  
   display: flex;
   flex-direction: column;
   justify-content: space-between;
