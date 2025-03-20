@@ -1,4 +1,4 @@
-🚀🚀STILL IN PROCESS....I HAVENT HOSTED BACKEND 🚀🚀
+🚀🚀STILL IN PROCESS....🚀🚀
 
 ---
 
@@ -9,19 +9,34 @@ The **Property Management System** is a web-based application built using **Reac
 
 ## **Features**  
 
-### **Tenant Dashboard (User)**  
-- View all available properties  
-- Book a property of choice  
-- Make monthly rental payments  
+### **Tenant Dashboard (User)** 
+![alt text](image-5.png) 
+- View all available properties 
+![alt text](image-6.png) 
+- Book a property of choice 
+![alt text](image-7.png) 
+![alt text](image-8.png)
+![alt text](image-9.png)
+- Make monthly rental payments 
+- Make a review of the property he/she has lived 
+![alt text](image-10.png)
+
 - View payment history  
 
 ### **Landlord Dashboard**  
-- Add new properties for rent  
-- View only their own listed properties  
-- Receive rental payments from tenants  
+ 
+ 
+
 - View tenant bookings  
+![alt text](image.png)
+![alt text](image-1.png)
+- Add new properties for rent 
+![alt text](image-2.png)
 
-
+- View only their own listed properties 
+![alt text](image-3.png)
+![alt text](image-4.png)
+- Receive rental payments from tenants  
 
 ## **Tech Stack**  
 - **Frontend:** React.js  

@@ -228,29 +228,29 @@ function Home() {
                       <div className="tenant-icon rounded-circle bg-success-soft p-2 me-2">
                         <FaUser className="text-success fs-5" />
                       </div>
-                      <h5 className="mb-0 text-success fw-bold">Tenant Details</h5>
+                      <h5 className="mb-0 text-success fw-bold fs-3">Tenant Details</h5>
                     </div>
                     
                     <div className="ms-4 mt-3">
                       <div className="d-flex align-items-center mb-2">
-                        <MdEmail className="text-gray-600 me-3 fs-5" />
-                        <span className="text-dark">{property.tenant.email}</span>
+                        <MdEmail className="text-gray-600 me-3 fs-4" />
+                        <span className="text-dark fs-5">{property.tenant.email}</span>
                       </div>
                       
                       <div className="d-flex align-items-center mb-2">
-                        <FaPhone className="text-gray-600 me-3 fs-5" />
-                        <span className="text-dark">{property.tenant.phone_number}</span>
+                        <FaPhone className="text-gray-600 me-3 fs-4" />
+                        <span className="text-dark fs-5">{property.tenant.phone_number}</span>
                       </div>
                       
                       <div className="d-flex align-items-center">
-                        <i className="bi bi-person-badge me-3 text-gray-600 fs-5"></i>
-                        <span className="text-dark fw-medium">{property.tenant.first_name}</span>
+                        <i className="bi bi-person-badge me-3 text-gray-600 fs-4"></i>
+                        <span className="text-dark fw-medium fs-5">{property.tenant.first_name}</span>
                       </div>
                     </div>
                   </div>
                 ) : (
                   <div className="alert alert-warning d-flex align-items-center">
-                    <i className="bi bi-exclamation-triangle-fill me-2 fs-5"></i>
+                    <i className="bi bi-exclamation-triangle-fill me-2 fs-4"></i>
                     <span>No tenants currently occupying this property</span>
                   </div>
                 )}
