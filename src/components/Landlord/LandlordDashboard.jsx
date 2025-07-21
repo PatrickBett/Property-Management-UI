@@ -12,27 +12,26 @@ import ProtectedRoute from "../ProtectedRoute";
 const LandlordDashboard = () => {
   const isAuthenticated = !!localStorage.getItem("access");
   return (
-
-      <div className="flex-grow-1 p-4">
-        <Routes>
+    <div className="flex-grow-1 p-4">
+      <Routes>
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
-          <Route path="/" element={
-            <CategoryProvider>
-               <Home />
-            </CategoryProvider>
-           
-            } />
-         
-          
+          <Route
+            path="/"
+            element={
+              <CategoryProvider>
+                <Home />
+              </CategoryProvider>
+            }
+          />
+
           <Route path="properties" element={<Properties />} />
           <Route path="maintenance-requests" element={<Maintenance />} />
-          
+
           <Route path="payments" element={<Payments />} />
           <Route path="account" element={<Account />} />
         </Route>
-        </Routes>
-      </div>
-
+      </Routes>
+    </div>
   );
 };
 

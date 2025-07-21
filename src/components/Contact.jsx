@@ -1,13 +1,14 @@
-import React from 'react';
-import './contact.css';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import React from "react";
+import "./contact.css";
+import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 function Contact() {
   return (
     <div className="contact-container">
       <h2 className="text-center">Contact Us</h2>
       <p className="text-center">
-        Have questions or need assistance? Reach out to us through any of the following ways:
+        Have questions or need assistance? Reach out to us through any of the
+        following ways:
       </p>
 
       <div className="contact-details">
@@ -26,7 +27,11 @@ function Contact() {
         <div className="contact-item">
           <FaMapMarkerAlt className="contact-icon" />
           <h4>Address</h4>
-          <p>123 Property Lane, Suite 400<br />Cityville, CA 12345</p>
+          <p>
+            123 Property Lane, Suite 400
+            <br />
+            Cityville, CA 12345
+          </p>
         </div>
       </div>
 

@@ -4,17 +4,18 @@
 .landing {
   position: relative;
   min-height: 100vh;
-  background: url('https://ent-tomps-images-public-prod.oss-ap-southeast-5.aliyuncs.com/prod/front_view_house_investments_elements_composition_47ad8a9f4a.jpg') no-repeat center center/cover;
+  background: url("https://ent-tomps-images-public-prod.oss-ap-southeast-5.aliyuncs.com/prod/front_view_house_investments_elements_composition_47ad8a9f4a.jpg")
+    no-repeat center center/cover;
   color: white;
   text-align: center;
-  
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .landing::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -250,7 +251,7 @@
 }
 
 .cta-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -100px;
   right: -100px;
@@ -262,7 +263,7 @@
 }
 
 .cta-section::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -100px;
   left: -100px;
@@ -350,15 +351,15 @@
   .landing-content h1 {
     font-size: 2.8rem;
   }
-  
+
   .landing-content h2 {
     font-size: 1.5rem;
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
-  
+
   .stat-number {
     font-size: 2.2rem;
   }
@@ -368,23 +369,25 @@
   .landing-content {
     padding-top: 10vh;
   }
-  
+
   .landing-content h1 {
     font-size: 2.3rem;
   }
-  
+
   .landing-content h2 {
     font-size: 1.3rem;
   }
-  
-  .feature-card, .info-card, .testimonial-card {
+
+  .feature-card,
+  .info-card,
+  .testimonial-card {
     margin-bottom: 1rem;
   }
-  
+
   .cta-text {
     font-size: 1.1rem;
   }
-  
+
   .cta-buttons .btn {
     display: block;
     width: 100%;

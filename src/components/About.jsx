@@ -1,5 +1,5 @@
-import React from 'react';
-import './about.css';
+import React from "react";
+import "./about.css";
 
 function About() {
   return (
@@ -8,7 +8,9 @@ function About() {
       <div className="about-hero">
         <div className="about-hero-content">
           <h1>About SPB Property Management</h1>
-          <p className="tagline">Transforming Property Management Through Innovation</p>
+          <p className="tagline">
+            Transforming Property Management Through Innovation
+          </p>
           <div className="hero-divider"></div>
         </div>
       </div>
@@ -17,8 +19,9 @@ function About() {
       <div className="container">
         <div className="about-intro">
           <p>
-            At <span className="brand-highlight">SPB Property Management</span>, we are dedicated to revolutionizing 
-            property management by offering innovative solutions that cater to both landlords and tenants, 
+            At <span className="brand-highlight">SPB Property Management</span>,
+            we are dedicated to revolutionizing property management by offering
+            innovative solutions that cater to both landlords and tenants,
             creating seamless experiences and lasting relationships.
           </p>
         </div>
@@ -31,8 +34,9 @@ function About() {
             </div>
             <h2>Our Mission</h2>
             <p>
-              To provide a cutting-edge platform where landlords and tenants can seamlessly manage properties, 
-              communicate effectively, and ensure hassle-free operations.
+              To provide a cutting-edge platform where landlords and tenants can
+              seamlessly manage properties, communicate effectively, and ensure
+              hassle-free operations.
             </p>
           </div>
 
@@ -42,8 +46,8 @@ function About() {
             </div>
             <h2>Our Values</h2>
             <p>
-              Transparency, integrity, and innovation form the foundation of our operations, 
-              ensuring trust and satisfaction for all users.
+              Transparency, integrity, and innovation form the foundation of our
+              operations, ensuring trust and satisfaction for all users.
             </p>
           </div>
 
@@ -53,8 +57,9 @@ function About() {
             </div>
             <h2>Our Team</h2>
             <p>
-              A group of passionate professionals in property management, technology, and customer service 
-              dedicated to helping landlords and tenants achieve their goals.
+              A group of passionate professionals in property management,
+              technology, and customer service dedicated to helping landlords
+              and tenants achieve their goals.
             </p>
           </div>
         </div>
@@ -64,7 +69,7 @@ function About() {
           <h2>Our Services</h2>
           <div className="section-divider"></div>
         </div>
-        
+
         <div className="services-content">
           <div className="service-item">
             <div className="service-icon">
@@ -73,7 +78,8 @@ function About() {
             <div className="service-details">
               <h3>Tenant Screening</h3>
               <p>
-                Helping landlords find reliable tenants with thorough screening processes to ensure a great rental experience.
+                Helping landlords find reliable tenants with thorough screening
+                processes to ensure a great rental experience.
               </p>
             </div>
           </div>
@@ -85,7 +91,8 @@ function About() {
             <div className="service-details">
               <h3>Rent Collection</h3>
               <p>
-                Streamlining rent collection with secure online payment methods for both landlords and tenants.
+                Streamlining rent collection with secure online payment methods
+                for both landlords and tenants.
               </p>
             </div>
           </div>
@@ -97,7 +104,8 @@ function About() {
             <div className="service-details">
               <h3>Maintenance Requests</h3>
               <p>
-                Enabling tenants to submit maintenance requests directly, ensuring quick resolution and property upkeep.
+                Enabling tenants to submit maintenance requests directly,
+                ensuring quick resolution and property upkeep.
               </p>
             </div>
           </div>
@@ -109,7 +117,8 @@ function About() {
             <div className="service-details">
               <h3>Performance Analytics</h3>
               <p>
-                Providing insights into property performance to help landlords make data-driven decisions.
+                Providing insights into property performance to help landlords
+                make data-driven decisions.
               </p>
             </div>
           </div>

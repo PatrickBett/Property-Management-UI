@@ -1,6 +1,5 @@
 /* Reset some default styles */
 
-
 /* Main content area that will push footer down */
 .content {
   flex: 1; /* This makes the content area expand to push footer down */
@@ -12,7 +11,7 @@
   color: #ecf0f1;
   padding: 1.5rem 0;
   text-align: center;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   width: 100%;
   /* No need for margin-top since we're using flex layout */
 }

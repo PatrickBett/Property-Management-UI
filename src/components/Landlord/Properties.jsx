@@ -3,6 +3,7 @@ import { PropertyContext } from "../../Context";
 
 function Properties() {
   const { properties } = useContext(PropertyContext);
+  console.log("landlord properties",properties)
 
   return (
     <div className="py-4">
@@ -22,12 +23,15 @@ function Properties() {
             {properties.map((property, index) => (
               <div className="col-md-6 col-lg-4" key={index}>
                 <div className="card h-100 shadow-sm hover-shadow transition-all">
-                  <img 
-                    src={property.url} 
-                    className="card-img-top" 
-                    style={{ height: "200px", objectFit: "cover" }} 
-                    alt={property.title} 
-                  />
+
+
+                  
+                {property.images && property.images.length > 0 && (
+  <div key={property.images[0].id}>
+    <img src={property.images[0].image} alt="Property" className="card-img-top object-fit-cover"/>
+
+  </div>
+)}
                   <div className="card-body">
                     <h3 className="card-title text-primary fw-bold">{property.title}</h3>
                     <div className="mb-3">

@@ -1,8 +1,40 @@
 import { useEffect, useState } from "react"
 import api from "../../api"
+import { HomeContext } from "../Contexts/HomeContext"
+import { useContext } from "react"
 function Maintenance() {
 
   const [maintenances, setMaintenances] = useState([])
+  const [maintainedhome,setMaintainedHome] = useState('')
+  const {homes} = useContext(HomeContext)
+  const [request,setRequest] = useState("")
+
+
+  const handleMaintainedHome =async(e)=>{
+    e.preventDefault()
+    const selectedHome = homes.find(home => home.property.title === maintainedhome);
+    console.log("posting.......")
+    console.log(selectedHome,request)
+
+    try{
+      
+      
+      if (!selectedHome) {
+        throw new Error("Selected property not found");
+      }
+      await api.post("/api/maintenances/",{property:selectedHome.property.id,request:request})
+      
+      
+
+    }
+    catch(error){
+      console.log(error)
+    }
+
+  }
+ 
+  
+
   useEffect(
     ()=>{
       fetchMaintenances()
@@ -11,26 +43,25 @@ function Maintenance() {
 
   const fetchMaintenances = async () => {
     try {
-      const res = await api.get("https://spbproperty.pythonanywhere.com/api/maintenances/", {
+      const res = await api.get("/api/maintenances/", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access")}`, // Include auth token if required
         },
       });
       setMaintenances(res.data);
-      console.log(res.data);
+      
+      
     } catch (error) {
       console.error("Error fetching maintenance requests:", error);
     }
   };
 
 
-
-
   return (
     <div className="container border my-3 p-2">
-        <h2 className="p-3 text-center bg-secondary">Property Maintenance </h2>
+        <h2 className="p-3 text-center bg-secondary">Property Maintenance 
         <button className="btn btn-warning my-3" data-bs-toggle="modal" data-bs-target="#myModal"><i className="bi bi-plus-circle-fill me-2"></i> Maintenance</button>
-
+        </h2>
          <div id="myModal" className="modal mt-5 " role="dialog">
   <div className="modal-dialog">
 
@@ -42,27 +73,40 @@ function Maintenance() {
        
       </div>
 
-      <form className="modal-body">
+      
+      <form className="modal-body" onSubmit={handleMaintainedHome}>
 
       <div className="mb-3 mt-3">
         <label htmlFor="property" className="form-label">Property:</label>
-        <select className="form-control" id="property"  name="property">
-          <option value="Property1">Property1</option>
-          <option value="Property2">Property1</option>
+        <select className="form-control" value={maintainedhome} onChange={(e) => setMaintainedHome(e.target.value)} name="property">
+          
+        <option value="">Select a Property</option>
+          {homes?.map((home)=>(
+            <option key={home.property.id}>{home.property.title}</option>
+
+          ))}
        
         </select>
       </div>
-
+      
       <div className="mb-3 mt-3">
         <label htmlFor="request" className="form-label">Request:</label>
-        <textarea type="text" className="form-control" id="request" placeholder="Enter Request Message" name="request" />
+        <textarea
+      type="text"
+      className="form-control"
+      value={request} // Bind state to the value
+      onChange={(e) => setRequest(e.target.value)} // Update state on change
+      placeholder="Enter Request Message"
+      name="request"
+    />
+      </div>
+
+      <div className="modal-footer">
+        <button type="submit" className="btn btn-success" data-bs-dismiss="modal">Submit</button>
       </div>
 
       </form>
-
-      <div className="modal-footer">
-        <button type="button" className="btn btn-success" data-bs-dismiss="modal">Submit</button>
-      </div>
+  
     </div>
 
   </div>

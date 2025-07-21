@@ -1,37 +1,17 @@
 import api from "../../api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { HomeContext } from "../Contexts/HomeContext";
+
 
 function Home() {
-  const [homes, setHome] = useState([]);
-  const navigate = useNavigate();
-  const [username, setUsername] = useState("");
 
-  const token = localStorage.getItem("access");
+  const {homes} = useContext(HomeContext)
+  
   const role = localStorage.getItem("userRole");
   
-  useEffect(() => {
-    getHome();
-  }, []);
   
-  const getHome = async() => {
-    try {
-      const response = await api.get('https://spbproperty.pythonanywhere.com/api/myhome', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setHome(response.data);
-      if (response.data.length > 0) {
-        setUsername(response.data[0].tenant.username);
-      }
-    } catch(error) {
-      console.log(error);
-      // navigate("/login")
-    }
-  };
 
   return (
     <div className="container mt-5 mb-5" style={{ fontFamily: "Poppins, sans-serif" }}>

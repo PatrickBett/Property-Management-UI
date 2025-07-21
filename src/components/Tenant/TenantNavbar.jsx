@@ -1,9 +1,5 @@
-
-
 function TenantNavbar() {
-  return (
-    <div>TenantNavbar</div>
-  )
+  return <div>TenantNavbar</div>;
 }
 
-export default TenantNavbar
+export default TenantNavbar;
