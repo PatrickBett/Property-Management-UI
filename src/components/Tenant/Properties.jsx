@@ -16,7 +16,7 @@ function Properties() {
         },
       });
       setProperties(res.data);
-      console.log(res.data);
+      console.log("Properties", res.data);
     } catch (error) {
       console.log(error);
       navigate("/login");
