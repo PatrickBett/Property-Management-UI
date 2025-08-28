@@ -41,7 +41,7 @@ function Signup() {
       // If successful, navigate to login
       navigate("/login");
     } catch (err) {
-      setError("Failed to register. Please check your inputs.");
+      setError("Failed to register.", err);
       console.error(err);
     }
   };
