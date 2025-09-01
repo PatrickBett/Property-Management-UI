@@ -27,7 +27,7 @@ function Signup() {
     });
 
     try {
-      const res = await api.post("/api/api-auth/users/", {
+      const res = await api.post("api/api-auth/users/", {
         username,
         email,
         first_name,
