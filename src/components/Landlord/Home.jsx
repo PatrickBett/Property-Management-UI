@@ -9,6 +9,7 @@ import api from "../../api.js";
 
 function Home() {
   const { categories } = useContext(CategoryContext);
+  console.log("This are categories", categories);
   const { properties } = useContext(PropertyContext);
 
   const [title, setTitle] = useState("");
@@ -31,6 +32,7 @@ function Home() {
     e.preventDefault();
     // Convert category to an integer
     const categoryId = parseInt(category, 10);
+
     console.log(
       title,
       category,

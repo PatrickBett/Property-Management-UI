@@ -254,7 +254,7 @@ function PropertyDetails() {
                       <div>
                         <small className="text-muted d-block">Price</small>
                         <span className="fw-bold">
-                          ${property.rent_amount}/month
+                          Kshs{property.rent_amount}/month
                         </span>
                       </div>
                     </div>
