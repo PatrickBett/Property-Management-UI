@@ -33,6 +33,7 @@ function Home() {
     const categoryId = parseInt(category, 10);
     console.log(
       title,
+      category,
 
       description,
       address,
@@ -67,6 +68,7 @@ function Home() {
           "Content-Type": "multipart/form-data",
         },
       });
+      console.log("Adding property...", res.data);
 
       alert("property added successfull ");
 
@@ -159,6 +161,7 @@ function Home() {
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
                     >
+                      <option value="">-- Select Category --</option>
                       {categories?.map((category) => (
                         <option key={category.id} value={category.id}>
                           {category.name}

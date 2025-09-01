@@ -278,7 +278,7 @@ function PropertyDetails() {
                           Property Type
                         </small>
                         <span className="fw-bold">
-                          {property.category.name} Bedrooms
+                          {property.category.name}
                         </span>
                       </div>
                     </div>
