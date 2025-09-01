@@ -2,9 +2,9 @@
 
 /* Hero Section */
 .landing {
-  position: relative;
+  /* position: relative; */
   min-height: 100vh;
-  background: url("https://ent-tomps-images-public-prod.oss-ap-southeast-5.aliyuncs.com/prod/front_view_house_investments_elements_composition_47ad8a9f4a.jpg")
+  background: url("https://assets.marketing.quickbase.com/blog/_1320x742_crop_center-center_82_line/blog-images-real-estate.jpg.webp")
     no-repeat center center/cover;
   color: white;
   text-align: center;

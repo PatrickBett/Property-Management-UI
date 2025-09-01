@@ -205,7 +205,9 @@ function PropertyDetails() {
       });
 
       setClientSecret(response.data.clientSecret);
+      console.log("response.data.clientSecret", response.data.clientSecret);
       setPaymentData(response.data);
+      console.log("response.data", response.data);
     } catch (error) {
       console.error("Error creating payment intent:", error);
     }
