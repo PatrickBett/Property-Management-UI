@@ -78,7 +78,7 @@ function PaymentHistory() {
                     <td>
                       <div className="d-flex align-items-center">
                         <img
-                          src={payment.property.url}
+                          src={`https://propertyms.pythonanywhere.com/${payment.property.images[0].image}`}
                           alt={payment.property.title}
                           className="rounded me-3"
                           style={{
