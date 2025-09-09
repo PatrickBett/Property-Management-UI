@@ -243,7 +243,7 @@ function PropertyDetails() {
                       alt="Property"
                       style={{
                         width: "100%", // always take full width
-                        height: "400px", // consistent height
+                        // consistent height
                         objectFit: "cover", // crop to fit instead of stretching
                         borderRadius: "8px", // optional, makes it look smoother
                       }}
