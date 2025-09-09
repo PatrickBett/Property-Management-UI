@@ -233,12 +233,21 @@ function PropertyDetails() {
                 showThumbs={true}
                 infiniteLoop={true}
                 autoPlay={true}
-                interval={5000}
+                interval={1000}
                 stopOnHover={true}
               >
                 {property.images.map((img) => (
                   <div key={img.id}>
-                    <img src={img.image} alt="Property" />
+                    <img
+                      src={img.image}
+                      alt="Property"
+                      style={{
+                        width: "100%", // always take full width
+                        height: "400px", // consistent height
+                        objectFit: "cover", // crop to fit instead of stretching
+                        borderRadius: "8px", // optional, makes it look smoother
+                      }}
+                    />
                   </div>
                 ))}
               </Carousel>
