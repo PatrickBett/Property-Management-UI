@@ -105,9 +105,9 @@ const Login = ({ setIsLoggedIn, setIsTenant }) => {
             </div>
 
             <div className="d-flex justify-content-between align-items-center mb-4">
-              <div className="form-check">
+              <div className="form-check mt-5">
                 <input
-                  className="form-check-input mt-5"
+                  className="form-check-input "
                   type="checkbox"
                   id="rememberMe"
                 />
