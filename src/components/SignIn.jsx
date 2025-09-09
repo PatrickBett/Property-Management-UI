@@ -73,11 +73,11 @@ const Login = ({ setIsLoggedIn, setIsTenant }) => {
             </div>
           )}
 
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleLogin} style={{ height: "50vh" }}>
             <div className="form-floating mb-4">
               <input
                 type="text"
-                className="form-control"
+                className="form-control mt-5"
                 id="username"
                 placeholder="Username"
                 value={username}
@@ -92,7 +92,7 @@ const Login = ({ setIsLoggedIn, setIsTenant }) => {
             <div className="form-floating mb-4">
               <input
                 type="password"
-                className="form-control"
+                className="form-control mt-5"
                 id="password"
                 placeholder="Password"
                 value={password}
@@ -107,7 +107,7 @@ const Login = ({ setIsLoggedIn, setIsTenant }) => {
             <div className="d-flex justify-content-between align-items-center mb-4">
               <div className="form-check">
                 <input
-                  className="form-check-input"
+                  className="form-check-input mt-5"
                   type="checkbox"
                   id="rememberMe"
                 />
