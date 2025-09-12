@@ -13,7 +13,7 @@ api.interceptors.request.use(
     //included on registration
     if (
       token &&
-      !config.url.includes("/api/api-auth/users/") &&
+      !config.url.includes("/register") &&
       !config.url.includes("/login")
     ) {
       config.headers.Authorization = `Bearer ${token}`;
