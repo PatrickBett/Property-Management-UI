@@ -10,6 +10,7 @@ function Signup() {
   const [role, setRole] = useState("tenant"); // Default role set to 'tenant'
   const [phone_number, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -25,6 +26,7 @@ function Signup() {
       role,
       phone_number,
     });
+    setIsLoading(true);
 
     try {
       const res = await api.post("api/api-auth/users/", {
@@ -43,6 +45,8 @@ function Signup() {
     } catch (err) {
       setError("Failed to register.", err);
       console.error(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -186,7 +190,7 @@ function Signup() {
             <div className="d-grid">
               <button className="btn btn-success py-3" type="submit">
                 <i className="bi bi-check-circle me-2"></i>
-                Create Account
+                {isLoading ? "Creating..." : "Create Account"}
               </button>
             </div>
           </form>
