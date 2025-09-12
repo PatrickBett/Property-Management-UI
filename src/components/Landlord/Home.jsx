@@ -10,7 +10,8 @@ import api from "../../api.js";
 function Home() {
   const { categories } = useContext(CategoryContext);
   console.log("This are categories", categories);
-  const { properties } = useContext(PropertyContext);
+
+  const { properties, setProperties } = useContext(PropertyContext);
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
@@ -26,6 +27,7 @@ function Home() {
 
   const token = localStorage.getItem("access");
   const role = localStorage.getItem("userRole");
+  const [isLoading, setIsLoading] = useState(false);
 
   //  function to triger add property
   const handleAddProperty = async (e) => {
@@ -46,6 +48,7 @@ function Home() {
 
       images
     );
+    setIsLoading(true);
 
     try {
       // Create FormData object
@@ -70,7 +73,8 @@ function Home() {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("Adding property...", res.data);
+      // Add new property to existing properties
+      setProperties((prev) => [...prev, res.data]);
 
       alert("property added successfull ");
 
@@ -87,9 +91,10 @@ function Home() {
       setImages("");
 
       // Dismiss modal
-      document.getElementById("close-modal-btn").click();
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -273,9 +278,10 @@ function Home() {
                     <button className="btn btn-danger" data-bs-dismiss="modal">
                       Cancel
                     </button>
+
                     <button type="submit" className="btn btn-success">
                       {" "}
-                      Save
+                      {isLoading ? "Saving..." : "Save"}
                     </button>
                   </div>
                 </form>
