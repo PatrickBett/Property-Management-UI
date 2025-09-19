@@ -56,7 +56,7 @@ function Properties() {
                         </span>
                       </div>
                     ) : (
-                      <button className="btn btn-primary w-100">
+                      <button className="btn btn-danger w-100">
                         Not Yet Rented
                       </button>
                     )}
