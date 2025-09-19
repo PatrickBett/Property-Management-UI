@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api";
-
+import { toast } from "react-toastify";
 function Signup() {
   const [first_name, setFirstname] = useState("");
   const [username, setUsername] = useState("");
@@ -41,8 +41,10 @@ function Signup() {
       console.log(res);
 
       // If successful, navigate to login
+      toast.success("Signup Successfull");
       navigate("/login");
     } catch (err) {
+      toast.error("Failed to register", err);
       setError("Failed to register.", err);
       console.error(err);
     } finally {

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api"; // Axios instance configured with baseURL
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = ({ setIsLoggedIn, setIsTenant }) => {
   const [username, setUsername] = useState("");
@@ -28,6 +30,7 @@ const Login = ({ setIsLoggedIn, setIsTenant }) => {
 
       // Save tokens and role to localStorage
       localStorage.setItem("access", access);
+      localStorage.setItem("userRole", role);
       localStorage.setItem("refresh", refresh);
       localStorage.setItem("userRole", role);
 
@@ -35,15 +38,20 @@ const Login = ({ setIsLoggedIn, setIsTenant }) => {
 
       if (role === "tenant") {
         navigate("/tenant");
+        toast.success("Logged In successfully as Tenant");
       } else if (role === "landlord") {
         navigate("/landlord");
+        // toast.success("Logged In successfully");
       } else {
         setError("Invalid role. Please contact support.");
+        toast.error("Invalid role. Please contact support.");
+
         navigate("/login");
       }
     } catch (err) {
       console.error(err);
       setError("Invalid username or password.");
+      toast.error("Invalid username or password.");
     } finally {
       setIsLoading(false);
     }
