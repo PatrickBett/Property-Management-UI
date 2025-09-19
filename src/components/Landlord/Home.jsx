@@ -109,7 +109,10 @@ function Home() {
 
       {/* User Info Card */}
       <div className="row mt-5 p-1">
-        <div className=" text-center p-3 col-sm-4 border bg-primary rounded">
+        <div
+          className=" text-center p-3 col-sm-4 border bg-primary"
+          style={{ borderRadius: 20 }}
+        >
           <h3 className="font-bold text-lg">
             <FaUser className="text-blue-500 mr-3 text-xl" /> {/* User Icon */}
             {properties.length > 0 ? properties[0].landlord.email : "User"}
@@ -117,7 +120,8 @@ function Home() {
         </div>
 
         <div
-          className="  p-3 text-center col-sm-4 border rounded bg-success"
+          className="  p-3 text-center col-sm-4 border bg-success"
+          style={{ borderRadius: 20 }}
           data-bs-toggle="modal"
           data-bs-target="#myadd-property"
         >
@@ -293,7 +297,10 @@ function Home() {
         {/* End Modal property */}
 
         {/* Properties Count Card */}
-        <div className="p-3 text-center col-sm-4 border rounded bg-warning">
+        <div
+          className="p-3 text-center col-sm-4 border  bg-warning"
+          style={{ borderRadius: 20 }}
+        >
           <h3 className="font-bold text-lg flex items-center">
             <FaHome className="text-green-500 mr-3 text-xl " />{" "}
             {/* Home Icon */}

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api"; // Axios instance configured with baseURL
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
+
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -41,7 +41,7 @@ const Login = ({ setIsLoggedIn, setIsTenant }) => {
         toast.success("Logged In successfully as Tenant");
       } else if (role === "landlord") {
         navigate("/landlord");
-        // toast.success("Logged In successfully");
+        toast.success("Logged In successfully");
       } else {
         setError("Invalid role. Please contact support.");
         toast.error("Invalid role. Please contact support.");
