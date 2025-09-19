@@ -4,7 +4,7 @@ import { FaUser, FaHome, FaPhone } from "react-icons/fa"; // Import icons
 import { CiCirclePlus } from "react-icons/ci";
 import { MdEmail } from "react-icons/md";
 import { CategoryContext } from "../Contexts/CategoryContext.jsx";
-
+import { toast } from "react-toastify";
 import api from "../../api.js";
 
 function Home() {
@@ -76,7 +76,7 @@ function Home() {
       // Add new property to existing properties
       setProperties((prev) => [...prev, res.data]);
 
-      alert("property added successfull ");
+      toast.success("Property added successfull ");
 
       // Reset form fields
       setTitle("");
@@ -93,6 +93,7 @@ function Home() {
       // Dismiss modal
     } catch (err) {
       console.log(err);
+      toast.error("Failed to add property");
     } finally {
       setIsLoading(false);
     }
