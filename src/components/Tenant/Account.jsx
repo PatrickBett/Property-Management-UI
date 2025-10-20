@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import api from "../../api";
 import { useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
 function Account() {
   const [account, setAccount] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
   const token = localStorage.getItem("access");
   const navigate = useNavigate();
 
@@ -22,13 +23,35 @@ function Account() {
           },
         });
         setAccount(response.data);
+        console.log("Account Details", response.data);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchAccount();
-  }, [token, navigate]); // Dependencies ensure it runs when token or navigate changes
+  }, [token, navigate]);
+
+  const handleUpdate = async () => {
+    try {
+      const res = await api.put("api/update-profile/", account);
+      setAccount(res.data);
+      setIsEditing(false); // Disable editing after successful update
+      toast.success("Profile updated successfully!");
+    } catch (err) {
+      console.log("Error updating account", err);
+      toast.error("Error updating account");
+    }
+  };
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+    // Optionally refetch account data to reset changes
+  };
 
   return (
     <div className="container py-5">
@@ -40,14 +63,17 @@ function Account() {
               Account Settings
             </h2>
           </div>
-          
+
           <div className="card-body p-0">
             <div className="row g-0">
               {/* Profile Image Section */}
               <div className="col-lg-4 bg-light p-4 text-center d-flex flex-column align-items-center justify-content-center">
                 <div className="position-relative mb-4">
                   <img
-                    src={account.profile?.profile || "https://via.placeholder.com/150"}
+                    src={
+                      account.profile?.profile ||
+                      "https://via.placeholder.com/150"
+                    }
                     alt="Profile"
                     className="rounded-circle img-thumbnail shadow"
                     style={{
@@ -61,14 +87,30 @@ function Account() {
                     <i className="bi bi-camera-fill"></i>
                   </button>
                 </div>
-                
-                <h4 className="mt-3 mb-1">{account.first_name} {account.last_name}</h4>
+
+                <h4 className="mt-3 mb-1">
+                  {account.first_name} {account.last_name}
+                </h4>
                 <p className="text-muted mb-3">@{account.username}</p>
-                
-                <button className="btn btn-outline-primary w-75 mt-2">
-                  <i className="bi bi-pencil-square me-2"></i>
-                  Edit Profile
-                </button>
+
+                {!isEditing && (
+                  <button
+                    className="btn btn-outline-primary w-75 mt-2"
+                    onClick={handleEdit}
+                  >
+                    <i className="bi bi-pencil-square me-2"></i>
+                    Edit Profile
+                  </button>
+                )}
+                {isEditing && (
+                  <button
+                    className="btn btn-outline-secondary w-75 mt-2"
+                    onClick={handleCancel}
+                  >
+                    <i className="bi bi-x-circle me-2"></i>
+                    Cancel
+                  </button>
+                )}
               </div>
 
               {/* User Information Section */}
@@ -77,7 +119,7 @@ function Account() {
                   <i className="bi bi-info-circle me-2"></i>
                   Personal Information
                 </h4>
-                
+
                 <div className="row g-4">
                   <div className="col-md-6">
                     <div className="card h-100 border-0 shadow-sm">
@@ -86,15 +128,29 @@ function Account() {
                           <div className="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
                             <i className="bi bi-envelope-fill text-primary"></i>
                           </div>
-                          <div>
+                          <div className="flex-grow-1">
                             <h6 className="text-muted mb-1">Email Address</h6>
-                            <p className="mb-0 fw-bold">{account.email}</p>
+                            {isEditing ? (
+                              <input
+                                type="email"
+                                className="form-control"
+                                value={account.email || ""}
+                                onChange={(e) =>
+                                  setAccount({
+                                    ...account,
+                                    email: e.target.value,
+                                  })
+                                }
+                              />
+                            ) : (
+                              <p className="mb-0 fw-bold">{account.email}</p>
+                            )}
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="col-md-6">
                     <div className="card h-100 border-0 shadow-sm">
                       <div className="card-body p-4">
@@ -102,15 +158,31 @@ function Account() {
                           <div className="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
                             <i className="bi bi-telephone-fill text-primary"></i>
                           </div>
-                          <div>
+                          <div className="flex-grow-1">
                             <h6 className="text-muted mb-1">Phone Number</h6>
-                            <p className="mb-0 fw-bold">{account.phone_number}</p>
+                            {isEditing ? (
+                              <input
+                                type="tel"
+                                className="form-control"
+                                value={account.phone_number || ""}
+                                onChange={(e) =>
+                                  setAccount({
+                                    ...account,
+                                    phone_number: e.target.value,
+                                  })
+                                }
+                              />
+                            ) : (
+                              <p className="mb-0 fw-bold">
+                                {account.phone_number}
+                              </p>
+                            )}
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="col-md-6">
                     <div className="card h-100 border-0 shadow-sm">
                       <div className="card-body p-4">
@@ -118,15 +190,31 @@ function Account() {
                           <div className="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
                             <i className="bi bi-person-fill text-primary"></i>
                           </div>
-                          <div>
+                          <div className="flex-grow-1">
                             <h6 className="text-muted mb-1">First Name</h6>
-                            <p className="mb-0 fw-bold">{account.first_name}</p>
+                            {isEditing ? (
+                              <input
+                                type="text"
+                                className="form-control"
+                                value={account.first_name || ""}
+                                onChange={(e) =>
+                                  setAccount({
+                                    ...account,
+                                    first_name: e.target.value,
+                                  })
+                                }
+                              />
+                            ) : (
+                              <p className="mb-0 fw-bold">
+                                {account.first_name}
+                              </p>
+                            )}
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="col-md-6">
                     <div className="card h-100 border-0 shadow-sm">
                       <div className="card-body p-4">
@@ -134,28 +222,56 @@ function Account() {
                           <div className="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
                             <i className="bi bi-person-fill text-primary"></i>
                           </div>
-                          <div>
+                          <div className="flex-grow-1">
                             <h6 className="text-muted mb-1">Last Name</h6>
-                            <p className="mb-0 fw-bold">{account.last_name}</p>
+                            {isEditing ? (
+                              <input
+                                type="text"
+                                className="form-control"
+                                value={account.last_name || ""}
+                                onChange={(e) =>
+                                  setAccount({
+                                    ...account,
+                                    last_name: e.target.value,
+                                  })
+                                }
+                              />
+                            ) : (
+                              <p className="mb-0 fw-bold">
+                                {account.last_name}
+                              </p>
+                            )}
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                
-                <div className="d-flex justify-content-end mt-4">
-                  <button className="btn btn-primary px-4 py-2">
-                    <i className="bi bi-save me-2"></i>
-                    Update Profile
-                  </button>
-                </div>
+
+                {isEditing && (
+                  <div className="d-flex justify-content-end gap-2 mt-4">
+                    <button
+                      className="btn btn-secondary px-4 py-2"
+                      onClick={handleCancel}
+                    >
+                      <i className="bi bi-x-circle me-2"></i>
+                      Cancel
+                    </button>
+                    <button
+                      className="btn btn-primary px-4 py-2"
+                      onClick={handleUpdate}
+                    >
+                      <i className="bi bi-save me-2"></i>
+                      Update Profile
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
       )}
-      
+
       {!account && (
         <div className="card shadow-sm p-5 text-center">
           <div className="py-5">

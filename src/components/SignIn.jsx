@@ -49,9 +49,9 @@ const Login = ({ setIsLoggedIn, setIsTenant }) => {
         navigate("/login");
       }
     } catch (err) {
-      console.error(err);
-      setError("Invalid username or password.");
-      toast.error("Invalid username or password.");
+      console.error("Error is:",err.response.data.detail);
+      setError(err.response.data.detail);
+      toast.error(err);
     } finally {
       setIsLoading(false);
     }
