@@ -11,20 +11,21 @@ import Home from "./Home";
 
 import PaymentHistory from "./PaymentsHistory";
 const TenantDashboard = () => {
-  const isAuthenticated = !!localStorage.getItem("access"); // Check authentication
+  const isAuthenticated = !!localStorage.getItem("access"); 
+  // Check authentication
 
   return (
     <div className=" p-4 border m-2 mt-5">
       <HomeProvider>
         <Routes>
-          <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+          {/* <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}> */}
             <Route path="/" element={<Home />} />
             <Route path="properties" element={<Properties />} />
             <Route path="maintenance-requests" element={<Maintenance />} />
             <Route path="applications" element={<Applications />} />
             <Route path="mypayments-history" element={<PaymentHistory />} />
             <Route path="account" element={<Account />} />
-          </Route>
+          {/* </Route> */}
         </Routes>
       </HomeProvider>
     </div>
