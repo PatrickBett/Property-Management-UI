@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import api from "../../api";
 import { Link, useNavigate } from "react-router-dom";
-import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 function Properties() {
   const [properties, setProperties] = useState([]);
+  const [filteredProperties, setFilteredProperties] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
   const navigate = useNavigate();
 
-  // function to fetch properties
+  // Fetch properties
   const fetchProperties = async () => {
     try {
       const res = await api.get("/api/properties/", {
@@ -16,10 +20,29 @@ function Properties() {
         },
       });
       setProperties(res.data);
-      console.log("Properties", res.data);
+      setFilteredProperties(res.data);
+
+      // Extract unique category names
+      const uniqueCategories = [
+        ...new Set(res.data.map((prop) => prop.category.name)),
+      ];
+      setCategories(uniqueCategories);
     } catch (error) {
       console.log(error);
       navigate("/login");
+    }
+  };
+
+  // Handle filtering by category
+  const handleFilterChange = (category) => {
+    setSelectedCategory(category);
+    if (category === "All") {
+      setFilteredProperties(properties);
+    } else {
+      const filtered = properties.filter(
+        (prop) => prop.category.name === category
+      );
+      setFilteredProperties(filtered);
     }
   };
 
@@ -39,9 +62,34 @@ function Properties() {
       </div>
 
       <div className="container py-4">
-        {properties.length > 0 ? (
+        {/* Category Filter Row */}
+        <div className="d-flex flex-wrap justify-content-center gap-2 mb-4">
+          <button
+            className={`btn ${
+              selectedCategory === "All" ? "btn-primary" : "btn-outline-primary"
+            } btn-sm rounded-pill`}
+            onClick={() => handleFilterChange("All")}
+          >
+            All
+          </button>
+
+          {categories.map((cat, index) => (
+            <button
+              key={index}
+              className={`btn ${
+                selectedCategory === cat ? "btn-primary" : "btn-outline-primary"
+              } btn-sm rounded-pill`}
+              onClick={() => handleFilterChange(cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Property Cards */}
+        {filteredProperties.length > 0 ? (
           <div className="row g-4">
-            {properties.map((property, index) => (
+            {filteredProperties.map((property, index) => (
               <div className="col-md-6 col-lg-4" key={index}>
                 <div className="card h-100 shadow-sm hover-shadow transition-all">
                   <div className="position-relative">

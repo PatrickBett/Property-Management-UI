@@ -45,6 +45,7 @@ function Properties() {
                         <span className="fw-medium">Monthly Rent:</span> $
                         {property.rent_amount}
                       </p>
+                      
                     </div>
                   </div>
                   <div className="card-footer bg-white border-top-0">

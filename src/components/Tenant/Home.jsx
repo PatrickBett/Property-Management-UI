@@ -56,7 +56,7 @@ function Home() {
                 
                 <div className="col-md-8 p-4">
                   <div className="card mb-4">
-                    <div className="card-header bg-success text-white">
+                    <div className="card-header text-white">
                       <h5 className="m-0">
                         <i className="bi bi-person-badge me-2"></i>
                         Personal Information
@@ -78,7 +78,7 @@ function Home() {
                   
                   {/* Landlord's details */}
                   <div className="card">
-                    <div className="card-header bg-warning text-dark">
+                    <div className="card-header text-dark">
                       <h5 className="m-0">
                         <i className="bi bi-person-square me-2"></i>
                         Landlord Information

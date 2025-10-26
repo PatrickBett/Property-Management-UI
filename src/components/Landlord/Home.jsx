@@ -110,10 +110,10 @@ function Home() {
       </div>
 
       {/* User Info Card */}
-      <div className="row mt-5 p-1">
+      <div className="container row mt-5 p-1 dashboard-tabs">
         <div
-          className=" text-center p-3 col-sm-4 border"
-          style={{ borderRadius: 20 }}
+          className=" text-center p-3 col-sm-3 border me-5"
+          // style={{ borderRadius: 20 }}
         >
           <h3 className="font-bold text-lg">
             <FaUser className="text-blue-500 mr-3 text-xl" /> {/* User Icon */}
@@ -122,8 +122,8 @@ function Home() {
         </div>
 
         <div
-          className="  p-3 text-center col-sm-4 border "
-          style={{ borderRadius: 20 }}
+          className="  p-3 text-center col-sm-3 border me-5 "
+          // style={{ borderRadius: 20 }}
           data-bs-toggle="modal"
           data-bs-target="#myadd-property"
         >
@@ -300,8 +300,8 @@ function Home() {
 
         {/* Properties Count Card */}
         <div
-          className=" text-center col-sm-4 border "
-          style={{ borderRadius: 20 }}
+          className=" text-center col-sm-3 border p-3 "
+          // style={{ borderRadius: 20 }}
         >
           <h3 className="font-bold text-lg flex items-center">
             <FaHome className="text-green-500 mr-3 text-xl " />{" "}
