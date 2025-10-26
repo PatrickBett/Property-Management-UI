@@ -1,0 +1,196 @@
+/* Home.css */
+
+/*
+  ==================================================
+  General Layout and Structure
+  ==================================================
+*/
+
+/* Container for the main content area */
+.home-container {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light gray background */
+    
+  }
+  
+  /* Enhancing the header section */
+  .header-card {
+    border-left: 5px solid #007bff; /* Primary blue color */
+    padding: 15px;
+    margin-bottom: 30px;
+    background-color: #ffffff;
+  }
+  
+  .header-card h2 {
+    color: #343a40; /* Darker text for contrast */
+    font-size: 1.75rem;
+  }
+  
+  /*
+    ==================================================
+    User/Action/Count Cards
+    ==================================================
+  */
+  
+  .info-card-container .col-sm-4 {
+    padding: 10px;
+  }
+  
+  .info-card {
+    min-height: 120px; /* Ensure consistent height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Overriding inline styles for better maintainability */
+  .info-card.bg-primary {
+    background-color: #007bff !important; /* Blue */
+    color: white;
+  }
+  
+  .info-card.bg-success {
+    background-color: #28a745 !important; /* Green */
+    color: white;
+  }
+  
+  .info-card.bg-warning {
+    background-color: #ffc107 !important; /* Yellow */
+    color: #343a40; /* Dark text for contrast */
+  }
+  
+  .info-card h3 {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    text-align: left;
+  }
+  
+  .info-card svg {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    /* Color set by the utility classes on the component will mostly override this,
+       but it's a good fallback */
+    color: inherit;
+  }
+  
+  /*
+    ==================================================
+    Modal Styling (Add Property)
+    ==================================================
+  */
+  
+  /* Note: Bootstrap handles most modal styling, but we can enhance it */
+  #myadd-property .modal-content {
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  #myadd-property .modal-header {
+    background-color: #6f42c1; /* Purple/Indigo for modal header */
+    color: white;
+    border-bottom: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  #myadd-property .modal-title {
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
+  
+  /*
+    ==================================================
+    Tenant Information Section
+    ==================================================
+  */
+  
+  .tenant-info-section {
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden; /* For rounded corners on header */
+  }
+  
+  .tenant-info-section .card-header {
+    /* Using a subtle, modern gradient if not already applied by utility classes */
+    background: linear-gradient(135deg, #6f42c1, #007bff);
+    color: white !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Individual Property/Tenant Card */
+  .property-tenant-card {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .property-tenant-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: #adb5bd;
+  }
+  
+  .property-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0; /* Prevents icon from shrinking */
+  }
+  
+  .tenant-details-box {
+    background-color: #e9f7ef; /* Lighter success color */
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .tenant-details-box h5 {
+    color: #155724; /* Darker success text */
+  }
+  
+  .tenant-details-box svg {
+    color: #383d41;
+  }
+  
+  .tenant-details-box span {
+    font-size: 1rem;
+  }
+  
+  /* Empty State Styling */
+  .empty-state-icon i {
+    color: #ced4da !important;
+    font-size: 4rem !important;
+  }
+  
+  .empty-state-icon-text h3 {
+    color: #868e96 !important;
+  }
+  
+  /*
+    ==================================================
+    Responsiveness
+    ==================================================
+  */
+  @media (max-width: 767px) {
+    .info-card-container .col-sm-4 {
+      margin-bottom: 15px; /* Add space between cards on small screens */
+    }
+  
+    .info-card h3 {
+      font-size: 1rem;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+  

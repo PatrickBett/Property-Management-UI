@@ -21,13 +21,10 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import Payment from "./components/Payment";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
-
 // import { ToastContainer } from "react-toastify";
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("access"));
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isTenant, setIsTenant] = useState(false);
-  
   const navigate = useNavigate();
 
   //FUNCTION TO LOGOUT USER

@@ -1,123 +1,289 @@
-// http://127.0.0.1:8000//api/account/
-import { useState, useEffect } from "react"
-import api from "../../api"
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react";
+import api from "../../api";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 function Account() {
-  const [account, setAccount] = useState("")
-  const navigate = useNavigate()
+  const [account, setAccount] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const token = localStorage.getItem("access");
+  const navigate = useNavigate();
 
-  useEffect(
-   ()=>{
-    const fetchAccount= async()=>{
-      try{
-        const response = await api.get("/api/account/")
-        setAccount(response.data)
-        
-  
-      }
-      catch(error){
-        console.log(error)
-        navigate("/login")
-        
-      }
+  useEffect(() => {
+    // Redirect to login if no token is found
+    if (!token) {
+      navigate("/login");
+      return;
     }
-    fetchAccount()
-   } 
-   ,[navigate])
 
+    const fetchAccount = async () => {
+      try {
+        const response = await api.get("/api/account/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setAccount(response.data);
+        console.log("Account Details", response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
+    fetchAccount();
+  }, [token, navigate]);
 
+  const handleUpdate = async () => {
+    try {
+      const res = await api.put("api/update-profile/", account);
+      setAccount(res.data);
+      setIsEditing(false); // Disable editing after successful update
+      toast.success("Profile updated successfully!");
+    } catch (err) {
+      console.log("Error updating account", err);
+      toast.error("Error updating account");
+    }
+  };
 
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+    // Optionally refetch account data to reset changes
+  };
 
   return (
-    <div className="container py-4">
-  {account && (
-    <div className="card shadow border-0">
-      <div className="card-header bg-white">
-        <h1 className="text-center text-primary my-3">Account Settings</h1>
-      </div>
-      
-      <div className="card-body">
-        <div className="row">
-          {/* Profile Image Column */}
-          <div className="col-md-4 text-center d-flex justify-content-center align-items-start">
-            <img 
-              src={account.profile?.profile} 
-              alt="Profile"
-              className="my-4"
-              style={{
-                borderRadius: "50%",
-                width: "180px",
-                height: "180px",
-                objectFit: "cover",
-                border: "4px solid #007bff",
-                boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)"
-              }}
-            />
+    <div className="container py-5">
+      {account && (
+        <div className="card shadow-lg border-0">
+          <div className="card-header bg-primary text-white p-4">
+            <h2 className="m-0 text-center">
+              <i className="bi bi-person-gear me-2"></i>
+              Account Settings
+            </h2>
           </div>
-          
-          {/* User Details Column */}
-          <div className="col-md-8">
-            <div className="p-3">
-              <div className="row mb-3">
-                <div className="col-md-4">
-                  <h5 className="text-muted mb-0">Email</h5>
+
+          <div className="card-body p-0">
+            <div className="row g-0">
+              {/* Profile Image Section */}
+              <div className="col-lg-4 bg-light p-4 text-center d-flex flex-column align-items-center justify-content-center">
+                <div className="position-relative mb-4">
+                  <img
+                    src={
+                      account.profile?.profile ||
+                      "https://via.placeholder.com/150"
+                    }
+                    alt="Profile"
+                    className="rounded-circle img-thumbnail shadow"
+                    style={{
+                      width: "180px",
+                      height: "180px",
+                      objectFit: "cover",
+                      border: "4px solid #fff",
+                    }}
+                  />
+                  <button className="btn btn-sm btn-primary position-absolute bottom-0 end-0 rounded-circle p-2">
+                    <i className="bi bi-camera-fill"></i>
+                  </button>
                 </div>
-                <div className="col-md-8">
-                  <p className="fs-5 mb-0">{account.email}</p>
-                </div>
+
+                <h4 className="mt-3 mb-1">
+                  {account.first_name} {account.last_name}
+                </h4>
+                <p className="text-muted mb-3">@{account.username}</p>
+
+                {!isEditing && (
+                  <button
+                    className="btn btn-outline-primary w-75 mt-2"
+                    onClick={handleEdit}
+                  >
+                    <i className="bi bi-pencil-square me-2"></i>
+                    Edit Profile
+                  </button>
+                )}
+                {isEditing && (
+                  <button
+                    className="btn btn-outline-secondary w-75 mt-2"
+                    onClick={handleCancel}
+                  >
+                    <i className="bi bi-x-circle me-2"></i>
+                    Cancel
+                  </button>
+                )}
               </div>
-              
-              <div className="row mb-3">
-                <div className="col-md-4">
-                  <h5 className="text-muted mb-0">First Name</h5>
+
+              {/* User Information Section */}
+              <div className="col-lg-8 p-4">
+                <h4 className="mb-4 pb-2 border-bottom">
+                  <i className="bi bi-info-circle me-2"></i>
+                  Personal Information
+                </h4>
+
+                <div className="row g-4">
+                  <div className="col-md-6">
+                    <div className="card h-100 border-0 shadow-sm">
+                      <div className="card-body p-4">
+                        <div className="d-flex align-items-center mb-3">
+                          <div className="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                            <i className="bi bi-envelope-fill text-primary"></i>
+                          </div>
+                          <div className="flex-grow-1">
+                            <h6 className="text-muted mb-1">Email Address</h6>
+                            {isEditing ? (
+                              <input
+                                type="email"
+                                className="form-control"
+                                value={account.email || ""}
+                                onChange={(e) =>
+                                  setAccount({
+                                    ...account,
+                                    email: e.target.value,
+                                  })
+                                }
+                              />
+                            ) : (
+                              <p className="mb-0 fw-bold">{account.email}</p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="col-md-6">
+                    <div className="card h-100 border-0 shadow-sm">
+                      <div className="card-body p-4">
+                        <div className="d-flex align-items-center mb-3">
+                          <div className="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                            <i className="bi bi-telephone-fill text-primary"></i>
+                          </div>
+                          <div className="flex-grow-1">
+                            <h6 className="text-muted mb-1">Phone Number</h6>
+                            {isEditing ? (
+                              <input
+                                type="tel"
+                                className="form-control"
+                                value={account.phone_number || ""}
+                                onChange={(e) =>
+                                  setAccount({
+                                    ...account,
+                                    phone_number: e.target.value,
+                                  })
+                                }
+                              />
+                            ) : (
+                              <p className="mb-0 fw-bold">
+                                {account.phone_number}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="col-md-6">
+                    <div className="card h-100 border-0 shadow-sm">
+                      <div className="card-body p-4">
+                        <div className="d-flex align-items-center mb-3">
+                          <div className="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                            <i className="bi bi-person-fill text-primary"></i>
+                          </div>
+                          <div className="flex-grow-1">
+                            <h6 className="text-muted mb-1">First Name</h6>
+                            {isEditing ? (
+                              <input
+                                type="text"
+                                className="form-control"
+                                value={account.first_name || ""}
+                                onChange={(e) =>
+                                  setAccount({
+                                    ...account,
+                                    first_name: e.target.value,
+                                  })
+                                }
+                              />
+                            ) : (
+                              <p className="mb-0 fw-bold">
+                                {account.first_name}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="col-md-6">
+                    <div className="card h-100 border-0 shadow-sm">
+                      <div className="card-body p-4">
+                        <div className="d-flex align-items-center mb-3">
+                          <div className="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                            <i className="bi bi-person-fill text-primary"></i>
+                          </div>
+                          <div className="flex-grow-1">
+                            <h6 className="text-muted mb-1">Last Name</h6>
+                            {isEditing ? (
+                              <input
+                                type="text"
+                                className="form-control"
+                                value={account.last_name || ""}
+                                onChange={(e) =>
+                                  setAccount({
+                                    ...account,
+                                    last_name: e.target.value,
+                                  })
+                                }
+                              />
+                            ) : (
+                              <p className="mb-0 fw-bold">
+                                {account.last_name}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="col-md-8">
-                  <p className="fs-5 mb-0">{account.first_name}</p>
-                </div>
-              </div>
-              
-              <div className="row mb-3">
-                <div className="col-md-4">
-                  <h5 className="text-muted mb-0">Last Name</h5>
-                </div>
-                <div className="col-md-8">
-                  <p className="fs-5 mb-0">{account.last_name}</p>
-                </div>
-              </div>
-              
-              <div className="row mb-3">
-                <div className="col-md-4">
-                  <h5 className="text-muted mb-0">Username</h5>
-                </div>
-                <div className="col-md-8">
-                  <p className="fs-5 mb-0">{account.username}</p>
-                </div>
-              </div>
-              
-              <div className="row mb-4">
-                <div className="col-md-4">
-                  <h5 className="text-muted mb-0">Phone Number</h5>
-                </div>
-                <div className="col-md-8">
-                  <p className="fs-5 mb-0">{account.phone_number}</p>
-                </div>
-              </div>
-              
-              <div className="d-flex justify-content-md-start mt-3">
-                <button className="btn btn-primary btn-lg">
-                  <i className="bi bi-pencil-fill me-2"></i>
-                  Update Profile
-                </button>
+
+                {isEditing && (
+                  <div className="d-flex justify-content-end gap-2 mt-4">
+                    <button
+                      className="btn btn-secondary px-4 py-2"
+                      onClick={handleCancel}
+                    >
+                      <i className="bi bi-x-circle me-2"></i>
+                      Cancel
+                    </button>
+                    <button
+                      className="btn btn-primary px-4 py-2"
+                      onClick={handleUpdate}
+                    >
+                      <i className="bi bi-save me-2"></i>
+                      Update Profile
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
+
+      {!account && (
+        <div className="card shadow-sm p-5 text-center">
+          <div className="py-5">
+            <div className="spinner-border text-primary mb-4" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <h3>Loading your account information...</h3>
+          </div>
+        </div>
+      )}
     </div>
-  )}
-</div>
-  )
+  );
 }
 
-export default Account
+export default Account;

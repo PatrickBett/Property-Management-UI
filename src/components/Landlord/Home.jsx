@@ -6,6 +6,8 @@ import { MdEmail } from "react-icons/md";
 import { CategoryContext } from "../Contexts/CategoryContext.jsx";
 import { toast } from "react-toastify";
 import api from "../../api.js";
+import './Home.css';
+
 
 function Home() {
   const { categories } = useContext(CategoryContext);
@@ -110,7 +112,7 @@ function Home() {
       {/* User Info Card */}
       <div className="row mt-5 p-1">
         <div
-          className=" text-center p-3 col-sm-4 border bg-primary"
+          className=" text-center p-3 col-sm-4 border"
           style={{ borderRadius: 20 }}
         >
           <h3 className="font-bold text-lg">
@@ -120,7 +122,7 @@ function Home() {
         </div>
 
         <div
-          className="  p-3 text-center col-sm-4 border bg-success"
+          className="  p-3 text-center col-sm-4 border "
           style={{ borderRadius: 20 }}
           data-bs-toggle="modal"
           data-bs-target="#myadd-property"
@@ -298,7 +300,7 @@ function Home() {
 
         {/* Properties Count Card */}
         <div
-          className="p-3 text-center col-sm-4 border  bg-warning"
+          className=" text-center col-sm-4 border "
           style={{ borderRadius: 20 }}
         >
           <h3 className="font-bold text-lg flex items-center">
