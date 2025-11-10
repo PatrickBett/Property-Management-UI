@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
-import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import {
+  Elements,
+  CardElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import api from "../../api";
+import { toast, ToastContainer } from "react-toastify";
 
 // Stripe initialization
-const stripePromise = loadStripe("pk_test_51OeBjFF11zjK1PObRcOLVS4OiagIrRa6TnECSaI7lrMkV59jyBDEkyLpNaz63nHJKcL7JLNmhUXTYN5oNm0cAqxX00i3WBd2FG");
+const stripePromise = loadStripe(
+  "pk_test_51OeBjFF11zjK1PObRcOLVS4OiagIrRa6TnECSaI7lrMkV59jyBDEkyLpNaz63nHJKcL7JLNmhUXTYN5oNm0cAqxX00i3WBd2FG"
+);
 
 function CheckoutForm({ clientSecret, property }) {
   const stripe = useStripe();
@@ -21,7 +29,10 @@ function CheckoutForm({ clientSecret, property }) {
     if (!stripe || !elements) return;
 
     const cardElement = elements.getElement(CardElement);
-    const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, { payment_method: { card: cardElement } });
+    const { paymentIntent, error } = await stripe.confirmCardPayment(
+      clientSecret,
+      { payment_method: { card: cardElement } }
+    );
 
     if (error) {
       console.error(error.message);
@@ -42,46 +53,55 @@ function CheckoutForm({ clientSecret, property }) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        border: "1px solid #ccc",
-        borderRadius: "12px",
-        padding: "20px",
-        marginTop: "20px",
-        backgroundColor: "#f8f9fa",
-        boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
-      }}
-    >
-      <h3 style={{ color: "#1a839a", marginBottom: "15px" }}>Payment Details</h3>
-      <div style={{ marginBottom: "15px" }}>
-        <CardElement
-          options={{
-            style: {
-              base: { fontSize: "16px", color: "#424770", "::placeholder": { color: "#aab7c4" } },
-              invalid: { color: "#9e2146" },
-            },
-          }}
-        />
-      </div>
-      <div style={{ textAlign: "center" }}>
-        <button
-          type="submit"
-          disabled={!stripe || loading}
-          style={{
-            backgroundColor: "#1a839a",
-            color: "white",
-            padding: "10px 20px",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer",
-            fontWeight: "600",
-          }}
-        >
-          {loading ? "Processing..." : "Complete Payment"}
-        </button>
-      </div>
-    </form>
+    <>
+      <ToastContainer />
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          border: "1px solid #ccc",
+          borderRadius: "12px",
+          padding: "20px",
+          marginTop: "20px",
+          backgroundColor: "#f8f9fa",
+          boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+        }}
+      >
+        <h3 style={{ color: "#1a839a", marginBottom: "15px" }}>
+          Payment Details
+        </h3>
+        <div style={{ marginBottom: "15px" }}>
+          <CardElement
+            options={{
+              style: {
+                base: {
+                  fontSize: "16px",
+                  color: "#424770",
+                  "::placeholder": { color: "#aab7c4" },
+                },
+                invalid: { color: "#9e2146" },
+              },
+            }}
+          />
+        </div>
+        <div style={{ textAlign: "center" }}>
+          <button
+            type="submit"
+            disabled={!stripe || loading}
+            style={{
+              backgroundColor: "#1a839a",
+              color: "white",
+              padding: "10px 20px",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontWeight: "600",
+            }}
+          >
+            {loading ? "Processing..." : "Complete Payment"}
+          </button>
+        </div>
+      </form>
+    </>
   );
 }
 
@@ -111,7 +131,9 @@ function PropertyDetails() {
 
   const fetchReviews = async () => {
     try {
-      const res = await api.get("/api/post-review/", { params: { property_id: property.id } });
+      const res = await api.get("/api/post-review/", {
+        params: { property_id: property.id },
+      });
       setReviews(res.data);
     } catch (err) {
       console.error(err);
@@ -126,16 +148,26 @@ function PropertyDetails() {
       const res = await api.post(
         "/api/post-review/",
         { content, property_id: property.id },
-        { headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" } }
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
       );
-      if (res.data.error) setError(res.data.error);
-      else {
+      if (res.data.error) {
+        setError(res.data.error);
+        toast.error("You give only reviews to homes you have stayed in.");
+      } else {
         setSuccess("Review added successfully");
+        toast.success("Review added successfully");
         setContent("");
         fetchReviews();
       }
     } catch (err) {
       setError("Something went wrong.");
+      toast.error("Something went wrong");
+
       console.error(err);
     } finally {
       setLoading(false);
@@ -147,11 +179,27 @@ function PropertyDetails() {
   }, []);
 
   return (
-    <div style={{ width: "95%", maxWidth: "1200px", margin: "0 auto", padding: "20px", fontFamily: "Poppins, sans-serif" }}>
+    <div
+      style={{
+        width: "95%",
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: "20px",
+        fontFamily: "Poppins, sans-serif",
+      }}
+    >
+      <ToastContainer />
       <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
         {/* Carousel & Details */}
         <div style={{ flex: "1 1 400px", minWidth: "300px" }}>
-          <div style={{ borderRadius: "12px", overflow: "hidden", boxShadow: "0 2px 10px rgba(0,0,0,0.05)", backgroundColor: "#fff" }}>
+          <div
+            style={{
+              borderRadius: "12px",
+              overflow: "hidden",
+              boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+              backgroundColor: "#fff",
+            }}
+          >
             <div style={{ height: "400px", overflowY: "auto" }}>
               <Carousel
                 showArrows
@@ -223,7 +271,12 @@ function PropertyDetails() {
                     <img
                       src={img.image}
                       alt="Property"
-                      style={{ width: "100%", maxWidth: "100%", height: "auto", objectFit: "cover" }}
+                      style={{
+                        width: "100%",
+                        maxWidth: "100%",
+                        height: "auto",
+                        objectFit: "cover",
+                      }}
                     />
                   </div>
                 ))}
@@ -231,12 +284,28 @@ function PropertyDetails() {
             </div>
 
             <div style={{ padding: "20px" }}>
-              <h2 style={{ color: "#1a839a", marginBottom: "10px" }}>{property.title}</h2>
-              <p style={{ margin: "5px 0" }}><strong>Price:</strong> Kshs{property.rent_amount}/month</p>
-              <p style={{ margin: "5px 0" }}><strong>Location:</strong> {property.city}, {property.state}</p>
-              <p style={{ margin: "5px 0" }}><strong>Type:</strong> {property.category.name}</p>
+              <h2 style={{ color: "#1a839a", marginBottom: "10px" }}>
+                {property.title}
+              </h2>
+              <p style={{ margin: "5px 0" }}>
+                <strong>Price:</strong> Kshs{property.rent_amount}/month
+              </p>
+              <p style={{ margin: "5px 0" }}>
+                <strong>Location:</strong> {property.city}, {property.state}
+              </p>
+              <p style={{ margin: "5px 0" }}>
+                <strong>Type:</strong> {property.category.name}
+              </p>
               <div style={{ marginTop: "15px" }}>
-                <h5 style={{ borderBottom: "2px solid #1a839a", paddingBottom: "5px", marginBottom: "10px" }}>Description</h5>
+                <h5
+                  style={{
+                    borderBottom: "2px solid #1a839a",
+                    paddingBottom: "5px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  Description
+                </h5>
                 <p style={{ color: "#6c757d" }}>{property.description}</p>
               </div>
               {!property.tenant && !clientSecret && (
@@ -258,7 +327,16 @@ function PropertyDetails() {
                 </div>
               )}
               {property.tenant && (
-                <div style={{ marginTop: "15px", padding: "10px", backgroundColor: "#dc3545", color: "white", borderRadius: "8px", textAlign: "center" }}>
+                <div
+                  style={{
+                    marginTop: "15px",
+                    padding: "10px",
+                    backgroundColor: "#dc3545",
+                    color: "white",
+                    borderRadius: "8px",
+                    textAlign: "center",
+                  }}
+                >
                   This property is currently not available for rent.
                 </div>
               )}
@@ -268,19 +346,55 @@ function PropertyDetails() {
 
         {/* Payment & Reviews */}
         <div style={{ flex: "1 1 350px", minWidth: "300px" }}>
-          {clientSecret && !property.tenant && <Elements stripe={stripePromise} options={{ clientSecret }}><CheckoutForm clientSecret={clientSecret} property={property} /></Elements>}
+          {clientSecret && !property.tenant && (
+            <Elements stripe={stripePromise} options={{ clientSecret }}>
+              <CheckoutForm clientSecret={clientSecret} property={property} />
+            </Elements>
+          )}
 
           {/* Write Review */}
-          <div style={{ marginTop: "20px", borderRadius: "12px", overflow: "hidden", boxShadow: "0 2px 10px rgba(0,0,0,0.05)", backgroundColor: "#fff" }}>
-            <div style={{ backgroundColor: "#1a839a", color: "white", padding: "15px" }}>
+          <div
+            style={{
+              marginTop: "20px",
+              borderRadius: "12px",
+              overflow: "hidden",
+              boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+              backgroundColor: "#fff",
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "#1a839a",
+                color: "white",
+                padding: "15px",
+              }}
+            >
               <h4 style={{ margin: 0 }}>Write a Review</h4>
             </div>
             <div style={{ padding: "15px" }}>
-              {error && <div style={{ marginBottom: "10px", color: "#dc3545" }}>{error}</div>}
-              {success && <div style={{ marginBottom: "10px", color: "#28a745" }}>{success}</div>}
-              <form onSubmit={handleSubmitReview} style={{ textAlign: "center" }}>
+              {error && (
+                <div style={{ marginBottom: "10px", color: "#dc3545" }}>
+                  {error}
+                </div>
+              )}
+              {success && (
+                <div style={{ marginBottom: "10px", color: "#28a745" }}>
+                  {success}
+                </div>
+              )}
+              <form
+                onSubmit={handleSubmitReview}
+                style={{ textAlign: "center" }}
+              >
                 <textarea
-                  style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ccc", resize: "vertical", marginBottom: "10px" }}
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    borderRadius: "8px",
+                    border: "1px solid #ccc",
+                    resize: "vertical",
+                    marginBottom: "10px",
+                  }}
                   rows={4}
                   placeholder="Share your experience..."
                   value={content}
@@ -309,20 +423,62 @@ function PropertyDetails() {
           </div>
 
           {/* Property Reviews */}
-          <div style={{ marginTop: "20px", borderRadius: "12px", overflow: "hidden", boxShadow: "0 2px 10px rgba(0,0,0,0.05)", backgroundColor: "#fff" }}>
-            <div style={{ backgroundColor: "#1a839a", color: "white", padding: "15px" }}>
+          <div
+            style={{
+              marginTop: "20px",
+              borderRadius: "12px",
+              overflow: "hidden",
+              boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+              backgroundColor: "#fff",
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "#1a839a",
+                color: "white",
+                padding: "15px",
+              }}
+            >
               <h4 style={{ margin: 0 }}>Property Reviews</h4>
             </div>
             <div style={{ padding: "15px" }}>
               {reviews.length === 0 ? (
-                <p style={{ color: "#6c757d", textAlign: "center", padding: "20px 0" }}>No reviews yet. Be the first to leave a review!</p>
+                <p
+                  style={{
+                    color: "#6c757d",
+                    textAlign: "center",
+                    padding: "20px 0",
+                  }}
+                >
+                  No reviews yet. Be the first to leave a review!
+                </p>
               ) : (
                 <div>
                   {reviews.map((review) => (
-                    <div key={review.id} style={{ marginBottom: "10px", padding: "10px", borderRadius: "8px", backgroundColor: "#f8f9fa" }}>
-                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "5px" }}>
-                        <span style={{ color: "#1a839a", fontWeight: "600" }}>Guest Review</span>
-                        <small style={{ color: "#6c757d" }}>{new Date(review.created_at || Date.now()).toLocaleDateString()}</small>
+                    <div
+                      key={review.id}
+                      style={{
+                        marginBottom: "10px",
+                        padding: "10px",
+                        borderRadius: "8px",
+                        backgroundColor: "#f8f9fa",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          marginBottom: "5px",
+                        }}
+                      >
+                        <span style={{ color: "#1a839a", fontWeight: "600" }}>
+                          Guest Review
+                        </span>
+                        <small style={{ color: "#6c757d" }}>
+                          {new Date(
+                            review.created_at || Date.now()
+                          ).toLocaleDateString()}
+                        </small>
                       </div>
                       <p style={{ margin: 0 }}>{review.content}</p>
                     </div>

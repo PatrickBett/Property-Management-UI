@@ -12,7 +12,7 @@ function Maintenance() {
         },
       });
       setMaintenances(res.data);
-      console.log("landlord", res.data);
+      console.log("landlords manitenanece", res.data);
     } catch (error) {
       console.error("Error fetching maintenance requests:", error);
     }
@@ -23,7 +23,13 @@ function Maintenance() {
   }, []);
 
   return (
-    <div style={{ width: "90%", margin: "20px auto", fontFamily: "Poppins, sans-serif" }}>
+    <div
+      style={{
+        width: "90%",
+        margin: "20px auto",
+        fontFamily: "Poppins, sans-serif",
+      }}
+    >
       {/* Header */}
       <h2
         style={{
@@ -62,7 +68,7 @@ function Maintenance() {
               }}
             >
               <img
-                src={maintenance.property.url}
+                src={maintenance.property.images[0].image}
                 alt={maintenance.property.title}
                 style={{
                   width: "100%",
@@ -77,6 +83,9 @@ function Maintenance() {
               </h3>
               <h4 style={{ margin: "5px 0", textAlign: "center" }}>
                 Property: {maintenance.property.title}
+              </h4>
+              <h4 style={{ margin: "5px 0", textAlign: "center" }}>
+                Tenant: {maintenance.tenant.first_name.toLowerCase()} {"-"} {maintenance.tenant.phone_number}
               </h4>
 
               {/* Status Button */}
