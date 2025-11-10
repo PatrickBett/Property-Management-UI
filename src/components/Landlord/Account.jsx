@@ -57,7 +57,10 @@ function Account() {
     <div className="container py-5">
       {account && (
         <div className="card shadow-lg border-0">
-          <div className="card-header bg-primary text-white p-4">
+          <div
+            className="card-header text-white p-4"
+            style={{ backgroundColor: "#1a839a" }}
+          >
             <h2 className="m-0 text-center">
               <i className="bi bi-person-gear me-2"></i>
               Account Settings
@@ -83,7 +86,10 @@ function Account() {
                       border: "4px solid #fff",
                     }}
                   />
-                  <button className="btn btn-sm btn-primary position-absolute bottom-0 end-0 rounded-circle p-2">
+                  <button
+                    className="btn btn-sm position-absolute bottom-0 end-0 rounded-circle p-2"
+                    style={{ backgroundColor: "#1a839a", color: "white" }}
+                  >
                     <i className="bi bi-camera-fill"></i>
                   </button>
                 </div>
@@ -96,6 +102,10 @@ function Account() {
                 {!isEditing && (
                   <button
                     className="btn btn-outline-primary w-75 mt-2"
+                    style={{
+                      borderColor: "#1a839a",
+                      color: "#1a839a",
+                    }}
                     onClick={handleEdit}
                   >
                     <i className="bi bi-pencil-square me-2"></i>
@@ -125,8 +135,11 @@ function Account() {
                     <div className="card h-100 border-0 shadow-sm">
                       <div className="card-body p-4">
                         <div className="d-flex align-items-center mb-3">
-                          <div className="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
-                            <i className="bi bi-envelope-fill text-primary"></i>
+                          <div
+                            className=" bg-opacity-10 p-3 rounded-circle me-3"
+                            style={{ backgroundColor: "#1a839a" }}
+                          >
+                            <i className="bi bi-envelope-fill"></i>
                           </div>
                           <div className="flex-grow-1">
                             <h6 className="text-muted mb-1">Email Address</h6>
@@ -155,8 +168,11 @@ function Account() {
                     <div className="card h-100 border-0 shadow-sm">
                       <div className="card-body p-4">
                         <div className="d-flex align-items-center mb-3">
-                          <div className="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
-                            <i className="bi bi-telephone-fill text-primary"></i>
+                          <div
+                            className=" bg-opacity-10 p-3 rounded-circle me-3"
+                            style={{ backgroundColor: "#1a839a" }}
+                          >
+                            <i className="bi bi-telephone-fill"></i>
                           </div>
                           <div className="flex-grow-1">
                             <h6 className="text-muted mb-1">Phone Number</h6>
@@ -187,8 +203,11 @@ function Account() {
                     <div className="card h-100 border-0 shadow-sm">
                       <div className="card-body p-4">
                         <div className="d-flex align-items-center mb-3">
-                          <div className="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
-                            <i className="bi bi-person-fill text-primary"></i>
+                          <div
+                            className=" bg-opacity-10 p-3 rounded-circle me-3"
+                            style={{ backgroundColor: "#1a839a" }}
+                          >
+                            <i className="bi bi-person-fill"></i>
                           </div>
                           <div className="flex-grow-1">
                             <h6 className="text-muted mb-1">First Name</h6>
@@ -219,8 +238,11 @@ function Account() {
                     <div className="card h-100 border-0 shadow-sm">
                       <div className="card-body p-4">
                         <div className="d-flex align-items-center mb-3">
-                          <div className="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
-                            <i className="bi bi-person-fill text-primary"></i>
+                          <div
+                            className=" bg-opacity-10 p-3 rounded-circle me-3"
+                            style={{ backgroundColor: "#1a839a" }}
+                          >
+                            <i className="bi bi-person-fill "></i>
                           </div>
                           <div className="flex-grow-1">
                             <h6 className="text-muted mb-1">Last Name</h6>
@@ -258,7 +280,8 @@ function Account() {
                       Cancel
                     </button>
                     <button
-                      className="btn btn-primary px-4 py-2"
+                      className="btn px-4 py-2"
+                      style={{ backgroundColor: "#1a839a", color: "white" }}
                       onClick={handleUpdate}
                     >
                       <i className="bi bi-save me-2"></i>
@@ -275,7 +298,11 @@ function Account() {
       {!account && (
         <div className="card shadow-sm p-5 text-center">
           <div className="py-5">
-            <div className="spinner-border text-primary mb-4" role="status">
+            <div
+              className="spinner-border mb-4"
+              style={{ color: "#1a839a" }}
+              role="status"
+            >
               <span className="visually-hidden">Loading...</span>
             </div>
             <h3>Loading your account information...</h3>

@@ -52,7 +52,10 @@ function Properties() {
 
   return (
     <>
-      <div className="bg-primary text-white py-4 mb-4 shadow-sm">
+      <div
+        className=" text-white py-4 mb-4 shadow-sm"
+        style={{ backgroundColor: "#1a839a" }}
+      >
         <div className="container">
           <h2 className="text-center m-0">
             <i className="bi bi-buildings me-2"></i>
@@ -68,6 +71,11 @@ function Properties() {
             className={`btn ${
               selectedCategory === "All" ? "btn-primary" : "btn-outline-primary"
             } btn-sm rounded-pill`}
+            style={{
+              backgroundColor: "#1a839a",
+              color: "white",
+              border: "#1a839a",
+            }}
             onClick={() => handleFilterChange("All")}
           >
             All
@@ -79,6 +87,7 @@ function Properties() {
               className={`btn ${
                 selectedCategory === cat ? "btn-primary" : "btn-outline-primary"
               } btn-sm rounded-pill`}
+              
               onClick={() => handleFilterChange(cat)}
             >
               {cat}
@@ -120,7 +129,10 @@ function Properties() {
                     <h5 className="card-title mb-3">{property.title}</h5>
                     <div className="d-flex justify-content-between align-items-center mb-3">
                       <span className="badge bg-light text-dark p-2">
-                        <i className="bi bi-house-door-fill me-1 text-primary"></i>
+                        <i
+                          className="bi bi-house-door-fill me-1 "
+                          style={{ color: "#1a839a" }}
+                        ></i>
                         {property.category.name}
                       </span>
                       <span className="badge bg-info text-white p-2">
@@ -134,7 +146,8 @@ function Properties() {
                     <Link
                       to="/property/property-details"
                       state={{ property }}
-                      className="btn btn-primary"
+                      className="btn"
+                      style={{ backgroundColor: "#1a839a", color: "white" }}
                     >
                       <i className="bi bi-info-circle me-1"></i>
                       See Details

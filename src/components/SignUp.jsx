@@ -61,7 +61,7 @@ const Signup = () => {
           className="col-md-6 d-none d-md-block"
           style={{
             backgroundImage:
-              "url('https://i.ibb.co/vxWRKrWq/work-home-with-computer-couch.jpg')",
+              "url('https://monumentale.net/wp-content/uploads/2025/05/valuation-multiples-for-a-property-management-firm-1-scaled-1.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -70,10 +70,12 @@ const Signup = () => {
         {/* Right form section */}
         <div className="col-md-6 bg-white p-5 d-flex flex-column justify-content-center">
           <div className="text-center mb-4">
-            <h2 className="fw-bold text-success mb-2">
+            <h2 className="fw-bold mb-2" style={{color:"#1a839a"}}>
               <i className="bi bi-person-plus-fill me-2"></i>Register Account
             </h2>
-            <p className="text-muted">Join us and manage your property easily</p>
+            <p className="text-muted">
+              Join us and manage your property easily
+            </p>
           </div>
 
           {error && (
@@ -219,9 +221,8 @@ const Signup = () => {
               style={{
                 borderRadius: "10px",
                 fontSize: "1.1rem",
-                background: "linear-gradient(135deg, #198754 0%, #157347 100%)",
+                background: "#1a839a",
                 border: "none",
-                boxShadow: "0 4px 15px rgba(25, 135, 84, 0.3)",
               }}
             >
               {isLoading ? (

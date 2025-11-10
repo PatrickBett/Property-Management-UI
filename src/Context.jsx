@@ -23,7 +23,7 @@ export const PropertyProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProperties(res.data);
-        console.log(res.data)
+        console.log("properttiee",res.data)
       } catch (error) {
         console.error("Error fetching properties:", error);
       }

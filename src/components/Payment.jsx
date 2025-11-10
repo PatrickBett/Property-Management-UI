@@ -66,7 +66,8 @@ const CheckoutForm = () => {
       <button
         type="submit"
         disabled={!stripe || loading}
-        className="btn btn-primary w-100"
+        className="btn w-100"
+        style={{ backgroundColor: "#1a839a", color: "white" }}
       >
         {loading ? (
           <span

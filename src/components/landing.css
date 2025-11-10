@@ -56,8 +56,8 @@
   animation: fadeIn 1.8s ease-out;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
-  background-color: #ff5900;
-  border-color: #ff5900;
+
+  border-color: #1a839a;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
@@ -65,8 +65,8 @@
 .hero-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  background-color: #e65000;
-  border-color: #e65000;
+
+  border-color: #1a839a;
 }
 
 /* Feature Cards on Hero */
@@ -100,7 +100,7 @@
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
   font-weight: 600;
-  color: #ff5900;
+  color: #1a839a;
 }
 
 .feature-card p {

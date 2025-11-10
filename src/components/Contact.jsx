@@ -67,7 +67,11 @@ function Contact() {
           ></textarea>
         </div>
 
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className="btn"
+          style={{ backgroundColor: "#1a839a", color: "white" }}
+        >
           Submit
         </button>
       </form>

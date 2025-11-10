@@ -41,7 +41,8 @@ function Landingpage() {
             </h2>
             <Link
               to="/register"
-              className="btn btn-primary btn-lg mt-5 hero-btn px-5 py-3"
+              className="btn btn-lg mt-5 hero-btn px-5 py-3"
+              style={{ backgroundColor: "#1a839a", color: "white" }}
             >
               Explore Properties
             </Link>
@@ -61,10 +62,10 @@ function Landingpage() {
                 </div>
               </div>
               <div className="col-md-4">
-                <div className="feature-card bg-secondary ">
+                <div className="feature-card">
                   <div className="feature-icon">⚡</div>
                   <h3 className="fs-1">Fast Bookings</h3>
-                  <p className="text-white fs-4">
+                  <p className="fs-4">
                     Secure your dream property in minutes
                   </p>
                 </div>
@@ -213,7 +214,11 @@ function Landingpage() {
             our features and join a community of satisfied users.
           </p>
           <div className="cta-buttons">
-            <Link to="/register" className="btn btn-primary btn-lg me-3">
+            <Link
+              to="/register"
+              className="btn btn-lg me-3"
+              style={{ backgroundColor: "#1a839a", color: "white" }}
+            >
               Get Started
             </Link>
             <Link to="/login" className="btn btn-outline-primary btn-lg">

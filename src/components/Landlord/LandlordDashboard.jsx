@@ -12,7 +12,7 @@ import ProtectedRoute from "../ProtectedRoute";
 const LandlordDashboard = () => {
   const isAuthenticated = !!localStorage.getItem("access");
   return (
-    <div className="flex-grow-1 p-4">
+    <div className="container mx-auto" style={{width:"100%"}}>
       <Routes>
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
           <Route

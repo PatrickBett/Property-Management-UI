@@ -77,17 +77,17 @@ function App() {
         <Route element={<ProtectedRoute isAuthenticated={isLoggedIn} />}>
           <Route path="/tenant/*" element={<TenantDashboard />} />
           <Route path="/landlord/*" element={<LandlordDashboard />} />
+          <Route
+            path="/property/property-details"
+            element={<PropertyDetails />}
+          />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
+          <Route path="/payment-cancel" element={<PaymentCancel />} />
         </Route>
 
         {/* <Route path="/tenant/*" element={<TenantDashboard />} />
         <Route path="/landlord/*" element={<LandlordDashboard />} /> */}
-        <Route
-          path="/property/property-details"
-          element={<PropertyDetails />}
-        />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/payment-success" element={<PaymentSuccess />} />
-        <Route path="/payment-cancel" element={<PaymentCancel />} />
       </Routes>
 
       <ToastContainer
@@ -101,7 +101,7 @@ function App() {
         theme="colored"
       />
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

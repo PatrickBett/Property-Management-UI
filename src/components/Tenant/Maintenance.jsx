@@ -1,142 +1,329 @@
-import { useEffect, useState } from "react"
-import api from "../../api"
-import { HomeContext } from "../Contexts/HomeContext"
-import { useContext } from "react"
+import { useEffect, useState, useContext } from "react";
+import api from "../../api";
+import { HomeContext } from "../Contexts/HomeContext";
+
 function Maintenance() {
+  const [maintenances, setMaintenances] = useState([]);
+  const [maintainedhome, setMaintainedHome] = useState("");
+  const { homes } = useContext(HomeContext);
+  const [request, setRequest] = useState("");
 
-  const [maintenances, setMaintenances] = useState([])
-  const [maintainedhome,setMaintainedHome] = useState('')
-  const {homes} = useContext(HomeContext)
-  const [request,setRequest] = useState("")
+  const handleMaintainedHome = async (e) => {
+    e.preventDefault();
+    const selectedHome = homes.find(
+      (home) => home.property.title === maintainedhome
+    );
 
-
-  const handleMaintainedHome =async(e)=>{
-    e.preventDefault()
-    const selectedHome = homes.find(home => home.property.title === maintainedhome);
-    console.log("posting.......")
-    console.log(selectedHome,request)
-
-    try{
-      
-      
+    try {
       if (!selectedHome) {
         throw new Error("Selected property not found");
       }
-      await api.post("/api/maintenances/",{property:selectedHome.property.id,request:request})
-      
-      
-
+      await api.post("/api/maintenances/", {
+        property: selectedHome.property.id,
+        request: request,
+      });
+      setMaintainedHome("");
+      setRequest("");
+      fetchMaintenances();
+    } catch (error) {
+      console.log(error);
     }
-    catch(error){
-      console.log(error)
-    }
+  };
 
-  }
- 
-  
-
-  useEffect(
-    ()=>{
-      fetchMaintenances()
-    },[]
-  )
+  useEffect(() => {
+    fetchMaintenances();
+  }, []);
 
   const fetchMaintenances = async () => {
     try {
       const res = await api.get("/api/maintenances/", {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("access")}`, // Include auth token if required
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
         },
       });
       setMaintenances(res.data);
-      
-      
     } catch (error) {
       console.error("Error fetching maintenance requests:", error);
     }
   };
 
-
   return (
-    <div className="container border my-3 p-2">
-        <h2 className="p-3 text-center bg-secondary">Property Maintenance 
-        <button className="btn btn-warning my-3" data-bs-toggle="modal" data-bs-target="#myModal"><i className="bi bi-plus-circle-fill me-2"></i> Maintenance</button>
-        </h2>
-         <div id="myModal" className="modal mt-5 " role="dialog">
-  <div className="modal-dialog">
-
-    {/* Modal content */}
-    <div className="modal-content">
-      <div className="modal-header">
-        <h4 className="modal-title">maintenance</h4>
-        <button type="button" className="btn-close" data-bs-dismiss="modal">&times;</button>
-       
+    <div
+      style={{
+        width: "90%",
+        margin: "20px auto",
+        fontFamily: "Poppins, sans-serif",
+      }}
+    >
+      {/* Header */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          backgroundColor: "#1a839a",
+          color: "white",
+          padding: "15px",
+          borderRadius: "8px",
+        }}
+      >
+        <h2 style={{ margin: 0 }}>Property Maintenance</h2>
+        <button
+          onClick={() =>
+            (document.getElementById("myModal").style.display = "block")
+          }
+          style={{
+            backgroundColor: "#1a839a",
+            border: "1px solid white",
+            padding: "10px 15px",
+            borderRadius: "5px",
+            cursor: "pointer",
+            fontWeight: "600",
+            color: "white",
+            display: "flex",
+            alignItems: "center",
+            gap: "5px",
+          }}
+        >
+          <i className="bi bi-plus-circle-fill"></i> Maintenance
+        </button>
       </div>
 
-      
-      <form className="modal-body" onSubmit={handleMaintainedHome}>
-
-      <div className="mb-3 mt-3">
-        <label htmlFor="property" className="form-label">Property:</label>
-        <select className="form-control" value={maintainedhome} onChange={(e) => setMaintainedHome(e.target.value)} name="property">
-          
-        <option value="">Select a Property</option>
-          {homes?.map((home)=>(
-            <option key={home.property.id}>{home.property.title}</option>
-
-          ))}
-       
-        </select>
-      </div>
-      
-      <div className="mb-3 mt-3">
-        <label htmlFor="request" className="form-label">Request:</label>
-        <textarea
-      type="text"
-      className="form-control"
-      value={request} // Bind state to the value
-      onChange={(e) => setRequest(e.target.value)} // Update state on change
-      placeholder="Enter Request Message"
-      name="request"
-    />
-      </div>
-
-      <div className="modal-footer">
-        <button type="submit" className="btn btn-success" data-bs-dismiss="modal">Submit</button>
-      </div>
-
-      </form>
-  
-    </div>
-
-  </div>
-</div>       
-         {/* History of maintenances */}
-
-         { maintenances.length>0 ? maintenances.map((maintenance,index)=>(
-          <div key={index} className="border mt-3 p-3 col-sm-4">
-            <img src={maintenance.property.url} style={{width: "100%", height:"200px"}}/>
-            <h2>Request: {maintenance.request}</h2>
-            <h3>Property: {maintenance.property.title}</h3>
-            {maintenance.status == "submitted" ? <button className="btn btn-warning">Submitted</button> :
-            maintenance.status == "in_progress" ? <button className="btn btn-primary">In-progress...</button> :
-            <button className="btn btn-success">Resolved</button> }
-
+      {/* Modal */}
+      <div
+        id="myModal"
+        style={{
+          display: "none",
+          position: "fixed",
+          zIndex: 1000,
+          left: 0,
+          top: 0,
+          width: "100%",
+          height: "100%",
+          overflow: "auto",
+          backgroundColor: "rgba(0,0,0,0.4)",
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: "white",
+            margin: "10% auto",
+            padding: "20px",
+            borderRadius: "8px",
+            width: "90%",
+            maxWidth: "500px",
+            boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "15px",
+            }}
+          >
+            <h4 style={{ margin: 0 }}>Add Maintenance</h4>
+            <button
+              onClick={() =>
+                (document.getElementById("myModal").style.display = "none")
+              }
+              style={{
+                border: "none",
+                background: "transparent",
+                fontSize: "20px",
+                cursor: "pointer",
+              }}
+            >
+              &times;
+            </button>
           </div>
-         ))
-         :
-         <div className="border p-3 m-3">
-          <h3>No Maintenance Request made!!</h3>
-         </div>
-        }
 
+          <form onSubmit={handleMaintainedHome}>
+            <div style={{ marginBottom: "15px" }}>
+              <label style={{ display: "block", marginBottom: "5px" }}>
+                Property:
+              </label>
+              <select
+                value={maintainedhome}
+                onChange={(e) => setMaintainedHome(e.target.value)}
+                style={{
+                  width: "100%",
+                  padding: "8px",
+                  borderRadius: "5px",
+                  border: "1px solid #1a839a",
+                }}
+              >
+                <option value="">Select a Property</option>
+                {homes?.map((home) => (
+                  <option key={home.property.id}>{home.property.title}</option>
+                ))}
+              </select>
+            </div>
 
+            <div style={{ marginBottom: "15px" }}>
+              <label style={{ display: "block", marginBottom: "5px" }}>
+                Request:
+              </label>
+              <textarea
+                value={request}
+                onChange={(e) => setRequest(e.target.value)}
+                placeholder="Enter Request Message"
+                style={{
+                  width: "100%",
+                  padding: "8px",
+                  borderRadius: "5px",
+                  border: "1px solid #1a839a",
+                  resize: "vertical",
+                }}
+              />
+            </div>
 
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                gap: "10px",
+              }}
+            >
+              <button
+                type="button"
+                onClick={() =>
+                  (document.getElementById("myModal").style.display = "none")
+                }
+                style={{
+                  padding: "8px 15px",
+                  borderRadius: "5px",
+                  border: "none",
+                  backgroundColor: "#dc3545",
+                  color: "white",
+                  cursor: "pointer",
+                  fontWeight: "600",
+                }}
+              >
+                Cancel
+              </button>
 
-
-        
+              <button
+                type="submit"
+                style={{
+                  padding: "8px 15px",
+                  borderRadius: "5px",
+                  border: "none",
+                  backgroundColor: "#1a839a",
+                  color: "white",
+                  cursor: "pointer",
+                  fontWeight: "600",
+                }}
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-  )
+
+      {/* Maintenance Requests */}
+      <div
+        style={{
+          marginTop: "20px",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "20px",
+        }}
+      >
+        {maintenances.length > 0 ? (
+          maintenances.map((maintenance, index) => (
+            <div
+              key={index}
+              style={{
+                flex: "1 1 300px",
+                border: "1px solid #1a839a",
+                borderRadius: "10px",
+                padding: "15px",
+                backgroundColor: "#e6f7fb",
+                boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+              }}
+            >
+              <img
+                src={maintenance.property.url}
+                alt="Property"
+                style={{
+                  width: "100%",
+                  height: "200px",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                  marginBottom: "10px",
+                }}
+              />
+              <h3 style={{ marginTop: "10px", color: "#1a839a" }}>
+                Request: {maintenance.request}
+              </h3>
+              <h4 style={{ color: "#1a839a" }}>
+                Property: {maintenance.property.title}
+              </h4>
+
+              {maintenance.status === "submitted" ? (
+                <div
+                  style={{
+                    marginTop: "10px",
+                    padding: "8px",
+                    borderRadius: "5px",
+                    backgroundColor: "#ffc107",
+                    color: "white",
+                    textAlign: "center",
+                    fontWeight: "600",
+                  }}
+                >
+                  Submitted
+                </div>
+              ) : maintenance.status === "in_progress" ? (
+                <div
+                  style={{
+                    marginTop: "10px",
+                    padding: "8px",
+                    borderRadius: "5px",
+                    backgroundColor: "#1a839a",
+                    color: "white",
+                    textAlign: "center",
+                    fontWeight: "600",
+                  }}
+                >
+                  In-progress...
+                </div>
+              ) : (
+                <div
+                  style={{
+                    marginTop: "10px",
+                    padding: "8px",
+                    borderRadius: "5px",
+                    backgroundColor: "#28a745",
+                    color: "white",
+                    textAlign: "center",
+                    fontWeight: "600",
+                  }}
+                >
+                  Resolved
+                </div>
+              )}
+            </div>
+          ))
+        ) : (
+          <div
+            style={{
+              width: "100%",
+              padding: "30px",
+              textAlign: "center",
+              backgroundColor: "#f0f8fa",
+              borderRadius: "8px",
+            }}
+          >
+            <h3 style={{ color: "#1a839a" }}>No Maintenance Request made!!</h3>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
-export default Maintenance
+export default Maintenance;

@@ -78,7 +78,9 @@ function CheckoutForm({ clientSecret, property }) {
       onSubmit={handleSubmit}
       className="border rounded shadow-sm mt-5 p-4 bg-light"
     >
-      <h3 className="mb-4 text-primary fw-bold">Payment Details</h3>
+      <h3 className="mb-4 fw-bold" style={{ color: "#1a839a" }}>
+        Payment Details
+      </h3>
       <div className="mb-4">
         <CardElement
           className="border rounded p-3"
@@ -100,9 +102,13 @@ function CheckoutForm({ clientSecret, property }) {
       </div>
       <button
         type="submit"
-        className="btn btn-primary py-2 px-4 fw-bold"
+        className="btn py-2 px-4 fw-bold"
         disabled={!stripe || loading}
-        style={{ minWidth: "150px" }}
+        style={{
+          minWidth: "150px",
+          backgroundColor: "#1a839a",
+          color: "white",
+        }}
       >
         {loading ? (
           <span>
@@ -254,7 +260,9 @@ function PropertyDetails() {
             </div>
 
             <div className="card-body bg-light p-4">
-              <h2 className="card-title text-primary mb-3">{property.title}</h2>
+              <h2 className="card-title mb-3" style={{ color: "#1a839a" }}>
+                {property.title}
+              </h2>
               <div className="property-details mb-4">
                 <div className="row g-3">
                   <div className="col-6">
@@ -281,7 +289,10 @@ function PropertyDetails() {
                   </div>
                   <div className="col-6">
                     <div className="d-flex align-items-center">
-                      <i className="bi bi-house-door me-2 text-primary fs-5"></i>
+                      <i
+                        className="bi bi-house-door me-2 fs-5"
+                        style={{ color: "#1a839a" }}
+                      ></i>
                       <div>
                         <small className="text-muted d-block">
                           Property Type
@@ -333,7 +344,9 @@ function PropertyDetails() {
 
           <div className="card shadow-sm rounded mb-4">
             <div className="card-header bg-white py-3">
-              <h4 className="m-0 fw-bold text-primary">Write a Review</h4>
+              <h4 className="m-0 fw-bold" style={{ color: "#1a839a" }}>
+                Write a Review
+              </h4>
             </div>
             <div className="card-body p-4">
               {error && <div className="alert alert-danger">{error}</div>}
@@ -351,7 +364,8 @@ function PropertyDetails() {
                 </div>
                 <button
                   type="submit"
-                  className="btn btn-primary"
+                  className="btn"
+                  style={{ backgroundColor: "#1a839a", color: "white" }}
                   disabled={loading}
                 >
                   {loading ? (
@@ -372,7 +386,7 @@ function PropertyDetails() {
           </div>
 
           <div className="card shadow-sm rounded">
-            <div className="card-header bg-success text-white py-3">
+            <div className="card-header text-white py-3" style={{background:"#1a839a"}}>
               <h4 className="m-0">Property Reviews</h4>
             </div>
             <div className="card-body p-3">
@@ -384,7 +398,9 @@ function PropertyDetails() {
                       className="list-group-item list-group-item-action p-3 mb-2 bg-light rounded"
                     >
                       <div className="d-flex w-100 justify-content-between mb-1">
-                        <h6 className="mb-1 text-primary">Guest Review</h6>
+                        <h6 className="mb-1" style={{ color: "#1a839a" }}>
+                          Guest Review
+                        </h6>
                         <small className="text-muted">
                           {new Date(
                             review.created_at || Date.now()

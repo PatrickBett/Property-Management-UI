@@ -57,7 +57,7 @@ const Login = ({ setIsLoggedIn, setIsTenant }) => {
         style={{
           flex: 1,
           backgroundImage:
-            "url('https://i.ibb.co/vxWRKrWq/work-home-with-computer-couch.jpg')",
+            "url('https://monumentale.net/wp-content/uploads/2025/05/valuation-multiples-for-a-property-management-firm-1-scaled-1.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -66,8 +66,7 @@ const Login = ({ setIsLoggedIn, setIsTenant }) => {
         <div
           className="position-absolute top-0 start-0 w-100 h-100"
           style={{
-            background:
-              "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6))",
+            background: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6))",
             zIndex: 1,
           }}
         ></div>
@@ -100,8 +99,13 @@ const Login = ({ setIsLoggedIn, setIsTenant }) => {
         >
           <div className="card-body p-5">
             <div className="text-center mb-4">
-              <i className="bi bi-house-lock fs-1 text-primary mb-2"></i>
-              <h2 className="fw-bold text-primary mb-2">Welcome Back</h2>
+              <i
+                className="bi bi-house-lock fs-1 mb-2"
+                style={{ color: "#1a839a" }}
+              ></i>
+              <h2 className="fw-bold  mb-2" style={{ color: "#1a839a" }}>
+                Welcome Back
+              </h2>
               <p className="text-muted">Sign in to access your dashboard</p>
             </div>
 
@@ -155,15 +159,15 @@ const Login = ({ setIsLoggedIn, setIsTenant }) => {
               </div>
 
               <button
-                className="btn btn-primary w-100 py-3 fw-bold shadow-sm"
+                className="btn w-100 py-3 fw-bold shadow-sm"
                 type="submit"
                 disabled={isLoading}
                 style={{
                   borderRadius: "10px",
                   fontSize: "1.05rem",
-                  background:
-                    "linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)",
                   border: "none",
+                  backgroundColor: "#1a839a",
+                  color: "white",
                 }}
               >
                 {isLoading ? (
@@ -188,7 +192,8 @@ const Login = ({ setIsLoggedIn, setIsTenant }) => {
                   Don’t have an account?{" "}
                   <a
                     href="/register"
-                    className="text-primary fw-bold text-decoration-none"
+                    className=" fw-bold text-decoration-none"
+                    style={{ color: "#1a839a" }}
                   >
                     Sign Up
                   </a>
