@@ -1,22 +1,13 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
-import {
-  Elements,
-  CardElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js";
-
+import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
 import api from "../../api";
 
-// Initialize Stripe outside the component
-const stripePromise = loadStripe(
-  "pk_test_51OeBjFF11zjK1PObRcOLVS4OiagIrRa6TnECSaI7lrMkV59jyBDEkyLpNaz63nHJKcL7JLNmhUXTYN5oNm0cAqxX00i3WBd2FG"
-);
+// Stripe initialization
+const stripePromise = loadStripe("pk_test_51OeBjFF11zjK1PObRcOLVS4OiagIrRa6TnECSaI7lrMkV59jyBDEkyLpNaz63nHJKcL7JLNmhUXTYN5oNm0cAqxX00i3WBd2FG");
 
 function CheckoutForm({ clientSecret, property }) {
   const stripe = useStripe();
@@ -27,48 +18,25 @@ function CheckoutForm({ clientSecret, property }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
-    if (!stripe || !elements) {
-      console.error("Stripe.js has not loaded properly.");
-      return;
-    }
+    if (!stripe || !elements) return;
 
     const cardElement = elements.getElement(CardElement);
-    if (!cardElement) {
-      console.error("CardElement is not found.");
-      return;
-    }
-
-    const { paymentIntent, error } = await stripe.confirmCardPayment(
-      clientSecret,
-      {
-        payment_method: {
-          card: cardElement,
-        },
-      }
-    );
+    const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, { payment_method: { card: cardElement } });
 
     if (error) {
-      console.error("Payment failed:", error.message);
+      console.error(error.message);
       navigate("/payment-cancel");
     } else if (paymentIntent.status === "succeeded") {
-      console.log("Payment successful property ID!", property);
-
       try {
-        const paymentshistory = await api.post("/api/finalyze-payment/", {
+        await api.post("/api/finalyze-payment/", {
           paymentIntentId: paymentIntent.id,
           status: "succeeded",
           property_id: property.id,
         });
-        console.log("Payment Confirmed Successful Response", paymentshistory);
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        console.error(err);
       }
-
       navigate("/payment-success");
-    } else {
-      console.error("Unexpected payment status:", paymentIntent.status);
-      navigate("/payment-cancel");
     }
     setLoading(false);
   };
@@ -76,131 +44,57 @@ function CheckoutForm({ clientSecret, property }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="border rounded shadow-sm mt-5 p-4 bg-light"
+      style={{
+        border: "1px solid #ccc",
+        borderRadius: "12px",
+        padding: "20px",
+        marginTop: "20px",
+        backgroundColor: "#f8f9fa",
+        boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+      }}
     >
-      <h3 className="mb-4 fw-bold" style={{ color: "#1a839a" }}>
-        Payment Details
-      </h3>
-      <div className="mb-4">
+      <h3 style={{ color: "#1a839a", marginBottom: "15px" }}>Payment Details</h3>
+      <div style={{ marginBottom: "15px" }}>
         <CardElement
-          className="border rounded p-3"
           options={{
             style: {
-              base: {
-                fontSize: "16px",
-                color: "#424770",
-                "::placeholder": {
-                  color: "#aab7c4",
-                },
-              },
-              invalid: {
-                color: "#9e2146",
-              },
+              base: { fontSize: "16px", color: "#424770", "::placeholder": { color: "#aab7c4" } },
+              invalid: { color: "#9e2146" },
             },
           }}
         />
       </div>
-      <button
-        type="submit"
-        className="btn py-2 px-4 fw-bold"
-        disabled={!stripe || loading}
-        style={{
-          minWidth: "150px",
-          backgroundColor: "#1a839a",
-          color: "white",
-        }}
-      >
-        {loading ? (
-          <span>
-            <span
-              className="spinner-border spinner-border-sm me-2"
-              role="status"
-              aria-hidden="true"
-            ></span>
-            Processing...
-          </span>
-        ) : (
-          "Complete Payment"
-        )}
-      </button>
+      <div style={{ textAlign: "center" }}>
+        <button
+          type="submit"
+          disabled={!stripe || loading}
+          style={{
+            backgroundColor: "#1a839a",
+            color: "white",
+            padding: "10px 20px",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontWeight: "600",
+          }}
+        >
+          {loading ? "Processing..." : "Complete Payment"}
+        </button>
+      </div>
     </form>
   );
 }
 
 function PropertyDetails() {
   const location = useLocation();
-  const [paymentdata, setPaymentData] = useState("");
   const property = location.state?.property;
-  const property_images = property.images;
   const [clientSecret, setClientSecret] = useState("");
-  const navigate = useNavigate();
-
+  const [reviews, setReviews] = useState([]);
   const [content, setContent] = useState("");
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [reviews, setReviews] = useState([]);
-
-  // Function to post the review
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      const token = localStorage.getItem("token");
-
-      const res = await api.post(
-        "/api/post-review/",
-        {
-          content: content,
-          property_id: property.id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (res.data.error) {
-        setError(res.data.error);
-        setContent("");
-      } else {
-        setSuccess("Review added successfully");
-        setContent("");
-        // Refresh reviews after adding a new one
-        fetchReviews();
-      }
-    } catch (e) {
-      if (e.response && e.response.data) {
-        setError(e.response.data.error || "Something went wrong.");
-      } else {
-        setError("Network error. Please try again.");
-      }
-      console.error(e);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Function to fetch reviews
-  useEffect(() => {
-    fetchReviews();
-  }, []);
-
-  const fetchReviews = async () => {
-    try {
-      const res = await api.get(`/api/post-review/`, {
-        params: { property_id: property.id },
-      });
-
-      setReviews(res.data);
-    } catch (err) {
-      setError("Failed to load reviews.");
-      console.error(err);
-    }
-  };
+  const navigate = useNavigate();
 
   const handlePaymentIntent = async () => {
     try {
@@ -209,214 +103,230 @@ function PropertyDetails() {
         currency: "usd",
         property_id: property.id,
       });
-
       setClientSecret(response.data.clientSecret);
-      console.log("response.data.clientSecret", response.data.clientSecret);
-      setPaymentData(response.data);
-      console.log("response.data", response.data);
-    } catch (error) {
-      console.error("Error creating payment intent:", error);
+    } catch (err) {
+      console.error(err);
     }
   };
 
-  return (
-    <div className="container py-5">
-      <div className="row g-4">
-        <div className="col-lg-6">
-          <div className="card border-0 shadow-sm overflow-hidden h-100">
-            {/* <img 
-              src={property.url} 
-              className="card-img-top object-fit-cover" 
-              alt={property.title}
-              style={{ height: "400px" }} 
-            /> */}
+  const fetchReviews = async () => {
+    try {
+      const res = await api.get("/api/post-review/", { params: { property_id: property.id } });
+      setReviews(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-            {/* Image Carousel */}
-            <div className="max-w-2xl mx-auto mt-4">
+  const handleSubmitReview = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      const res = await api.post(
+        "/api/post-review/",
+        { content, property_id: property.id },
+        { headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" } }
+      );
+      if (res.data.error) setError(res.data.error);
+      else {
+        setSuccess("Review added successfully");
+        setContent("");
+        fetchReviews();
+      }
+    } catch (err) {
+      setError("Something went wrong.");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchReviews();
+  }, []);
+
+  return (
+    <div style={{ width: "95%", maxWidth: "1200px", margin: "0 auto", padding: "20px", fontFamily: "Poppins, sans-serif" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+        {/* Carousel & Details */}
+        <div style={{ flex: "1 1 400px", minWidth: "300px" }}>
+          <div style={{ borderRadius: "12px", overflow: "hidden", boxShadow: "0 2px 10px rgba(0,0,0,0.05)", backgroundColor: "#fff" }}>
+            <div style={{ height: "400px", overflowY: "auto" }}>
               <Carousel
-                showArrows={true}
+                showArrows
+                showThumbs
                 showStatus={false}
-                showThumbs={true}
-                infiniteLoop={true}
-                autoPlay={true}
+                infiniteLoop
+                autoPlay
                 interval={1000}
-                stopOnHover={true}
+                stopOnHover
+                renderArrowPrev={(onClickHandler, hasPrev, label) =>
+                  hasPrev && (
+                    <button
+                      onClick={onClickHandler}
+                      title={label}
+                      style={{
+                        position: "absolute",
+                        zIndex: 2,
+                        top: "50%",
+                        left: "10px",
+                        transform: "translateY(-50%)",
+                        background: "rgba(0,0,0,0.4)",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "50%",
+                        width: "35px",
+                        height: "35px",
+                        cursor: "pointer",
+                        fontSize: "18px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      ‹
+                    </button>
+                  )
+                }
+                renderArrowNext={(onClickHandler, hasNext, label) =>
+                  hasNext && (
+                    <button
+                      onClick={onClickHandler}
+                      title={label}
+                      style={{
+                        position: "absolute",
+                        zIndex: 2,
+                        top: "50%",
+                        right: "10px",
+                        transform: "translateY(-50%)",
+                        background: "rgba(0,0,0,0.4)",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "50%",
+                        width: "35px",
+                        height: "35px",
+                        cursor: "pointer",
+                        fontSize: "18px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      ›
+                    </button>
+                  )
+                }
               >
                 {property.images.map((img) => (
                   <div key={img.id}>
                     <img
                       src={img.image}
                       alt="Property"
-                      style={{
-                        width: "100%", // always take full width
-                        // consistent height
-                        objectFit: "cover", // crop to fit instead of stretching
-                        borderRadius: "8px", // optional, makes it look smoother
-                      }}
+                      style={{ width: "100%", maxWidth: "100%", height: "auto", objectFit: "cover" }}
                     />
                   </div>
                 ))}
               </Carousel>
             </div>
 
-            <div className="card-body bg-light p-4">
-              <h2 className="card-title mb-3" style={{ color: "#1a839a" }}>
-                {property.title}
-              </h2>
-              <div className="property-details mb-4">
-                <div className="row g-3">
-                  <div className="col-6">
-                    <div className="d-flex align-items-center">
-                      <i className="bi bi-currency-dollar me-2 text-success fs-5"></i>
-                      <div>
-                        <small className="text-muted d-block">Price</small>
-                        <span className="fw-bold">
-                          Kshs{property.rent_amount}/month
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-6">
-                    <div className="d-flex align-items-center">
-                      <i className="bi bi-geo-alt me-2 text-danger fs-5"></i>
-                      <div>
-                        <small className="text-muted d-block">Location</small>
-                        <span className="fw-bold">
-                          {property.city}, {property.state}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-6">
-                    <div className="d-flex align-items-center">
-                      <i
-                        className="bi bi-house-door me-2 fs-5"
-                        style={{ color: "#1a839a" }}
-                      ></i>
-                      <div>
-                        <small className="text-muted d-block">
-                          Property Type
-                        </small>
-                        <span className="fw-bold">
-                          {property.category.name}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div style={{ padding: "20px" }}>
+              <h2 style={{ color: "#1a839a", marginBottom: "10px" }}>{property.title}</h2>
+              <p style={{ margin: "5px 0" }}><strong>Price:</strong> Kshs{property.rent_amount}/month</p>
+              <p style={{ margin: "5px 0" }}><strong>Location:</strong> {property.city}, {property.state}</p>
+              <p style={{ margin: "5px 0" }}><strong>Type:</strong> {property.category.name}</p>
+              <div style={{ marginTop: "15px" }}>
+                <h5 style={{ borderBottom: "2px solid #1a839a", paddingBottom: "5px", marginBottom: "10px" }}>Description</h5>
+                <p style={{ color: "#6c757d" }}>{property.description}</p>
               </div>
-
-              <div className="mb-4">
-                <h5 className="border-bottom pb-2 mb-3">Description</h5>
-                <p className="text-muted">{property.description}</p>
-              </div>
-
-              {property.tenant ? (
-                <div
-                  className="alert alert-danger d-flex align-items-center"
-                  role="alert"
-                >
-                  <i className="bi bi-exclamation-triangle-fill me-2"></i>
-                  <div>This property is currently not available for rent.</div>
+              {!property.tenant && !clientSecret && (
+                <div style={{ textAlign: "center", marginTop: "15px" }}>
+                  <button
+                    onClick={handlePaymentIntent}
+                    style={{
+                      backgroundColor: "#1a839a",
+                      color: "white",
+                      border: "none",
+                      padding: "10px 20px",
+                      borderRadius: "8px",
+                      cursor: "pointer",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Book Now
+                  </button>
                 </div>
-              ) : (
-                <div className="text-center">
-                  {!clientSecret ? (
-                    <button
-                      className="btn btn-success btn-lg px-4 py-2"
-                      onClick={handlePaymentIntent}
-                    >
-                      <i className="bi bi-check-circle me-2"></i> Book Now
-                    </button>
-                  ) : null}
+              )}
+              {property.tenant && (
+                <div style={{ marginTop: "15px", padding: "10px", backgroundColor: "#dc3545", color: "white", borderRadius: "8px", textAlign: "center" }}>
+                  This property is currently not available for rent.
                 </div>
               )}
             </div>
           </div>
         </div>
 
-        <div className="col-lg-6">
-          {clientSecret && !property.tenant && (
-            <Elements stripe={stripePromise} options={{ clientSecret }}>
-              <CheckoutForm clientSecret={clientSecret} property={property} />
-            </Elements>
-          )}
+        {/* Payment & Reviews */}
+        <div style={{ flex: "1 1 350px", minWidth: "300px" }}>
+          {clientSecret && !property.tenant && <Elements stripe={stripePromise} options={{ clientSecret }}><CheckoutForm clientSecret={clientSecret} property={property} /></Elements>}
 
-          <div className="card shadow-sm rounded mb-4">
-            <div className="card-header bg-white py-3">
-              <h4 className="m-0 fw-bold" style={{ color: "#1a839a" }}>
-                Write a Review
-              </h4>
+          {/* Write Review */}
+          <div style={{ marginTop: "20px", borderRadius: "12px", overflow: "hidden", boxShadow: "0 2px 10px rgba(0,0,0,0.05)", backgroundColor: "#fff" }}>
+            <div style={{ backgroundColor: "#1a839a", color: "white", padding: "15px" }}>
+              <h4 style={{ margin: 0 }}>Write a Review</h4>
             </div>
-            <div className="card-body p-4">
-              {error && <div className="alert alert-danger">{error}</div>}
-              {success && <div className="alert alert-success">{success}</div>}
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <textarea
-                    className="form-control"
-                    rows="4"
-                    placeholder="Share your experience with this property..."
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    required
-                  ></textarea>
+            <div style={{ padding: "15px" }}>
+              {error && <div style={{ marginBottom: "10px", color: "#dc3545" }}>{error}</div>}
+              {success && <div style={{ marginBottom: "10px", color: "#28a745" }}>{success}</div>}
+              <form onSubmit={handleSubmitReview} style={{ textAlign: "center" }}>
+                <textarea
+                  style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #ccc", resize: "vertical", marginBottom: "10px" }}
+                  rows={4}
+                  placeholder="Share your experience..."
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  required
+                />
+                <div>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    style={{
+                      backgroundColor: "#1a839a",
+                      color: "white",
+                      border: "none",
+                      padding: "10px 20px",
+                      borderRadius: "8px",
+                      cursor: "pointer",
+                      fontWeight: "600",
+                    }}
+                  >
+                    {loading ? "Submitting..." : "Submit Review"}
+                  </button>
                 </div>
-                <button
-                  type="submit"
-                  className="btn"
-                  style={{ backgroundColor: "#1a839a", color: "white" }}
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <span>
-                      <span
-                        className="spinner-border spinner-border-sm me-2"
-                        role="status"
-                        aria-hidden="true"
-                      ></span>
-                      Submitting...
-                    </span>
-                  ) : (
-                    "Submit Review"
-                  )}
-                </button>
               </form>
             </div>
           </div>
 
-          <div className="card shadow-sm rounded">
-            <div className="card-header text-white py-3" style={{background:"#1a839a"}}>
-              <h4 className="m-0">Property Reviews</h4>
+          {/* Property Reviews */}
+          <div style={{ marginTop: "20px", borderRadius: "12px", overflow: "hidden", boxShadow: "0 2px 10px rgba(0,0,0,0.05)", backgroundColor: "#fff" }}>
+            <div style={{ backgroundColor: "#1a839a", color: "white", padding: "15px" }}>
+              <h4 style={{ margin: 0 }}>Property Reviews</h4>
             </div>
-            <div className="card-body p-3">
-              {reviews.length > 0 ? (
-                <div className="list-group">
+            <div style={{ padding: "15px" }}>
+              {reviews.length === 0 ? (
+                <p style={{ color: "#6c757d", textAlign: "center", padding: "20px 0" }}>No reviews yet. Be the first to leave a review!</p>
+              ) : (
+                <div>
                   {reviews.map((review) => (
-                    <div
-                      key={review.id}
-                      className="list-group-item list-group-item-action p-3 mb-2 bg-light rounded"
-                    >
-                      <div className="d-flex w-100 justify-content-between mb-1">
-                        <h6 className="mb-1" style={{ color: "#1a839a" }}>
-                          Guest Review
-                        </h6>
-                        <small className="text-muted">
-                          {new Date(
-                            review.created_at || Date.now()
-                          ).toLocaleDateString()}
-                        </small>
+                    <div key={review.id} style={{ marginBottom: "10px", padding: "10px", borderRadius: "8px", backgroundColor: "#f8f9fa" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "5px" }}>
+                        <span style={{ color: "#1a839a", fontWeight: "600" }}>Guest Review</span>
+                        <small style={{ color: "#6c757d" }}>{new Date(review.created_at || Date.now()).toLocaleDateString()}</small>
                       </div>
-                      <p className="mb-1">{review.content}</p>
+                      <p style={{ margin: 0 }}>{review.content}</p>
                     </div>
                   ))}
-                </div>
-              ) : (
-                <div className="text-center py-4">
-                  <i className="bi bi-chat-square-text text-muted fs-1 d-block mb-3"></i>
-                  <p className="text-muted mb-0">
-                    No reviews yet. Be the first to leave a review!
-                  </p>
                 </div>
               )}
             </div>
