@@ -5,7 +5,11 @@ import {
   FaHome,
   FaBuilding,
   FaHistory,
+  FaEnvelope,
+  FaInfoCircle,
   FaUser,
+  FaSignInAlt,
+  FaUserPlus,
 } from "react-icons/fa";
 import { GrHostMaintenance } from "react-icons/gr";
 import { IoIosSettings } from "react-icons/io";
@@ -185,21 +189,25 @@ function Header({ isLoggedIn, onLogout, isTenant }) {
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/about" onClick={closeMenu}>
+                    <FaInfoCircle className="nav-icon" />
                     <span>About Us</span>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/register" onClick={closeMenu}>
+                    <FaUserPlus className="nav-icon" />
                     <span>Register</span>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/login" onClick={closeMenu}>
+                    <FaSignInAlt className="nav-icon" />
                     <span>Login</span>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/contact" onClick={closeMenu}>
+                    <FaEnvelope className="nav-icon" />
                     <span>Contact</span>
                   </Link>
                 </li>

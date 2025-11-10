@@ -1,6 +1,6 @@
 /* Reset and Base Styles */
 .about {
-  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  font-family: "Roboto", "Segoe UI", sans-serif;
   color: #333;
   line-height: 1.6;
   background-color: #fcfcfc;
@@ -15,7 +15,8 @@
 
 /* Hero Section */
 .about-hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/property-hero.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("/images/property-hero.jpg");
   background-size: cover;
   background-position: center;
   color: white;
@@ -45,7 +46,7 @@
 .hero-divider {
   width: 80px;
   height: 4px;
-  background-color: #f5a623;
+  background: linear-gradient(135deg, #16274a, #1a839a) !important;
   margin: 0 auto;
 }
 
@@ -64,7 +65,7 @@
 }
 
 .brand-highlight {
-  color: #f5a623;
+  color: #1a839a;
   font-weight: 600;
 }
 
@@ -84,7 +85,7 @@
 .section-divider {
   width: 60px;
   height: 3px;
-  background-color: #f5a623;
+  background: linear-gradient(135deg, #16274a, #1a839a) !important;
   margin: 0 auto;
 }
 
@@ -123,7 +124,7 @@
 
 .about-item i {
   font-size: 2.8rem; /* Increased from 2.5rem */
-  color: #f5a623;
+  color: #1a839a;
 }
 
 .about-item h2 {
@@ -176,7 +177,7 @@
 
 .service-icon i {
   font-size: 2.2rem; /* Increased from 2rem */
-  color: #f5a623;
+  color: #1a839a;
 }
 
 .service-details {
@@ -230,7 +231,7 @@
 
 .benefit-item i {
   font-size: 1.4rem; /* Increased from 1.2rem */
-  color: #f5a623;
+  color: #1a839a;
   flex-shrink: 0;
 }
 
@@ -246,7 +247,7 @@
 }
 
 .cta-button {
-  background-color: #f5a623;
+  background: linear-gradient(135deg, #16274a, #1a839a) !important;
   color: white;
   font-size: 1.3rem; /* Increased from 1.1rem */
   font-weight: 600;
@@ -255,13 +256,13 @@
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(245, 166, 35, 0.3);
+  box-shadow: 0 4px 15px #1a839a;
 }
 
 .cta-button:hover {
-  background-color: #e09416;
+  background: linear-gradient(135deg, #16274a, #1a839a) !important;
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4);
+  box-shadow: 0 6px 20px #1a839a;
 }
 
 /* Responsive Design */
@@ -269,15 +270,15 @@
   .about-hero h1 {
     font-size: 3rem; /* Increased from 2.5rem */
   }
-  
+
   .tagline {
     font-size: 1.6rem; /* Increased from 1.3rem */
   }
-  
+
   .about-intro p {
     font-size: 1.4rem; /* Increased from 1.15rem */
   }
-  
+
   .section-heading h2 {
     font-size: 2.3rem; /* Increased from 2rem */
   }
@@ -287,34 +288,34 @@
   .about-hero {
     padding: 80px 20px;
   }
-  
+
   .about-hero h1 {
     font-size: 2.6rem; /* Increased from 2.2rem */
   }
-  
+
   .tagline {
     font-size: 1.4rem; /* Increased from 1.2rem */
   }
-  
-  .about-content, 
+
+  .about-content,
   .services-content {
     grid-template-columns: 1fr;
   }
-  
+
   .about-item,
   .service-item {
     padding: 30px 20px;
   }
-  
+
   .icon-container {
     width: 70px;
     height: 70px;
   }
-  
+
   .about-item i {
     font-size: 2.2rem; /* Increased from 2rem */
   }
-  
+
   .benefits-list {
     grid-template-columns: 1fr;
   }
@@ -324,31 +325,31 @@
   .about-hero {
     padding: 60px 15px;
   }
-  
+
   .about-hero h1 {
     font-size: 2.2rem; /* Increased from 1.8rem */
   }
-  
+
   .tagline {
     font-size: 1.3rem; /* Increased from 1.1rem */
   }
-  
+
   .about-intro p {
     font-size: 1.2rem; /* Increased from 1rem */
   }
-  
+
   .section-heading h2 {
     font-size: 2rem; /* Increased from 1.8rem */
   }
-  
+
   .about-item h2 {
     font-size: 1.6rem; /* Increased from 1.4rem */
   }
-  
+
   .service-item h3 {
     font-size: 1.5rem; /* Increased from 1.3rem */
   }
-  
+
   .cta-button {
     padding: 12px 25px;
     font-size: 1.2rem; /* Increased from 1rem */

@@ -124,8 +124,9 @@
 
 .title-underline {
   width: 80px;
-  height: 4px;
-  background-color: #ff5900;
+  /* height: 4px;
+  background-color: #ff5900; */
+  background: linear-gradient(135deg, #16274a, #1a839a) !important;
   margin: 0 auto 3rem;
   border-radius: 2px;
 }
@@ -138,7 +139,7 @@
   transition: all 0.3s ease;
   height: 100%;
   text-align: center;
-  border-top: 4px solid #ff5900;
+  border-top: 4px solid #1a839a;
 }
 
 .info-card:hover {
@@ -166,7 +167,7 @@
 
 /* Stats Section */
 .stats-section {
-  background-color: #ff5900;
+  background: linear-gradient(135deg, #16274a, #1a839a) !important;
   color: white;
   padding: 4rem 0;
 }
@@ -207,7 +208,7 @@
   top: 10px;
   left: 20px;
   font-size: 4rem;
-  color: #ff5900;
+  color: #1a839a;
   opacity: 0.2;
   font-family: Georgia, serif;
   line-height: 1;
@@ -299,24 +300,24 @@
 }
 
 .cta-buttons .btn-primary {
-  background-color: #ff5900;
-  border-color: #ff5900;
+  background: linear-gradient(135deg, #16274a, #1a839a) !important;
+  border-color: #1a839a;
 }
 
 .cta-buttons .btn-primary:hover {
-  background-color: #e65000;
-  border-color: #e65000;
+  background: linear-gradient(135deg, #16274a, #1a839a) !important;
+  border-color: #1a839a;
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .cta-buttons .btn-outline-primary {
-  color: #ff5900;
-  border-color: #ff5900;
+  color: #1a839a;
+  border-color: #1a839a;
 }
 
 .cta-buttons .btn-outline-primary:hover {
-  background-color: #ff5900;
+  background: linear-gradient(135deg, #16274a, #1a839a) !important;
   color: white;
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
