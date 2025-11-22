@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function Properties() {
+  const [isLoading, setIsLoading] = useState(false)
   const [properties, setProperties] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -13,6 +14,7 @@ function Properties() {
 
   // Fetch properties
   const fetchProperties = async () => {
+    setIsLoading(true)
     try {
       const res = await api.get("/api/properties/", {
         headers: {
@@ -27,9 +29,13 @@ function Properties() {
         ...new Set(res.data.map((prop) => prop.category.name)),
       ];
       setCategories(uniqueCategories);
+      
     } catch (error) {
       console.log(error);
       navigate("/login");
+    }
+    finally{
+      setIsLoading(false)
     }
   };
 
@@ -49,6 +55,18 @@ function Properties() {
   useEffect(() => {
     fetchProperties();
   }, []);
+
+
+  if (isLoading) {
+    return (
+      <div className="text-center py-5">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+  
 
   return (
     <>
