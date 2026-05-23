@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function Properties() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const [properties, setProperties] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -14,7 +14,7 @@ function Properties() {
 
   // Fetch properties
   const fetchProperties = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const res = await api.get("/api/properties/", {
         headers: {
@@ -29,13 +29,11 @@ function Properties() {
         ...new Set(res.data.map((prop) => prop.category.name)),
       ];
       setCategories(uniqueCategories);
-      
     } catch (error) {
       console.log(error);
       navigate("/login");
-    }
-    finally{
-      setIsLoading(false)
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -46,7 +44,7 @@ function Properties() {
       setFilteredProperties(properties);
     } else {
       const filtered = properties.filter(
-        (prop) => prop.category.name === category
+        (prop) => prop.category.name === category,
       );
       setFilteredProperties(filtered);
     }
@@ -55,7 +53,6 @@ function Properties() {
   useEffect(() => {
     fetchProperties();
   }, []);
-
 
   if (isLoading) {
     return (
@@ -66,7 +63,6 @@ function Properties() {
       </div>
     );
   }
-  
 
   return (
     <>
@@ -105,7 +101,6 @@ function Properties() {
               className={`btn ${
                 selectedCategory === cat ? "btn-primary" : "btn-outline-primary"
               } btn-sm rounded-pill`}
-              
               onClick={() => handleFilterChange(cat)}
             >
               {cat}
@@ -124,6 +119,7 @@ function Properties() {
                       <div key={property.images[0].id}>
                         <img
                           src={property.images[0].image}
+                          loading="lazy"
                           alt="Property"
                           className="card-img-top object-fit-cover"
                         />

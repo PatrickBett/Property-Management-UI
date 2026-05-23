@@ -1,8 +1,5 @@
-
 function Applications() {
-  return (
-    <div>Applications</div>
-  )
+  return <div>Applications</div>;
 }
 
-export default Applications
+export default Applications;
