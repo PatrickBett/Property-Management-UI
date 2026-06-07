@@ -39,7 +39,7 @@ The **Property Management System** is a web-based application built using **Reac
 - Receive rental payments from tenants  
 
 ## **Tech Stack**  
-- **Frontend:** React.js  
+- **Frontend:** React.js , Context API, Tanstack Query 
 - **Backend:** Django & Django Rest Framework (DRF)  
 - **Database:** PostgreSQL  
 - **Authentication:** JWT-based authentication  

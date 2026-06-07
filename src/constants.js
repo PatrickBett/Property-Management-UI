@@ -1,3 +1,3 @@
-export const ACCESS_TOKEN = 'access'
-export const REFRESH_TOKEN = 'refresh'
+export const access = 'access'
+export const refresh = 'refresh'
 export const ROLE = 'role'

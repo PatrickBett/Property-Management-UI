@@ -4,7 +4,7 @@ function Payments() {
   return (
     <div
       style={{
-        fontFamily: "Poppins, sans-serif",
+        
         padding: "50px 20px",
         maxWidth: "1000px",
         margin: "0 auto",

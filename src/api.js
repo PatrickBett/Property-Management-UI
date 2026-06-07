@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ACCESS_TOKEN } from "./constants";
+import { access } from "./constants";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -8,7 +8,7 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     //get token from localstorage if available
-    const token = localStorage.getItem(ACCESS_TOKEN);
+    const token = localStorage.getItem(access);
     //The && !config.url.includes("/register") ensures that authorization token is
     //included on registration
     if (

@@ -36,7 +36,6 @@ const Signup = () => {
       toast.success("Signup successful!");
       navigate("/login");
     } catch (err) {
-      console.error("Error:", err);
       setError("Failed to register. Please try again.");
       toast.error("Failed to register. Please try again.");
     } finally {
@@ -46,17 +45,11 @@ const Signup = () => {
 
   return (
     <div
-      className="container-fluid d-flex align-items-center justify-content-center"
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#f8f9fa",
-      }}
+      className="container-fluid"
+      style={{ minHeight: "80vh", backgroundColor: "#f8f9fa" }}
     >
-      <div
-        className="row shadow-lg border-0 rounded-4 overflow-hidden"
-        style={{ maxWidth: "950px", width: "100%" }}
-      >
-        {/* Left image section */}
+      <div className="row overflow-hidden">
+        {/* LEFT IMAGE */}
         <div
           className="col-md-6 d-none d-md-block"
           style={{
@@ -65,190 +58,105 @@ const Signup = () => {
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-        ></div>
+        />
 
-        {/* Right form section */}
+        {/* RIGHT FORM */}
         <div className="col-md-6 bg-white p-5 d-flex flex-column justify-content-center">
+          {/* HEADER */}
           <div className="text-center mb-4">
-            <h2 className="fw-bold mb-2" style={{color:"#1a839a"}}>
-              <i className="bi bi-person-plus-fill me-2"></i>Register Account
+            <h2 className="fs-1 fw-bold mb-2" style={{ color: "#1a839a" }}>
+              <i className="bi bi-person-plus-fill me-2"></i>
+              Register Account
             </h2>
-            <p className="text-muted">
+
+            <p className="text-muted fs-3">
               Join us and manage your property easily
             </p>
           </div>
 
+          {/* ERROR */}
           {error && (
-            <div
-              className="alert alert-danger d-flex align-items-center"
-              role="alert"
-            >
+            <div className="alert alert-danger d-flex align-items-center fs-3">
               <i className="bi bi-exclamation-triangle-fill me-2"></i>
-              <div>{error}</div>
+              {error}
             </div>
           )}
 
-          <form
-            onSubmit={handleRegister}
-            className="p-4 rounded-3 shadow-sm bg-white"
-            style={{
-              minHeight: "auto",
-              border: "1px solid rgba(0,0,0,0.1)",
-            }}
-          >
+          {/* FORM */}
+          <form className="p-4 rounded-3 shadow-sm bg-white border" onSubmit={handleRegister}>
             <div className="row g-3">
               <div className="col-md-6">
-                <div className="form-floating mb-3">
-                  <input
-                    type="text"
-                    className="form-control border-2"
-                    id="first_name"
-                    placeholder="First Name"
-                    value={first_name}
-                    onChange={(e) => setFirstname(e.target.value)}
-                    required
-                    style={{ borderRadius: "10px" }}
-                  />
-                  <label htmlFor="first_name">
-                    <i className="bi bi-person me-2"></i>First Name
-                  </label>
-                </div>
+                <input
+                  className="form-control fs-3"
+                  placeholder="First Name"
+                  value={first_name}
+                  onChange={(e) => setFirstname(e.target.value)}
+                />
               </div>
 
               <div className="col-md-6">
-                <div className="form-floating mb-3">
-                  <input
-                    type="text"
-                    className="form-control border-2"
-                    id="last_name"
-                    placeholder="Last Name"
-                    value={last_name}
-                    onChange={(e) => setLastname(e.target.value)}
-                    required
-                    style={{ borderRadius: "10px" }}
-                  />
-                  <label htmlFor="last_name">
-                    <i className="bi bi-person me-2"></i>Last Name
-                  </label>
-                </div>
+                <input
+                  className="form-control fs-3"
+                  placeholder="Last Name"
+                  value={last_name}
+                  onChange={(e) => setLastname(e.target.value)}
+                />
               </div>
             </div>
 
-            <div className="form-floating mb-3">
-              <input
-                type="text"
-                className="form-control border-2"
-                id="username"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                style={{ borderRadius: "10px" }}
-              />
-              <label htmlFor="username">
-                <i className="bi bi-person-badge me-2"></i>Username
-              </label>
-            </div>
+            <input
+              className="form-control fs-3 my-3"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
 
-            <div className="form-floating mb-3">
-              <input
-                type="email"
-                className="form-control border-2"
-                id="email"
-                placeholder="Email Address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                style={{ borderRadius: "10px" }}
-              />
-              <label htmlFor="email">
-                <i className="bi bi-envelope me-2"></i>Email Address
-              </label>
-            </div>
+            <input
+              className="form-control fs-3 my-3"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-            <div className="form-floating mb-3">
-              <input
-                type="tel"
-                className="form-control border-2"
-                id="phone_number"
-                placeholder="Phone Number"
-                value={phone_number}
-                onChange={(e) => setPhone(e.target.value)}
-                required
-                style={{ borderRadius: "10px" }}
-              />
-              <label htmlFor="phone_number">
-                <i className="bi bi-telephone me-2"></i>Phone Number
-              </label>
-            </div>
+            <input
+              className="form-control fs-3 my-3"
+              placeholder="Phone Number"
+              value={phone_number}
+              onChange={(e) => setPhone(e.target.value)}
+            />
 
-            <div className="form-floating mb-3">
-              <select
-                className="form-select border-2"
-                id="role"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                style={{ borderRadius: "10px" }}
-              >
-                <option value="tenant">Tenant</option>
-                <option value="landlord">Landlord</option>
-              </select>
-              <label htmlFor="role">
-                <i className="bi bi-person-workspace me-2"></i>Select Role
-              </label>
-            </div>
+            <select
+              className="form-select fs-3 my-3"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            >
+              <option value="tenant">Tenant</option>
+              <option value="landlord">Landlord</option>
+            </select>
 
-            <div className="form-floating mb-4">
-              <input
-                type="password"
-                className="form-control border-2"
-                id="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                style={{ borderRadius: "10px" }}
-              />
-              <label htmlFor="password">
-                <i className="bi bi-lock me-2"></i>Password
-              </label>
-            </div>
+            <input
+              type="password"
+              className="form-control fs-3 my-3"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
             <button
-              className="btn btn-success w-100 py-3 fw-bold"
+              className="btn w-100 fs-3 py-3 mt-3"
               type="submit"
               disabled={isLoading}
-              style={{
-                borderRadius: "10px",
-                fontSize: "1.1rem",
-                background: "#1a839a",
-                border: "none",
-              }}
+              style={{ background: "#1a839a", color: "white" }}
             >
-              {isLoading ? (
-                <>
-                  <span
-                    className="spinner-border spinner-border-sm me-2"
-                    role="status"
-                    aria-hidden="true"
-                  ></span>
-                  Creating Account...
-                </>
-              ) : (
-                <>
-                  <i className="bi bi-check-circle me-2"></i>Create Account
-                </>
-              )}
+              {isLoading ? "Creating Account..." : "Create Account"}
             </button>
 
-            <div className="text-center mt-4">
-              <p className="mb-0">
-                Already have an account?{" "}
-                <a href="/login" className="text-success fw-bold">
-                  Sign In
-                </a>
-              </p>
-            </div>
+            <p className="text-center mt-4 fs-3">
+              Already have an account?{" "}
+              <a href="/login" className="fw-bold text-success">
+                Sign In
+              </a>
+            </p>
           </form>
         </div>
       </div>

@@ -72,266 +72,109 @@ function Home() {
   };
 
   return (
-    <>
-      {/* Header */}
-      <div
-        style={{
-          backgroundColor: "#f8f9fa",
-          borderRadius: "10px",
-          padding: "15px 25px",
-          boxShadow: "0 3px 8px rgba(0,0,0,0.1)",
-          marginBottom: "25px",
-        }}
-      >
-        <h2 style={{ color: "#1a839a", fontWeight: "700", margin: 0 }}>
+    <div className="container-fluid py-4">
+      {/* HEADER */}
+      <div className="p-4 mb-4 bg-light rounded shadow-sm">
+        <h2 className="fs-2 text-primary fw-bold m-0">
           {role ? `Logged In As ${role}` : "Welcome User"}
         </h2>
       </div>
 
-      {/* Top Cards Row */}
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "15px",
-          justifyContent: "center",
-          marginTop: "30px",
-        }}
-      >
-        {/* User Info */}
-        <div
-          style={{
-            flex: "1 1 300px",
-            backgroundColor: "#21a8c6",
-            color: "white",
-            textAlign: "center",
-            padding: "20px",
-            borderRadius: "12px",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-            cursor: "default",
-          }}
-        >
-          <h3 style={{ fontSize: "1.2rem", margin: 0 }}>
-            <FaUser style={{ marginRight: "10px" }} />
-            {properties.length > 0 ? properties[0].landlord.email : "User"}
-          </h3>
+      {/* TOP STATS */}
+      <div className="row g-3 mb-5 text-center">
+        <div className="col-md-4">
+          <div className="p-4 bg-info text-white rounded shadow-sm">
+            <h3 className="fs-3 m-0">
+              <FaUser className="me-2" />
+              {properties.length > 0 ? properties[0].landlord.email : "User"}
+            </h3>
+          </div>
         </div>
 
-        {/* Add Property */}
-        <div
-          style={{
-            flex: "1 1 300px",
-            backgroundColor: "#1a839a",
-            color: "white",
-            textAlign: "center",
-            padding: "20px",
-            borderRadius: "12px",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-            cursor: "pointer",
-          }}
-          data-bs-toggle="modal"
-          data-bs-target="#myadd-property"
-        >
-          <h3 style={{ fontSize: "1.2rem", margin: 0 }}>
-            <CiCirclePlus style={{ marginRight: "10px", fontSize: "1.5rem" }} />
-            Add Property
-          </h3>
+        <div className="col-md-4">
+          <div
+            className="p-4 text-white rounded shadow-sm"
+            style={{ backgroundColor: "#1a839a", cursor: "pointer" }}
+            data-bs-toggle="modal"
+            data-bs-target="#myadd-property"
+          >
+            <h3 className="fs-3 m-0">
+              <CiCirclePlus className="me-2 fs-2" />
+              Add Property
+            </h3>
+          </div>
         </div>
 
-        {/* Property Count */}
-        <div
-          style={{
-            flex: "1 1 300px",
-            backgroundColor: "#26bada",
-            color: "white",
-            textAlign: "center",
-            padding: "20px",
-            borderRadius: "12px",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-          }}
-        >
-          <h3 style={{ fontSize: "1.2rem", margin: 0 }}>
-            <FaHome style={{ marginRight: "10px" }} />
-            Number of properties: {properties.length}
-          </h3>
+        <div className="col-md-4">
+          <div className="p-4 bg-primary text-white rounded shadow-sm">
+            <h3 className="fs-3 m-0">
+              <FaHome className="me-2" />
+              Properties: {properties.length}
+            </h3>
+          </div>
         </div>
       </div>
 
-      {/* Tenants Info */}
-      <div
-        style={{
-          backgroundColor: "white",
-          borderRadius: "12px",
-          boxShadow: "0 6px 20px rgba(0,0,0,0.1)",
-          marginTop: "40px",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            backgroundColor: "#e9f6f8",
-            color: "#1a839a",
-            padding: "20px",
-            textAlign: "center",
-          }}
-        >
-          <h2 style={{ margin: 0, fontWeight: "700" }}>
-            <i className="bi bi-people-fill me-2"></i>
-            Tenants Information
-          </h2>
+      {/* TENANTS SECTION */}
+      <div className="bg-white rounded shadow-sm">
+        <div className="p-4 text-center bg-light border-bottom">
+          <h2 className="fs-2 text-primary m-0">Tenants Information</h2>
         </div>
 
-        <div style={{ padding: "25px" }}>
+        <div className="p-4">
           {properties.length > 0 ? (
             properties.map((property, index) => (
-              <div
-                key={index}
-                style={{
-                  backgroundColor: "#fff",
-                  borderRadius: "10px",
-                  boxShadow: "0 3px 8px rgba(0,0,0,0.08)",
-                  marginBottom: "20px",
-                  padding: "20px",
-                  transition: "transform 0.3s ease",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.01)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.transform = "scale(1)")
-                }
-              >
-                <div style={{ display: "flex", alignItems: "flex-start" }}>
-                  <div
-                    style={{
-                      backgroundColor: "#e0f7fa",
-                      borderRadius: "50%",
-                      padding: "10px",
-                      marginRight: "15px",
-                    }}
-                  >
-                    <FaHome style={{ color: "#1a839a", fontSize: "1.5rem" }} />
-                  </div>
+              <div key={index} className="mb-4 p-4 border rounded shadow-sm">
+                <h3 className="fs-2 text-primary mb-3">{property.title}</h3>
 
-                  <div style={{ flex: 1 }}>
-                    <h4
-                      style={{
-                        color: "#1a839a",
-                        fontWeight: "600",
-                        marginBottom: "15px",
-                      }}
-                    >
-                      {property.title}
+                {property.tenant && property.tenant.email ? (
+                  <div className="p-3 bg-light rounded border-start border-success border-4">
+                    <h4 className="fs-3 text-success">
+                      <FaUser className="me-2" />
+                      Tenant Details
                     </h4>
 
-                    {property.tenant && property.tenant.email ? (
-                      <div
-                        style={{
-                          backgroundColor: "#f8f9fa",
-                          borderLeft: "5px solid #28a745",
-                          borderRadius: "10px",
-                          padding: "15px",
-                        }}
-                      >
-                        <h5
-                          style={{
-                            color: "#28a745",
-                            fontWeight: "600",
-                            marginBottom: "10px",
-                          }}
-                        >
-                          <FaUser style={{ marginRight: "8px" }} />
-                          Tenant Details
-                        </h5>
+                    <p className="fs-3 mb-2">
+                      <MdEmail className="me-2 text-primary" />
+                      {property.tenant.email}
+                    </p>
 
-                        <p style={{ margin: "5px 0", color: "#333" }}>
-                          <MdEmail
-                            style={{ marginRight: "10px", color: "#1a839a" }}
-                          />
-                          {property.tenant.email}
-                        </p>
-                        <p style={{ margin: "5px 0", color: "#333" }}>
-                          <FaPhone
-                            style={{ marginRight: "10px", color: "#1a839a" }}
-                          />
-                          {property.tenant.phone_number}
-                        </p>
-                        <p style={{ margin: "5px 0", color: "#333" }}>
-                          <i
-                            className="bi bi-person-badge"
-                            style={{
-                              marginRight: "10px",
-                              color: "#1a839a",
-                              fontSize: "1.2rem",
-                            }}
-                          ></i>
-                          {property.tenant.first_name}
-                        </p>
-                      </div>
-                    ) : (
-                      <div
-                        style={{
-                          backgroundColor: "#fff3cd",
-                          border: "1px solid #ffeeba",
-                          borderRadius: "10px",
-                          padding: "10px 15px",
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        <i
-                          className="bi bi-exclamation-triangle-fill"
-                          style={{
-                            color: "#856404",
-                            fontSize: "1.5rem",
-                            marginRight: "10px",
-                          }}
-                        ></i>
-                        <span>
-                          No tenants currently occupying this property
-                        </span>
-                      </div>
-                    )}
+                    <p className="fs-3 mb-2">
+                      <FaPhone className="me-2 text-primary" />
+                      {property.tenant.phone_number}
+                    </p>
+
+                    <p className="fs-3 mb-0">{property.tenant.first_name}</p>
                   </div>
-                </div>
+                ) : (
+                  <div className="p-3 bg-warning-subtle rounded fs-3">
+                    No tenants currently occupying this property
+                  </div>
+                )}
               </div>
             ))
           ) : (
-            <div style={{ textAlign: "center", padding: "50px 0" }}>
-              <i
-                className="bi bi-house-slash"
-                style={{ fontSize: "3rem", color: "#ccc" }}
-              ></i>
-              <h3 style={{ color: "#888", marginTop: "15px" }}>
-                Your properties have not been rented yet
-              </h3>
-              <p style={{ color: "#999" }}>
-                When your properties are rented, tenant information will appear
-                here.
+            <div className="text-center py-5">
+              <i className="bi bi-house-slash fs-1 text-muted"></i>
+              <p className="fs-2 text-muted mt-3">
+                No properties available yet
               </p>
             </div>
           )}
         </div>
       </div>
 
-      {/* Modal */}
+      {/* MODAL (logic unchanged) */}
       <div className="modal" id="myadd-property">
         <div className="modal-dialog">
           <div className="modal-content">
-            <div
-              className="modal-header"
-              style={{ borderBottom: "1px solid #ddd" }}
-            >
-              <div className="modal-title fw-bold">Add Property</div>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-              ></button>
+            <div className="modal-header">
+              <h5 className="modal-title fs-2">Add Property</h5>
+              <button className="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <div className="modal-body">
-              <form onSubmit={handleAddProperty} encType="multipart/form-data">
+              <form onSubmit={handleAddProperty}>
                 {[
                   { label: "Title", value: title, setter: setTitle },
                   { label: "Address", value: address, setter: setAddress },
@@ -340,113 +183,59 @@ function Home() {
                   { label: "Zip-code", value: zip_code, setter: setZipcode },
                   { label: "Rent", value: rent_amount, setter: setRent },
                 ].map((f, i) => (
-                  <div key={i} style={{ marginBottom: "15px" }}>
-                    <label style={{ fontWeight: "600" }}>{f.label}:</label>
+                  <div key={i} className="mb-3">
+                    <label className="fs-3 fw-semibold">{f.label}</label>
                     <input
-                      type="text"
+                      className="form-control fs-3"
                       value={f.value}
                       onChange={(e) => f.setter(e.target.value)}
-                      style={{
-                        width: "100%",
-                        padding: "10px",
-                        border: "1px solid #ccc",
-                        borderRadius: "8px",
-                        outline: "none",
-                        marginTop: "5px",
-                      }}
                     />
                   </div>
                 ))}
 
-                {/* Category Select */}
-                <div style={{ marginBottom: "15px" }}>
-                  <label style={{ fontWeight: "600" }}>Category:</label>
+                <div className="mb-3">
+                  <label className="fs-3 fw-semibold">Category</label>
                   <select
+                    className="form-select fs-3"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    style={{
-                      width: "100%",
-                      padding: "10px",
-                      border: "1px solid #ccc",
-                      borderRadius: "8px",
-                      outline: "none",
-                      marginTop: "5px",
-                    }}
                   >
-                    <option value="">-- Select Category --</option>
-                    {categories?.map((category) => (
-                      <option key={category.id} value={category.id}>
-                        {category.name}
+                    <option value="">Select</option>
+                    {categories?.map((c) => (
+                      <option key={c.id} value={c.id}>
+                        {c.name}
                       </option>
                     ))}
                   </select>
                 </div>
 
-                {/* Description */}
-                <div style={{ marginBottom: "15px" }}>
-                  <label style={{ fontWeight: "600" }}>Description:</label>
+                <div className="mb-3">
+                  <label className="fs-3 fw-semibold">Description</label>
                   <textarea
+                    className="form-control fs-3"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Enter property description"
-                    style={{
-                      width: "100%",
-                      padding: "10px",
-                      border: "1px solid #ccc",
-                      borderRadius: "8px",
-                      outline: "none",
-                      marginTop: "5px",
-                      minHeight: "80px",
-                    }}
-                  ></textarea>
-                </div>
-
-                {/* Image Upload */}
-                <div style={{ marginBottom: "15px" }}>
-                  <label style={{ fontWeight: "600" }}>Upload Images:</label>
-                  <input
-                    type="file"
-                    multiple
-                    onChange={(e) => setImages(e.target.files)}
-                    style={{
-                      width: "100%",
-                      padding: "10px",
-                      border: "1px solid #ccc",
-                      borderRadius: "8px",
-                      outline: "none",
-                      marginTop: "5px",
-                    }}
                   />
                 </div>
 
-                {/* Modal Footer */}
-                <div
-                  className="modal-footer"
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    gap: "10px",
-                    borderTop: "1px solid #ddd",
-                    paddingTop: "10px",
-                  }}
-                >
+                <div className="mb-3">
+                  <label className="fs-3 fw-semibold">Images</label>
+                  <input
+                    type="file"
+                    multiple
+                    className="form-control fs-3"
+                    onChange={(e) => setImages(e.target.files)}
+                  />
+                </div>
+
+                <div className="d-flex justify-content-end gap-2">
                   <button
-                    type="button"
-                    className="btn btn-danger"
+                    className="btn btn-danger fs-3"
                     data-bs-dismiss="modal"
                   >
                     Cancel
                   </button>
-                  <button
-                    type="submit"
-                    style={{
-                      backgroundColor: "#1a839a",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "8px",
-                      padding: "8px 15px",
-                    }}
-                  >
+                  <button className="btn btn-primary fs-3">
                     {isLoading ? "Saving..." : "Save"}
                   </button>
                 </div>
@@ -455,7 +244,7 @@ function Home() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

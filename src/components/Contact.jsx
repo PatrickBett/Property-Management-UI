@@ -1,80 +1,94 @@
 import React from "react";
-import "./contact.css";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 function Contact() {
   return (
-    <div className="contact-container">
-      <h2 className="text-center">Contact Us</h2>
-      <p className="text-center">
-        Have questions or need assistance? Reach out to us through any of the
-        following ways:
-      </p>
+    <div className="container py-5">
+      {/* HEADER */}
+      <div className="text-center mb-5">
+        <h2 className="fw-bold display-5">Contact Us</h2>
+        <p className="text-muted fs-4 mt-3">
+          Have questions or need assistance? Reach out to us through any of the
+          following ways:
+        </p>
+      </div>
 
-      <div className="contact-details">
-        <div className="contact-item">
-          <FaPhone className="contact-icon" />
-          <h4>Phone</h4>
-          <p>+254791474737</p>
+      {/* CONTACT INFO CARDS */}
+      <div className="row g-4 text-center mb-5">
+        <div className="col-md-4">
+          <div className="card shadow-sm h-100 p-4">
+            <FaPhone size={35} color="#1a839a" className="mb-3" />
+            <h4 className="fw-bold fs-3">Phone</h4>
+            <p className="fs-4 mb-0">+254791474737</p>
+          </div>
         </div>
 
-        <div className="contact-item">
-          <FaEnvelope className="contact-icon" />
-          <h4>Email</h4>
-          <p>support@spbproperty.com</p>
+        <div className="col-md-4">
+          <div className="card shadow-sm h-100 p-4">
+            <FaEnvelope size={35} color="#1a839a" className="mb-3" />
+            <h4 className="fw-bold fs-3">Email</h4>
+            <p className="fs-4 mb-0">support@spbproperty.com</p>
+          </div>
         </div>
 
-        <div className="contact-item">
-          <FaMapMarkerAlt className="contact-icon" />
-          <h4>Address</h4>
-          <p>
-            123 Property Lane, Suite 400
-            <br />
-            Cityville, CA 12345
-          </p>
+        <div className="col-md-4">
+          <div className="card shadow-sm h-100 p-4">
+            <FaMapMarkerAlt size={35} color="#1a839a" className="mb-3" />
+            <h4 className="fw-bold fs-3">Address</h4>
+            <p className="fs-4 mb-0">
+              123 Property Lane, Suite 400 <br />
+              Cityville, CA 12345
+            </p>
+          </div>
         </div>
       </div>
 
-      <form className="contact-form">
-        <h3>Send Us a Message</h3>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            className="form-control"
-            placeholder="Enter your name"
-          />
-        </div>
+      {/* CONTACT FORM */}
+      <div className="row justify-content-center">
+        <div className="col-md-7">
+          <div className="card shadow-lg p-4">
+            <h3 className="fw-bold text-center mb-4 fs-2">Send Us a Message</h3>
 
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            className="form-control"
-            placeholder="Enter your email"
-          />
-        </div>
+            <div className="mb-3">
+              <label className="form-label fs-4">Name</label>
+              <input
+                type="text"
+                className="form-control form-control-lg fs-4"
+                placeholder="Enter your name"
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="message">Message</label>
-          <textarea
-            id="message"
-            className="form-control"
-            rows="5"
-            placeholder="Type your message here"
-          ></textarea>
-        </div>
+            <div className="mb-3">
+              <label className="form-label fs-4">Email</label>
+              <input
+                type="email"
+                className="form-control form-control-lg fs-4"
+                placeholder="Enter your email"
+              />
+            </div>
 
-        <button
-          type="submit"
-          className="btn"
-          style={{ backgroundColor: "#1a839a", color: "white" }}
-        >
-          Submit
-        </button>
-      </form>
+            <div className="mb-3">
+              <label className="form-label fs-4">Message</label>
+              <textarea
+                rows="5"
+                className="form-control form-control-lg fs-4"
+                placeholder="Type your message here"
+              />
+            </div>
+
+            <button
+              className="btn w-100 py-3 fs-3 fw-bold"
+              style={{
+                backgroundColor: "#1a839a",
+                color: "white",
+                border: "none",
+              }}
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

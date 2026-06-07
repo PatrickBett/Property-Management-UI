@@ -11,7 +11,7 @@ function Maintenance() {
   const handleMaintainedHome = async (e) => {
     e.preventDefault();
     const selectedHome = homes.find(
-      (home) => home.property.title === maintainedhome
+      (home) => home.property.title === maintainedhome,
     );
 
     try {
@@ -51,8 +51,8 @@ function Maintenance() {
     <div
       style={{
         width: "90%",
-        margin: "20px auto",
-        fontFamily: "Poppins, sans-serif",
+        margin: "20px auto"
+        
       }}
     >
       {/* Header */}
@@ -63,26 +63,30 @@ function Maintenance() {
           alignItems: "center",
           backgroundColor: "#1a839a",
           color: "white",
-          padding: "15px",
-          borderRadius: "8px",
+          padding: "20px",
+          borderRadius: "10px",
         }}
       >
-        <h2 style={{ margin: 0 }}>Property Maintenance</h2>
+        <h2 className="fs-2" style={{ margin: 0 }}>
+          Property Maintenance
+        </h2>
+
         <button
           onClick={() =>
             (document.getElementById("myModal").style.display = "block")
           }
+          className="fs-3"
           style={{
             backgroundColor: "#1a839a",
             border: "1px solid white",
-            padding: "10px 15px",
-            borderRadius: "5px",
+            padding: "10px 16px",
+            borderRadius: "6px",
             cursor: "pointer",
             fontWeight: "600",
             color: "white",
             display: "flex",
             alignItems: "center",
-            gap: "5px",
+            gap: "6px",
           }}
         >
           <i className="bi bi-plus-circle-fill"></i> Maintenance
@@ -108,10 +112,10 @@ function Maintenance() {
           style={{
             backgroundColor: "white",
             margin: "10% auto",
-            padding: "20px",
-            borderRadius: "8px",
+            padding: "25px",
+            borderRadius: "10px",
             width: "90%",
-            maxWidth: "500px",
+            maxWidth: "520px",
             boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
           }}
         >
@@ -123,7 +127,9 @@ function Maintenance() {
               marginBottom: "15px",
             }}
           >
-            <h4 style={{ margin: 0 }}>Add Maintenance</h4>
+            <h4 className="fs-3" style={{ margin: 0 }}>
+              Add Maintenance
+            </h4>
             <button
               onClick={() =>
                 (document.getElementById("myModal").style.display = "none")
@@ -131,7 +137,7 @@ function Maintenance() {
               style={{
                 border: "none",
                 background: "transparent",
-                fontSize: "20px",
+                fontSize: "24px",
                 cursor: "pointer",
               }}
             >
@@ -141,16 +147,20 @@ function Maintenance() {
 
           <form onSubmit={handleMaintainedHome}>
             <div style={{ marginBottom: "15px" }}>
-              <label style={{ display: "block", marginBottom: "5px" }}>
+              <label
+                className="fs-3"
+                style={{ display: "block", marginBottom: "6px" }}
+              >
                 Property:
               </label>
               <select
                 value={maintainedhome}
                 onChange={(e) => setMaintainedHome(e.target.value)}
+                className="fs-3"
                 style={{
                   width: "100%",
-                  padding: "8px",
-                  borderRadius: "5px",
+                  padding: "10px",
+                  borderRadius: "6px",
                   border: "1px solid #1a839a",
                 }}
               >
@@ -162,17 +172,21 @@ function Maintenance() {
             </div>
 
             <div style={{ marginBottom: "15px" }}>
-              <label style={{ display: "block", marginBottom: "5px" }}>
+              <label
+                className="fs-3"
+                style={{ display: "block", marginBottom: "6px" }}
+              >
                 Request:
               </label>
               <textarea
                 value={request}
                 onChange={(e) => setRequest(e.target.value)}
                 placeholder="Enter Request Message"
+                className="fs-3"
                 style={{
                   width: "100%",
-                  padding: "8px",
-                  borderRadius: "5px",
+                  padding: "10px",
+                  borderRadius: "6px",
                   border: "1px solid #1a839a",
                   resize: "vertical",
                 }}
@@ -191,9 +205,10 @@ function Maintenance() {
                 onClick={() =>
                   (document.getElementById("myModal").style.display = "none")
                 }
+                className="fs-3"
                 style={{
                   padding: "8px 15px",
-                  borderRadius: "5px",
+                  borderRadius: "6px",
                   border: "none",
                   backgroundColor: "#dc3545",
                   color: "white",
@@ -206,9 +221,10 @@ function Maintenance() {
 
               <button
                 type="submit"
+                className="fs-3"
                 style={{
                   padding: "8px 15px",
-                  borderRadius: "5px",
+                  borderRadius: "6px",
                   border: "none",
                   backgroundColor: "#1a839a",
                   color: "white",
@@ -226,7 +242,7 @@ function Maintenance() {
       {/* Maintenance Requests */}
       <div
         style={{
-          marginTop: "20px",
+          marginTop: "25px",
           display: "flex",
           flexWrap: "wrap",
           gap: "20px",
@@ -237,12 +253,12 @@ function Maintenance() {
             <div
               key={index}
               style={{
-                flex: "1 1 300px",
+                flex: "1 1 320px",
                 border: "1px solid #1a839a",
-                borderRadius: "10px",
+                borderRadius: "12px",
                 padding: "15px",
                 backgroundColor: "#e6f7fb",
-                boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
               }}
             >
               <img
@@ -250,25 +266,31 @@ function Maintenance() {
                 alt="Property"
                 style={{
                   width: "100%",
-                  height: "200px",
+                  height: "210px",
                   objectFit: "cover",
                   borderRadius: "8px",
                   marginBottom: "10px",
                 }}
               />
-              <h3 style={{ marginTop: "10px", color: "#1a839a" }}>
+
+              <h3
+                className="fs-4"
+                style={{ marginTop: "10px", color: "#1a839a" }}
+              >
                 Request: {maintenance.request}
               </h3>
-              <h4 style={{ color: "#1a839a" }}>
+
+              <h4 className="fs-3" style={{ color: "#1a839a" }}>
                 Property: {maintenance.property.title}
               </h4>
 
               {maintenance.status === "submitted" ? (
                 <div
+                  className="fs-3"
                   style={{
                     marginTop: "10px",
                     padding: "8px",
-                    borderRadius: "5px",
+                    borderRadius: "6px",
                     backgroundColor: "#ffc107",
                     color: "white",
                     textAlign: "center",
@@ -279,10 +301,11 @@ function Maintenance() {
                 </div>
               ) : maintenance.status === "in_progress" ? (
                 <div
+                  className="fs-5"
                   style={{
                     marginTop: "10px",
                     padding: "8px",
-                    borderRadius: "5px",
+                    borderRadius: "6px",
                     backgroundColor: "#1a839a",
                     color: "white",
                     textAlign: "center",
@@ -293,10 +316,11 @@ function Maintenance() {
                 </div>
               ) : (
                 <div
+                  className="fs-5"
                   style={{
                     marginTop: "10px",
                     padding: "8px",
-                    borderRadius: "5px",
+                    borderRadius: "6px",
                     backgroundColor: "#28a745",
                     color: "white",
                     textAlign: "center",
@@ -312,13 +336,15 @@ function Maintenance() {
           <div
             style={{
               width: "100%",
-              padding: "30px",
+              padding: "35px",
               textAlign: "center",
               backgroundColor: "#f0f8fa",
-              borderRadius: "8px",
+              borderRadius: "10px",
             }}
           >
-            <h3 style={{ color: "#1a839a" }}>No Maintenance Request made!!</h3>
+            <h3 className="fs-3" style={{ color: "#1a839a" }}>
+              No Maintenance Request made!!
+            </h3>
           </div>
         )}
       </div>

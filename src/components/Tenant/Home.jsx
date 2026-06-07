@@ -9,238 +9,139 @@ function Home() {
 
   return (
     <div
-      style={{
-        fontFamily: "Poppins, sans-serif",
-        maxWidth: "1200px",
-        margin: "50px auto",
-        padding: "0 20px",
-      }}
+      className="container py-5"
+      
     >
-      {/* Role alert */}
+      {/* ROLE BANNER */}
       <div
+        className="text-center p-3 mb-4 rounded shadow-sm"
         style={{
           backgroundColor: role ? "#e3f2fd" : "#f8f9fa",
           color: "#0d6efd",
-          textAlign: "center",
-          padding: "12px",
-          borderRadius: "10px",
-          marginBottom: "30px",
-          fontSize: "1.1rem",
-          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
         }}
       >
-        {role ? (
-          <>
-            <i className="bi bi-person-check me-2"></i>
-            Logged In As <strong>{role}</strong>
-          </>
-        ) : (
-          <>Welcome User</>
-        )}
+        <span className="fs-3">
+          {role ? (
+            <>
+              <i className="bi bi-person-check me-2"></i>
+              Logged In As <strong>{role}</strong>
+            </>
+          ) : (
+            "Welcome User"
+          )}
+        </span>
       </div>
 
-      {/* Title */}
-      <h2
-        style={{
-          textAlign: "center",
-          padding: "15px 0",
-          marginBottom: "30px",
-          borderBottom: "3px solid #1a839a",
-          display: "inline-block",
-          color: "#333",
-          fontWeight: "700",
-        }}
-      >
-        <i className="bi bi-house-door-fill me-2" style={{ color: "#1a839a" }}></i>
-        My Home
-      </h2>
+      {/* TITLE */}
+      <div className="text-center mb-5">
+        <h2
+          className="fw-bold fs-1 border-bottom pb-2 d-inline-block"
+          style={{ borderColor: "#1a839a" }}
+        >
+          <i
+            className="bi bi-house-door-fill me-2"
+            style={{ color: "#1a839a" }}
+          ></i>
+          My Home
+        </h2>
+      </div>
 
-      {/* Home Cards */}
+      {/* HOMES */}
       {homes && homes.length > 0 ? (
         homes.map((home, index) => (
-          <div
-            key={index}
-            style={{
-              backgroundColor: "#fff",
-              borderRadius: "12px",
-              boxShadow: "0 6px 20px rgba(0,0,0,0.1)",
-              marginBottom: "40px",
-              overflow: "hidden",
-            }}
-          >
-            {/* Header */}
+          <div key={index} className="card shadow-lg mb-5 border-0">
+            {/* HEADER */}
             <div
-              style={{
-                backgroundColor: "#1a839a",
-                color: "white",
-                padding: "15px 20px",
-              }}
+              className="p-3 text-white"
+              style={{ backgroundColor: "#1a839a" }}
             >
-              <h4 style={{ margin: 0 }}>{home.property.title}</h4>
+              <h3 className="fs-2 mb-0">{home.property.title}</h3>
             </div>
 
-            {/* Body */}
-            <div style={{ display: "flex", flexWrap: "wrap" }}>
-              {/* Tenant section */}
-              <div
-                style={{
-                  flex: "1 1 300px",
-                  backgroundColor: "#f8f9fa",
-                  padding: "30px",
-                  textAlign: "center",
-                  borderRight: "1px solid #eee",
-                }}
-              >
+            <div className="row g-0">
+              {/* TENANT */}
+              <div className="col-md-4 text-center p-4 bg-light border-end">
                 <img
                   src={home.tenant.profile.profile}
-                  alt="Tenant Profile"
+                  alt="Tenant"
+                  className="rounded-circle mb-3"
                   style={{
-                    width: "180px",
-                    height: "180px",
-                    borderRadius: "50%",
+                    width: "150px",
+                    height: "150px",
                     objectFit: "cover",
                     border: "3px solid #fff",
                     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
                   }}
                 />
-                <h5 style={{ marginTop: "20px", marginBottom: "5px" }}>
-                  {home.tenant.username}
-                </h5>
-                <span
-                  style={{
-                    backgroundColor: "#17a2b8",
-                    color: "white",
-                    padding: "5px 12px",
-                    borderRadius: "20px",
-                    fontSize: "0.9rem",
-                  }}
-                >
+
+                <h4 className="fs-3 fw-bold">{home.tenant.username}</h4>
+
+                <span className="badge bg-info fs-5 mt-2">
                   {home.tenant.role}
                 </span>
               </div>
 
-              {/* Property and Landlord details */}
-              <div style={{ flex: "2 1 500px", padding: "30px" }}>
-                {/* Personal Info */}
-                <div
-                  style={{
-                    border: "1px solid #e0e0e0",
-                    borderRadius: "10px",
-                    marginBottom: "25px",
-                    overflow: "hidden",
-                  }}
-                >
+              {/* DETAILS */}
+              <div className="col-md-8 p-4">
+                {/* PROPERTY INFO */}
+                <div className="card mb-4 border">
                   <div
-                    style={{
-                      backgroundColor: "#1a839a",
-                      color: "white",
-                      padding: "12px 20px",
-                    }}
+                    className="card-header text-white"
+                    style={{ backgroundColor: "#1a839a" }}
                   >
-                    <h5 style={{ margin: 0 }}>
-                      <i className="bi bi-person-badge me-2"></i>Personal
-                      Information
+                    <h5 className="fs-3 mb-0">
+                      <i className="bi bi-person-badge me-2"></i>
+                      Property Information
                     </h5>
                   </div>
-                  <div style={{ padding: "15px 20px" }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        marginBottom: "12px",
-                      }}
-                    >
-                      <span>
-                        <i className="bi bi-houses me-2"></i>Bedrooms
-                      </span>
-                      <span
-                        style={{
-                          backgroundColor: "#1a839a",
-                          color: "white",
-                          padding: "4px 12px",
-                          borderRadius: "20px",
-                        }}
-                      >
+
+                  <div className="card-body fs-3">
+                    <div className="d-flex justify-content-between mb-3">
+                      <span>Bedrooms</span>
+                      <span className="badge bg-primary fs-5">
                         {home.property.category.name}
                       </span>
                     </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <span>
-                        <i className="bi bi-wallet me-2"></i>Rent
-                      </span>
-                      <span
-                        style={{
-                          backgroundColor: "#28a745",
-                          color: "white",
-                          padding: "4px 12px",
-                          borderRadius: "20px",
-                        }}
-                      >
+
+                    <div className="d-flex justify-content-between">
+                      <span>Rent</span>
+                      <span className="badge bg-success fs-5">
                         {home.property.rent_amount} KES
                       </span>
                     </div>
                   </div>
                 </div>
 
-                {/* Landlord Info */}
-                <div
-                  style={{
-                    border: "1px solid #e0e0e0",
-                    borderRadius: "10px",
-                    overflow: "hidden",
-                  }}
-                >
-                  <div
-                    style={{
-                      backgroundColor: "#f8f9fa",
-                      color: "#333",
-                      padding: "12px 20px",
-                    }}
-                  >
-                    <h5 style={{ margin: 0 }}>
-                      <i className="bi bi-person-square me-2"></i>Landlord
-                      Information
+                {/* LANDLORD */}
+                <div className="card border">
+                  <div className="card-header bg-light">
+                    <h5 className="fs-3 mb-0">
+                      <i className="bi bi-person-square me-2"></i>
+                      Landlord Information
                     </h5>
                   </div>
-                  <div style={{ padding: "20px" }}>
-                    <div style={{ display: "flex", flexWrap: "wrap" }}>
-                      <div
+
+                  <div className="card-body">
+                    <div className="d-flex align-items-center gap-4">
+                      <img
+                        src={home.property.landlord.profile.profile}
+                        alt="Landlord"
+                        className="rounded-circle"
                         style={{
-                          flex: "1 1 120px",
-                          textAlign: "center",
-                          marginBottom: "15px",
+                          width: "90px",
+                          height: "90px",
+                          objectFit: "cover",
                         }}
-                      >
-                        <img
-                          src={home.property.landlord.profile.profile}
-                          alt="Landlord Profile"
-                          style={{
-                            width: "100px",
-                            height: "100px",
-                            borderRadius: "50%",
-                            objectFit: "cover",
-                            border: "2px solid #eee",
-                          }}
-                        />
-                      </div>
-                      <div style={{ flex: "2 1 200px" }}>
-                        <p style={{ marginBottom: "10px" }}>
-                          <i
-                            className="bi bi-envelope-fill me-2"
-                            style={{ color: "#1a839a" }}
-                          ></i>
+                      />
+
+                      <div className="fs-3">
+                        <p className="mb-2">
+                          <i className="bi bi-envelope-fill me-2 text-primary"></i>
                           {home.property.landlord.email}
                         </p>
-                        <p style={{ margin: 0 }}>
-                          <i
-                            className="bi bi-telephone-fill me-2"
-                            style={{ color: "#28a745" }}
-                          ></i>
+
+                        <p className="mb-0">
+                          <i className="bi bi-telephone-fill me-2 text-success"></i>
                           {home.property.landlord.phone_number}
                         </p>
                       </div>
@@ -252,45 +153,20 @@ function Home() {
           </div>
         ))
       ) : (
-        <div
-          style={{
-            backgroundColor: "#fff",
-            borderRadius: "12px",
-            boxShadow: "0 6px 20px rgba(0,0,0,0.1)",
-            textAlign: "center",
-            padding: "50px 20px",
-          }}
-        >
-          <i
-            className="bi bi-house-x"
-            style={{ fontSize: "4rem", color: "#aaa" }}
-          ></i>
-          <h3 style={{ marginTop: "20px", marginBottom: "10px" }}>
-            No Home Currently
-          </h3>
-          <p style={{ fontSize: "1.1rem", color: "#666" }}>
-            Looking for a new place?
-          </p>
+        <div className="text-center p-5 shadow rounded bg-white">
+          <i className="bi bi-house-x fs-1 text-muted"></i>
+
+          <h3 className="fs-2 mt-3">No Home Currently</h3>
+
+          <p className="fs-3 text-muted">Looking for a new place?</p>
+
           <Link
             to="/tenant/properties/"
-            style={{
-              display: "inline-block",
-              backgroundColor: "#1a839a",
-              color: "white",
-              textDecoration: "none",
-              padding: "12px 25px",
-              borderRadius: "8px",
-              fontWeight: "500",
-              transition: "background-color 0.3s ease",
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor = "#167180")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor = "#1a839a")
-            }
+            className="btn btn-primary px-4 py-3 fs-3 mt-3"
+            style={{ backgroundColor: "#1a839a", border: "none" }}
           >
-            <i className="bi bi-search me-2"></i>Browse Homes
+            <i className="bi bi-search me-2"></i>
+            Browse Homes
           </Link>
         </div>
       )}

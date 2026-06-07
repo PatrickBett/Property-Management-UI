@@ -27,7 +27,7 @@ function Maintenance() {
       style={{
         width: "90%",
         margin: "20px auto",
-        fontFamily: "Poppins, sans-serif",
+        
       }}
     >
       {/* Header */}

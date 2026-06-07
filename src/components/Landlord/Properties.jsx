@@ -13,7 +13,7 @@ function Properties() {
       : properties;
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Poppins, sans-serif" }}>
+    <div style={{ padding: "20px" }}>
       {/* Page Header */}
       <div
         style={{
