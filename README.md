@@ -8,6 +8,11 @@
 The **Property Management System** is a web-based application built using **React** and **Django** that facilitates property management for both **tenants (users)** and **landlords**. It provides a seamless experience for property booking, rental payments, and property management.
 
 ## **Features**
+## Login
+![alt text](image-21.png)
+
+## Register
+![alt text](image-22.png)
 
 ### **Tenant Dashboard (User)**
 
