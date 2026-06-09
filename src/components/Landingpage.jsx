@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 
 const SLIDES = [
   {
-    bg: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1800&q=85",
+    bg: "https://images.unsplash.com/photo-1544984243-ec57ea16fe25?q=80&w=387",
     eyebrow: "Premium Rentals · Nairobi",
     heading: "Find Your Perfect Property",
     sub: "Curated high-end homes and apartments managed by professionals who care about your experience.",
@@ -58,7 +58,7 @@ export default function Landingpage() {
           <div className="row align-items-center">
             {/* LEFT */}
             <div className="col-md-7">
-              <p className="fw-bold fs-2 text-warning">{cur.eyebrow}</p>
+              <p className="fw-bold fs-1 text-warning">{cur.eyebrow}</p>
 
               <h1 className="fs-1 fw-bold">{cur.heading}</h1>
 
@@ -152,7 +152,10 @@ export default function Landingpage() {
       </section>
 
       {/* CTA */}
-      <section className="py-5 text-white text-center" style={{ backgroundColor: "#1a839a" }}>
+      <section
+        className="py-5 text-white text-center"
+        style={{ backgroundColor: "#1a839a" }}
+      >
         <div className="container">
           <h2 className="fs-1 fw-bold">Start Managing Properties Better</h2>
 
